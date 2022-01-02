@@ -1,0 +1,81 @@
+buildscript {
+    ext {
+        allureVersion = "2.17.2"
+        aspectjVersion = "1.9.8.RC3"
+        log4jVersion = "2.17.1"
+        jacksonVersion = "2.13.0"
+        seleniumVersion = "4.1.1"
+    }
+}
+
+plugins {
+    id "java-library"
+    id("io.qameta.allure") version "2.9.6"
+    id 'idea'
+}
+
+apply plugin: 'java-library'
+apply plugin: "io.qameta.allure"
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+description = "Gradle selenium example"
+group 'com.oleynik.selenium.example'
+version '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+configurations.all {
+    resolutionStrategy {
+        force("org.slf4j:slf4j-api:1.7.32",
+                "org.apache.logging.log4j:log4j-api:$log4jVersion"
+        )
+    }
+}
+
+dependencies {
+    implementation("org.testng:testng:7.4.0")
+    implementation("io.qameta.allure:allure-testng:$allureVersion")
+    implementation("io.qameta.allure:allure-java-commons:$allureVersion")
+    implementation("org.aspectj:aspectjweaver:$aspectjVersion")
+    implementation("org.seleniumhq.selenium:selenium-java:$seleniumVersion")
+    implementation("org.aeonbits.owner:owner:1.0.12")
+    implementation("org.apache.poi:poi-ooxml:5.1.0")
+    implementation("com.opencsv:opencsv:5.5.2")
+}
+
+allure {
+    version = allureVersion
+    boolean autoconfigure = true
+    boolean aspectjweaver = true
+    String allureJavaVersion = allureVersion
+    useTestNG {
+        version = allureVersion
+    }
+    String configuration = 'testImplementation'
+}
+
+test {
+    systemProperty "file.encoding", "utf-8"
+    useTestNG {
+        parallel = 'classes'
+        threadCount = 3
+        useDefaultListeners = true
+        outputDirectory = file("$buildDir/reports/testng")
+    }
+    testLogging {
+        exceptionFormat = 'full'
+    }
+}
+
+test.finalizedBy allureReport
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
