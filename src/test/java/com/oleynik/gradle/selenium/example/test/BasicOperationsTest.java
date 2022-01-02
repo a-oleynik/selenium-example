@@ -2,7 +2,6 @@ package com.oleynik.gradle.selenium.example.test;
 
 import com.oleynik.gradle.selenium.example.framework.BaseTest;
 import com.oleynik.gradle.selenium.example.steps.CalculatorSteps;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -14,13 +13,7 @@ import java.util.ArrayList;
 import static com.oleynik.gradle.selenium.example.framework.config.ConfigurationManager.configuration;
 
 public class BasicOperationsTest extends BaseTest {
-    private CalculatorSteps calculatorSteps;
     private String url = configuration().environmentUrl();
-
-    @BeforeMethod()
-    public void setUp() {
-        calculatorSteps = new CalculatorSteps();
-    }
 
     @DataProvider(name = "addition")
     public static Object[][] additionNumbers() {
@@ -29,6 +22,7 @@ public class BasicOperationsTest extends BaseTest {
 
     @Test(dataProvider = "addition", description = "Check addition")
     public void checkCalculatorAdditions(int x, int y) {
+        CalculatorSteps calculatorSteps = new CalculatorSteps();
         calculatorSteps.openCalculator(url);
         calculatorSteps.add(Integer.toString(x), Integer.toString(y));
         calculatorSteps.checkAddition(x, y);
@@ -41,6 +35,7 @@ public class BasicOperationsTest extends BaseTest {
 
     @Test(dataProvider = "subtraction", description = "Check subtraction")
     public void checkCalculatorSubtractions(int x, int y) {
+        CalculatorSteps calculatorSteps = new CalculatorSteps();
         calculatorSteps.openCalculator(url);
         calculatorSteps.subtract(Integer.toString(x), Integer.toString(y));
         calculatorSteps.checkSubtraction(x, y);
@@ -53,6 +48,7 @@ public class BasicOperationsTest extends BaseTest {
 
     @Test(dataProvider = "multiplication", description = "Check multiplication")
     public void checkCalculatorMultiplications(int x, int y) {
+        CalculatorSteps calculatorSteps = new CalculatorSteps();
         calculatorSteps.openCalculator(url);
         calculatorSteps.multiply(Integer.toString(x), Integer.toString(y));
         calculatorSteps.checkMultiplication(x, y);
@@ -77,6 +73,7 @@ public class BasicOperationsTest extends BaseTest {
 
     @Test(dataProvider = "division", description = "Check division")
     public void checkCalculatorDivision(int x, int y) {
+        CalculatorSteps calculatorSteps = new CalculatorSteps();
         calculatorSteps.openCalculator(url);
         calculatorSteps.divide(Integer.toString(x), Integer.toString(y));
         calculatorSteps.checkDivision(x, y);

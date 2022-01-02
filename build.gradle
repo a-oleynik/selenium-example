@@ -64,7 +64,7 @@ allure {
 test {
     systemProperty "file.encoding", "utf-8"
     useTestNG {
-        parallel = 'classes'
+        parallel = 'methods'
         threadCount = 3
         useDefaultListeners = true
         outputDirectory = file("$buildDir/reports/testng")
