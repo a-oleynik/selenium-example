@@ -12,4 +12,7 @@ public interface Configuration extends Config {
 
     @Config.Key("default.webdriver.timeout")
     int defaultWebdriverTimeout();
+
+    @Config.Key("env.time.zone")
+    String environmentTimeZone();
 }

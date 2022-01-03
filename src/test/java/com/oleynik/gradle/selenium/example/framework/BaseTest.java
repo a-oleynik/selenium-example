@@ -1,12 +1,16 @@
 package com.oleynik.gradle.selenium.example.framework;
 
+import com.oleynik.gradle.selenium.example.framework.listeners.ResultExecutionListener;
+import com.oleynik.gradle.selenium.example.framework.listeners.TestExecutionMethodListener;
 import com.oleynik.gradle.selenium.example.framework.utils.WebdriverUtils;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 
 import static com.oleynik.gradle.selenium.example.framework.utils.WebdriverUtils.quitDriver;
 
+@Listeners({TestExecutionMethodListener.class, ResultExecutionListener.class})
 public class BaseTest {
     protected WebDriver driver;
 

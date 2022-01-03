@@ -48,6 +48,8 @@ dependencies {
     implementation("org.aeonbits.owner:owner:1.0.12")
     implementation("org.apache.poi:poi-ooxml:5.1.0")
     implementation("com.opencsv:opencsv:5.5.2")
+    implementation("org.apache.logging.log4j:log4j-to-slf4j:$log4jVersion")
+    implementation("org.slf4j:slf4j-simple:1.7.32")
 }
 
 allure {
