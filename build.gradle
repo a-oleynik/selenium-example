@@ -40,7 +40,7 @@ configurations.all {
 }
 
 dependencies {
-    implementation("org.testng:testng:7.4.0")
+    implementation("org.testng:testng:7.5")
     implementation("io.qameta.allure:allure-testng:$allureVersion")
     implementation("io.qameta.allure:allure-java-commons:$allureVersion")
     implementation("org.aspectj:aspectjweaver:$aspectjVersion")
