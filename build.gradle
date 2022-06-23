@@ -3,15 +3,15 @@ buildscript {
         allureVersion = "2.18.1"
         aspectjVersion = "1.9.9.1"
         log4jVersion = "2.17.2"
-        jacksonVersion = "2.13.0"
-        seleniumVersion = "4.2.1"
+        jacksonVersion = "2.13.3"
+        seleniumVersion = "4.2.2"
         slf4jVersion = "1.7.36"
     }
 }
 
 plugins {
     id "java-library"
-    id("io.qameta.allure") version "2.9.6"
+    id("io.qameta.allure") version "2.10.0"
     id 'idea'
 }
 
@@ -28,8 +28,8 @@ group 'com.oleynik.selenium.example'
 version '0.0.1-SNAPSHOT'
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 configurations.all {
