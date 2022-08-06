@@ -137,10 +137,12 @@ public class CalculatorSteps {
     }
 
     @Step("Checking multiple actions")
-    public void checkSoftAsserts(SoftAssert softAssert) {
-        softAssert.assertEquals(2, 3, "The first check failed");
-        softAssert.assertEquals(1, 3, "The second check failed");
-        softAssert.assertEquals(0, 3, "The third check failed");
-        softAssert.assertEquals(3, 3, "The fourth check failed");
+    public void checkSoftAsserts() {
+        SoftAssert softly = new SoftAssert();
+        softly.assertEquals(2, 3, "The first check failed");
+        softly.assertEquals(1, 3, "The second check failed");
+        softly.assertEquals(0, 3, "The third check failed");
+        softly.assertEquals(3, 3, "The fourth check failed");
+        softly.assertAll();
     }
 }

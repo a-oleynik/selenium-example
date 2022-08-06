@@ -2,6 +2,7 @@ package com.oleynik.gradle.selenium.example.test;
 
 import com.oleynik.gradle.selenium.example.framework.BaseTest;
 import com.oleynik.gradle.selenium.example.steps.CalculatorSteps;
+import io.qameta.allure.Feature;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -13,9 +14,10 @@ import java.util.ArrayList;
 
 import static com.oleynik.gradle.selenium.example.framework.config.ConfigurationManager.configuration;
 
+@Feature("Basic math operations")
 public class BasicOperationsTest extends BaseTest {
     private CalculatorSteps calculatorSteps;
-    private String url = configuration().environmentUrl();
+    private final String url = configuration().environmentUrl();
 
     @BeforeMethod()
     public void setUp() {
