@@ -11,7 +11,7 @@ import static com.oleynik.gradle.selenium.example.framework.config.Configuration
 
 @Feature("Calculator sanity")
 public class CalculatorSanityTest extends BaseTest {
-    CalculatorSteps calculatorSteps;
+    private CalculatorSteps calculatorSteps;
     private final String url = configuration().environmentUrl();
 
     @BeforeEach
