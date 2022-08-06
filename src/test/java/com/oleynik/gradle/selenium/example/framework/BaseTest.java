@@ -1,32 +1,34 @@
 package com.oleynik.gradle.selenium.example.framework;
 
-import com.oleynik.gradle.selenium.example.framework.listeners.ResultExecutionListener;
-import com.oleynik.gradle.selenium.example.framework.listeners.TestExecutionMethodListener;
+import com.oleynik.gradle.selenium.example.framework.listeners.MyTestWatcher;
 import com.oleynik.gradle.selenium.example.framework.utils.WebdriverUtils;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
 
 import static com.oleynik.gradle.selenium.example.framework.utils.WebdriverUtils.quitDriver;
 
-@Listeners({TestExecutionMethodListener.class, ResultExecutionListener.class})
+@ExtendWith({MyTestWatcher.class})
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class BaseTest {
     protected WebDriver driver;
 
-    @BeforeClass(alwaysRun = true)
+    @BeforeAll
     public void setUpBrowser() {
         driver = WebdriverUtils.createNewDriver();
         BaseTestMethods.setMaximisedBrowserWindow();
     }
 
-    @BeforeMethod(alwaysRun = true)
+    @BeforeEach
     public void checkWebDriver() {
+        BaseTestMethods.setMaximisedBrowserWindow();
         BaseTestMethods.instantiateDriver();
     }
 
-    @AfterClass(alwaysRun = true)
+    @AfterAll
     public void dropDriver() {
         quitDriver();
     }

@@ -6,9 +6,8 @@ import lombok.Data;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.time.ZonedDateTime;
-import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Objects;
+import java.util.List;
 
 @Data
 @Builder(toBuilder = true)
@@ -16,15 +15,15 @@ import java.util.Objects;
 public class TestExecutionResult implements Comparable<TestExecutionResult> {
     private final String testClass;
     private final String testMethod;
-    private Object[] testParameters;
+    private List<Object> testParameters;
     private ZonedDateTime testStartDateTime;
     private ZonedDateTime testEndDateTime;
     private ExecutionStatus executionStatus;
     private Throwable exception;
 
     public String getPrintableTestParameters() {
-        if (testParameters.length > 0) {
-            return Arrays.toString(testParameters);
+        if (null != testParameters && testParameters.size() > 0) {
+            return testParameters.toString();
         } else {
             return "";
         }

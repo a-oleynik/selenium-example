@@ -6,6 +6,7 @@ buildscript {
         jacksonVersion = "2.13.3"
         seleniumVersion = "4.3.0"
         slf4jVersion = "1.7.36"
+        junit5Version = "5.9.0"
     }
 }
 
@@ -41,8 +42,11 @@ configurations.all {
 }
 
 dependencies {
-    implementation("org.testng:testng:7.6.1")
-    implementation("io.qameta.allure:allure-testng:$allureVersion")
+    implementation("org.junit.jupiter:junit-jupiter-api:$junit5Version")
+    implementation("org.junit.jupiter:junit-jupiter-engine:$junit5Version")
+    implementation("org.junit.jupiter:junit-jupiter-params:$junit5Version")
+    implementation("org.junit.platform:junit-platform-runner:1.9.0")
+    implementation("io.qameta.allure:allure-junit5:$allureVersion")
     implementation("io.qameta.allure:allure-java-commons:$allureVersion")
     implementation("org.aspectj:aspectjweaver:$aspectjVersion")
     implementation("org.seleniumhq.selenium:selenium-java:$seleniumVersion")
@@ -61,7 +65,8 @@ allure {
     boolean autoconfigure = true
     boolean aspectjweaver = true
     String allureJavaVersion = allureVersion
-    useTestNG {
+
+    useJUnit5 {
         version = allureVersion
     }
     String configuration = 'testImplementation'
@@ -69,14 +74,17 @@ allure {
 
 test {
     systemProperty "file.encoding", "utf-8"
-    useTestNG {
-        parallel = 'classes'
-        threadCount = 3
-        useDefaultListeners = true
-        outputDirectory = file("$buildDir/reports/testng")
+    useJUnitPlatform {
+
     }
     testLogging.exceptionFormat = 'full'
     testLogging.showStandardStreams = true
+
+    systemProperty("junit.jupiter.execution.parallel.enabled", "true")
+    systemProperty("junit.jupiter.execution.parallel.mode.default", "concurrent")
+    systemProperty("junit.jupiter.execution.parallel.config.fixed.parallelism","3")
+    //systemProperty("junit.jupiter.execution.parallel.config.strategy", "dynamic")
+    //systemProperty("junit.jupiter.extensions.autodetection.enabled", "true")
 }
 
 test.finalizedBy allureReport

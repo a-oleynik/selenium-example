@@ -4,5 +4,6 @@ public enum ExecutionStatus {
     PASS,
     FAIL,
     SKIP,
+    DISABLED,
     UNKNOWN
 }

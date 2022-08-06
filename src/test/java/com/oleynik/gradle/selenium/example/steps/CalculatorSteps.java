@@ -2,10 +2,10 @@ package com.oleynik.gradle.selenium.example.steps;
 
 import com.oleynik.gradle.selenium.example.pages.CalculatorPage;
 import io.qameta.allure.Step;
-import org.testng.asserts.SoftAssert;
+import org.assertj.core.api.SoftAssertions;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CalculatorSteps {
 
@@ -138,11 +138,11 @@ public class CalculatorSteps {
 
     @Step("Checking multiple actions")
     public void checkSoftAsserts() {
-        SoftAssert softly = new SoftAssert();
-        softly.assertEquals(2, 3, "The first check failed");
-        softly.assertEquals(1, 3, "The second check failed");
-        softly.assertEquals(0, 3, "The third check failed");
-        softly.assertEquals(3, 3, "The fourth check failed");
+        SoftAssertions softly = new SoftAssertions();
+        softly.assertThat(2).as("The first check failed").isEqualTo(3);
+        softly.assertThat(1).as("The second check failed").isEqualTo(3);
+        softly.assertThat(0).as("The third check failed").isEqualTo(3);
+        softly.assertThat(3).as("The fourth check failed").isEqualTo(3);
         softly.assertAll();
     }
 }
