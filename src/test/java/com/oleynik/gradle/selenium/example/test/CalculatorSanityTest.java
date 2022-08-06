@@ -2,14 +2,16 @@ package com.oleynik.gradle.selenium.example.test;
 
 import com.oleynik.gradle.selenium.example.framework.BaseTest;
 import com.oleynik.gradle.selenium.example.steps.CalculatorSteps;
+import io.qameta.allure.Feature;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.oleynik.gradle.selenium.example.framework.config.ConfigurationManager.configuration;
 
+@Feature("Calculator sanity")
 public class CalculatorSanityTest extends BaseTest {
-    CalculatorSteps calculatorSteps;
-    String url = configuration().environmentUrl();
+    private CalculatorSteps calculatorSteps;
+    private final String url = configuration().environmentUrl();
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() {

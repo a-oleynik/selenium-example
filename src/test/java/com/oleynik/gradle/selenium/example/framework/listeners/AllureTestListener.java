@@ -25,8 +25,13 @@ public class AllureTestListener implements TestLifecycleListener {
     }
 
     public void afterTestStop(TestResult result){
+        Label testMethodLabel = result.getLabels()
+                .stream()
+                .filter(label -> label.getName().equals("testMethod"))
+                .findFirst().get();
+
         String testInfo = REPORT_DELIMITER + "\n" +
-                getDateTimeForAllureConsoleLog() + ": \n\"" + result.getTestCaseName() + "\"" + " test finished\n" +
+                getDateTimeForAllureConsoleLog() + ": \n\"" + testMethodLabel.getValue() + "\"" + " test finished\n" +
                 result.getFullName() + "\n" +
                 "Test status: " + result.getStatus() +
                 "\n" + REPORT_DELIMITER;
