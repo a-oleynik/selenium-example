@@ -1,16 +1,35 @@
 # Gradle Selenium Webdriver example
 
-# Usage
+### Usage
 
 * To start test execution
 
 ```
-gradlew.bat clean test
+.\gradlew.bat clean test
 ```
 
 * To start execution of a concrete test
 
 ```
-gradlew.bat clean test --tests com.oleynik.gradle.selenium.example.test.CalculatorSanityTest.checkCalculatorOpening
+.\gradlew.bat clean test --tests com.oleynik.gradle.selenium.example.test.CalculatorSanityTest.checkCalculatorOpening
+```
+* To execute tests in the package com.oleynik.gradle.selenium.example.test
+
+```
+.\gradlew.bat clean test --tests com.oleynik.gradle.selenium.example.test.* 
+```
+### Reporting
+
+* Generated Allure report can be found in
+```
+{project directory}/build/reports/allure-report/allureReport/index.html
 ```
 
+* Generated JUnit report can be found in
+```
+{project directory}/build/reports/tests/test/index.html
+```
+* Generated excel report can be found in
+```
+{project directory}/build/reports/testExecutionReport_ddmmyy_hhmmss.xlsx
+```
