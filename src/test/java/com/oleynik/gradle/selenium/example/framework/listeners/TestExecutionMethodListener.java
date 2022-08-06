@@ -9,7 +9,7 @@ import org.testng.ITestResult;
 import java.time.Instant;
 import java.time.ZonedDateTime;
 
-import static com.oleynik.gradle.selenium.example.framework.utils.GeneralUtils.ENVIRONMENT_ZONE_ID;
+import static com.oleynik.gradle.selenium.example.framework.utils.DateTimeUtils.ENVIRONMENT_ZONE_ID;
 import static com.oleynik.gradle.selenium.example.framework.utils.TestNGUtils.getExecutionStatus;
 
 public class TestExecutionMethodListener implements IInvokedMethodListener {
@@ -23,13 +23,14 @@ public class TestExecutionMethodListener implements IInvokedMethodListener {
                     .ofInstant(Instant.ofEpochMilli(testResult.getStartMillis()), ENVIRONMENT_ZONE_ID);
             ZonedDateTime testEndDateTime = ZonedDateTime
                     .ofInstant(Instant.ofEpochMilli(testResult.getEndMillis()), ENVIRONMENT_ZONE_ID);
-            TestExecutionResult testExecutionResult = new TestExecutionResult
-                    .TestResultBuilder(testClass, testMethod)
+            TestExecutionResult testExecutionResult = TestExecutionResult.builder()
+                    .testClass(testClass)
+                    .testMethod(testMethod)
                     .testParameters(testResult.getParameters())
                     .testStartDateTime(testStartDateTime)
                     .testEndDateTime(testEndDateTime)
                     .exception(testResult.getThrowable())
-                    .testStatus(getExecutionStatus(testResult.getStatus()))
+                    .executionStatus(getExecutionStatus(testResult.getStatus()))
                     .build();
             TestExecutionResultCollector.addTestExecutionResult(testExecutionResult);
         }

@@ -9,7 +9,7 @@ import java.util.Map;
 import static com.oleynik.gradle.selenium.example.framework.config.Constants.REPORTS_FOLDER;
 import static com.oleynik.gradle.selenium.example.framework.utils.ExcelUtils.convertExecutionTestResults;
 import static com.oleynik.gradle.selenium.example.framework.utils.ExcelUtils.createExcelFromData;
-import static com.oleynik.gradle.selenium.example.framework.utils.GeneralUtils.getDateTimeForExcelReport;
+import static com.oleynik.gradle.selenium.example.framework.utils.DateTimeUtils.getDateTimeForExcelReport;
 
 public class ResultExecutionListener implements IExecutionListener {
     @Override
