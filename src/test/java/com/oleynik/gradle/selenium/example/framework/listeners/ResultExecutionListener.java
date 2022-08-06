@@ -1,5 +1,6 @@
 package com.oleynik.gradle.selenium.example.framework.listeners;
 
+import com.google.common.collect.ImmutableMap;
 import com.oleynik.gradle.selenium.example.framework.reporting.TestExecutionResultCollector;
 import org.junit.platform.engine.TestExecutionResult;
 import org.junit.platform.engine.reporting.ReportEntry;
@@ -10,13 +11,20 @@ import org.junit.platform.launcher.TestPlan;
 import java.util.List;
 import java.util.Map;
 
+import static com.oleynik.gradle.selenium.example.framework.config.ConfigurationManager.configuration;
 import static com.oleynik.gradle.selenium.example.framework.config.Constants.REPORTS_FOLDER;
+import static com.oleynik.gradle.selenium.example.framework.reporting.AllureEnvironmentWriter.writeAllureEnvironment;
 import static com.oleynik.gradle.selenium.example.framework.utils.ExcelUtils.convertExecutionTestResults;
 import static com.oleynik.gradle.selenium.example.framework.utils.ExcelUtils.createExcelFromData;
 import static com.oleynik.gradle.selenium.example.framework.utils.DateTimeUtils.getDateTimeForExcelReport;
 
 public class ResultExecutionListener implements TestExecutionListener {
     public void testPlanExecutionStarted(TestPlan testPlan) {
+        writeAllureEnvironment(
+                ImmutableMap.<String, String>builder()
+                        .put("Browser", configuration().envBrowser())
+                        .put("URL", configuration().environmentUrl())
+                        .build());
     }
 
     public void testPlanExecutionFinished(TestPlan testPlan) {
