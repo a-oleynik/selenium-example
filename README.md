@@ -33,3 +33,13 @@
 ```
 {project directory}/build/reports/testExecutionReport_ddmmyy_hhmmss.xlsx
 ```
+### Webdriver
+
+* Supported Webdrivers should be put in 
+```
+{project directory}/drivers
+```
+* To kill Chromedriver processes on Windows execute
+```
+taskkill /F /IM chromedriver.exe /T
+```
