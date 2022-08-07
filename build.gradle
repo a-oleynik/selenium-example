@@ -16,9 +16,6 @@ plugins {
     id 'idea'
 }
 
-apply plugin: 'java-library'
-apply plugin: "io.qameta.allure"
-
 repositories {
     mavenLocal()
     mavenCentral()
@@ -62,27 +59,22 @@ dependencies {
 
 allure {
     version = allureVersion
-    boolean autoconfigure = true
-    boolean aspectjweaver = true
-    String allureJavaVersion = allureVersion
 
     useJUnit5 {
         version = allureVersion
     }
-    String configuration = 'testImplementation'
 }
 
 test {
     systemProperty "file.encoding", "utf-8"
     useJUnitPlatform {
-
     }
     testLogging.exceptionFormat = 'full'
     testLogging.showStandardStreams = true
 
     systemProperty("junit.jupiter.execution.parallel.enabled", "true")
     systemProperty("junit.jupiter.execution.parallel.mode.default", "concurrent")
-    systemProperty("junit.jupiter.execution.parallel.config.fixed.parallelism","3")
+    systemProperty("junit.jupiter.execution.parallel.config.fixed.parallelism", "3")
     //systemProperty("junit.jupiter.execution.parallel.config.strategy", "dynamic")
     //systemProperty("junit.jupiter.extensions.autodetection.enabled", "true")
 }
@@ -91,4 +83,10 @@ test.finalizedBy allureReport
 
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
+}
+
+gradle.projectsEvaluated {
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << "-Xlint:unchecked"
+    }
 }
