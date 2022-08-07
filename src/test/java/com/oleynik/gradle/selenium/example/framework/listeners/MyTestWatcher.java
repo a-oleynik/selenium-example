@@ -26,82 +26,45 @@ public class MyTestWatcher implements BeforeEachCallback, TestWatcher {
 
     @Override
     public void testAborted(ExtensionContext context, Throwable throwable) {
-        ZonedDateTime testStartDateTime = ZonedDateTime
-                .ofInstant(Instant.ofEpochMilli(startTime), ENVIRONMENT_ZONE_ID);
-        ZonedDateTime testEndDateTime = ZonedDateTime
-                .ofInstant(Instant.ofEpochMilli(System.currentTimeMillis()), ENVIRONMENT_ZONE_ID);
-        String testClass = context.getTestClass().get().getSimpleName();
-        String testMethod = context.getTestMethod().get().getName();
-        TestExecutionResult testExecutionResult = TestExecutionResult.builder()
-                .testClass(testClass)
-                .testMethod(testMethod)
-                .testParameters((List<Object>)context.getStore(NAMESPACE).get(METHOD_PARAMETERS))
-                .testStartDateTime(testStartDateTime)
-                .testEndDateTime(testEndDateTime)
-                .exception(context.getExecutionException().orElse(null))
-                .executionStatus(ExecutionStatus.SKIP)
-                .build();
+        TestExecutionResult testExecutionResult = generateTestExecutionResult(context, ExecutionStatus.SKIP);
         TestExecutionResultCollector.addTestExecutionResult(testExecutionResult);
     }
 
     @Override
     public void testDisabled(ExtensionContext context, Optional<String> optional) {
-        ZonedDateTime testStartDateTime = ZonedDateTime
-                .ofInstant(Instant.ofEpochMilli(startTime), ENVIRONMENT_ZONE_ID);
-        ZonedDateTime testEndDateTime = testStartDateTime;
-        String testClass = context.getTestClass().get().getSimpleName();
-        String testMethod = context.getTestMethod().get().getName();
-        TestExecutionResult testExecutionResult = TestExecutionResult.builder()
-                .testClass(testClass)
-                .testMethod(testMethod)
-                .testParameters((List<Object>)context.getStore(NAMESPACE).get(METHOD_PARAMETERS))
-                .testStartDateTime(testStartDateTime)
-                .testEndDateTime(testEndDateTime)
-                .exception(context.getExecutionException().orElse(null))
-                .executionStatus(ExecutionStatus.DISABLED)
-                .build();
+        TestExecutionResult testExecutionResult = generateTestExecutionResult(context, ExecutionStatus.DISABLED);
         TestExecutionResultCollector.addTestExecutionResult(testExecutionResult);
     }
 
     @Override
     public void testFailed(ExtensionContext context, Throwable throwable) {
-        ;
-        ZonedDateTime testStartDateTime = ZonedDateTime
-                .ofInstant(Instant.ofEpochMilli(startTime), ENVIRONMENT_ZONE_ID);
-        ZonedDateTime testEndDateTime = ZonedDateTime
-                .ofInstant(Instant.ofEpochMilli(System.currentTimeMillis()), ENVIRONMENT_ZONE_ID);
-        String testClass = context.getTestClass().get().getSimpleName();
-        String testMethod = context.getTestMethod().get().getName();
-        TestExecutionResult testExecutionResult = TestExecutionResult.builder()
-                .testClass(testClass)
-                .testMethod(testMethod)
-                .testParameters((List<Object>)context.getStore(NAMESPACE).get(METHOD_PARAMETERS))
-                .testStartDateTime(testStartDateTime)
-                .testEndDateTime(testEndDateTime)
-                .exception(context.getExecutionException().orElse(null))
-                .executionStatus(ExecutionStatus.FAIL)
-                .build();
+        TestExecutionResult testExecutionResult = generateTestExecutionResult(context, ExecutionStatus.FAIL);
         TestExecutionResultCollector.addTestExecutionResult(testExecutionResult);
     }
 
     @Override
     public void testSuccessful(ExtensionContext context) {
-        context.getStore(NAMESPACE);
+        TestExecutionResult testExecutionResult = generateTestExecutionResult(context, ExecutionStatus.PASS);
+        TestExecutionResultCollector.addTestExecutionResult(testExecutionResult);
+    }
+
+    private TestExecutionResult generateTestExecutionResult(ExtensionContext context, ExecutionStatus executionStatus) {
         ZonedDateTime testStartDateTime = ZonedDateTime
                 .ofInstant(Instant.ofEpochMilli(startTime), ENVIRONMENT_ZONE_ID);
         ZonedDateTime testEndDateTime = ZonedDateTime
                 .ofInstant(Instant.ofEpochMilli(System.currentTimeMillis()), ENVIRONMENT_ZONE_ID);
         String testClass = context.getTestClass().get().getSimpleName();
         String testMethod = context.getTestMethod().get().getName();
+        @SuppressWarnings("unchecked")
         TestExecutionResult testExecutionResult = TestExecutionResult.builder()
                 .testClass(testClass)
                 .testMethod(testMethod)
-                .testParameters((List<Object>)context.getStore(NAMESPACE).get(METHOD_PARAMETERS))
+                .testParameters((List<Object>) context.getStore(NAMESPACE).get(METHOD_PARAMETERS))
                 .testStartDateTime(testStartDateTime)
                 .testEndDateTime(testEndDateTime)
                 .exception(context.getExecutionException().orElse(null))
-                .executionStatus(ExecutionStatus.PASS)
+                .executionStatus(executionStatus)
                 .build();
-        TestExecutionResultCollector.addTestExecutionResult(testExecutionResult);
+        return testExecutionResult;
     }
 }

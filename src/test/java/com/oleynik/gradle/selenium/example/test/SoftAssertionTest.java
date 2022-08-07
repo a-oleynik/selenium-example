@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import static com.oleynik.gradle.selenium.example.framework.config.ConfigurationManager.configuration;
 
-@Feature("Soft sssertions")
+@Feature("Soft assertions")
 public class SoftAssertionTest extends BaseTest {
     private CalculatorSteps calculatorSteps;
     private final String url = configuration().environmentUrl();
