@@ -6,6 +6,7 @@ buildscript {
         jacksonVersion = "2.13.3"
         seleniumVersion = "4.3.0"
         slf4jVersion = "1.7.36"
+        testNGVersion = "7.6.1"
     }
 }
 
@@ -14,9 +15,6 @@ plugins {
     id("io.qameta.allure") version "2.10.0"
     id 'idea'
 }
-
-apply plugin: 'java-library'
-apply plugin: "io.qameta.allure"
 
 repositories {
     mavenLocal()
@@ -41,7 +39,7 @@ configurations.all {
 }
 
 dependencies {
-    implementation("org.testng:testng:7.6.1")
+    implementation("org.testng:testng:$testNGVersion")
     implementation("io.qameta.allure:allure-testng:$allureVersion")
     implementation("io.qameta.allure:allure-java-commons:$allureVersion")
     implementation("org.aspectj:aspectjweaver:$aspectjVersion")
@@ -58,13 +56,10 @@ dependencies {
 
 allure {
     version = allureVersion
-    boolean autoconfigure = true
-    boolean aspectjweaver = true
-    String allureJavaVersion = allureVersion
+
     useTestNG {
         version = allureVersion
     }
-    String configuration = 'testImplementation'
 }
 
 test {
@@ -83,4 +78,10 @@ test.finalizedBy allureReport
 
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
+}
+
+gradle.projectsEvaluated {
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << "-Xlint:unchecked"
+    }
 }
