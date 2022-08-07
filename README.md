@@ -18,6 +18,12 @@
 ```
 .\gradlew.bat clean test --tests com.oleynik.gradle.selenium.example.test.* 
 ```
+* Compile the project
+
+```
+.\gradlew clean compileTestJava
+```
+
 ### Reporting
 
 * Generated Allure report can be found in
