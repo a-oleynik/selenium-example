@@ -14,10 +14,15 @@ public class DateTimeUtils {
     public static final String STANDARD_DATE_TIME = "dd/MM/yyyy - HH:mm:ss.SSS";
     public static final String DATETIME_FORMAT_FOR_EXCEL_FILE = "ddMMyy_hhmmss";
     public static final String DATETIME_FORMAT_FOR_ALLURE_CONSOLE_LOG = "ddMMyy hh:mm:ss.SSS";
+    public static final String DATETIME_FORMAT_FOR_SCREENSHOT_NAME = "yyyyMMdd.hh.mm.ss.SSS";
     public static final ZoneId ENVIRONMENT_ZONE_ID = ZoneId.of(configuration().environmentTimeZone());
 
     public static String getDateTimeForAllureConsoleLog() {
         return getCurrentDateTime(getDateTimeFormatter(DATETIME_FORMAT_FOR_ALLURE_CONSOLE_LOG));
+    }
+
+    public static String getDateTimeForScreenshotName() {
+        return getCurrentDateTime(getDateTimeFormatter(DATETIME_FORMAT_FOR_SCREENSHOT_NAME));
     }
 
     public static String getCurrentDateTime(DateTimeFormatter formatter) {

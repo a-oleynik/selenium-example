@@ -17,6 +17,7 @@ import static com.oleynik.gradle.selenium.example.framework.reporting.AllureEnvi
 import static com.oleynik.gradle.selenium.example.framework.utils.ExcelUtils.convertExecutionTestResults;
 import static com.oleynik.gradle.selenium.example.framework.utils.ExcelUtils.createExcelFromData;
 import static com.oleynik.gradle.selenium.example.framework.utils.DateTimeUtils.getDateTimeForExcelReport;
+import static com.oleynik.gradle.selenium.example.framework.utils.GeneralUtils.createDirectoryIfNotExist;
 
 public class ResultExecutionListener implements TestExecutionListener {
     public void testPlanExecutionStarted(TestPlan testPlan) {
@@ -30,6 +31,7 @@ public class ResultExecutionListener implements TestExecutionListener {
     public void testPlanExecutionFinished(TestPlan testPlan) {
         List<Map<String, String>> testResults = convertExecutionTestResults(TestExecutionResultCollector.getAllResults());
         String excelReport = REPORTS_FOLDER + "testExecutionReport_" + getDateTimeForExcelReport() + ".xlsx";
+        createDirectoryIfNotExist(REPORTS_FOLDER);
         createExcelFromData(excelReport, "Report", testResults);
     }
 
