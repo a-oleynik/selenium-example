@@ -12,7 +12,7 @@ buildscript {
 
 plugins {
     id "java-library"
-    id("io.qameta.allure") version "2.10.0"
+    id("io.qameta.allure") version "2.11.2"
     id 'idea'
 }
 
@@ -65,6 +65,10 @@ allure {
     }
 }
 
+task cleanAllureReport(type: Delete) {
+    delete "build\\reports\\allure-report\\allureReport"
+}
+
 test {
     systemProperty "file.encoding", "utf-8"
     useJUnitPlatform {
@@ -73,10 +77,12 @@ test {
     testLogging.showStandardStreams = true
 
     systemProperty("junit.jupiter.execution.parallel.enabled", "true")
-    systemProperty("junit.jupiter.execution.parallel.mode.default", "concurrent")
-    systemProperty("junit.jupiter.execution.parallel.config.fixed.parallelism", "3")
-    //systemProperty("junit.jupiter.execution.parallel.config.strategy", "dynamic")
-    //systemProperty("junit.jupiter.extensions.autodetection.enabled", "true")
+    systemProperty("junit.jupiter.execution.parallel.config.strategy", "dynamic")
+    systemProperty("junit.jupiter.extensions.autodetection.enabled", "true")
+    dependsOn cleanTest
+    dependsOn cleanAllureReport
+    testLogging.showStandardStreams = true
+    maxParallelForks = 3
 }
 
 test.finalizedBy allureReport
