@@ -1,7 +1,9 @@
 package com.oleynik.gradle.selenium.example.framework.listeners;
 
 import com.oleynik.gradle.selenium.example.framework.manager.WebdriverManager;
+import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
+import io.qameta.allure.model.Status;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -26,13 +28,18 @@ public class ScreenshotListener implements IInvokedMethodListener {
     public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
         boolean isTestSkipped = (testResult.getStatus() == 3);
         if (!testResult.isSuccess() && (!isTestSkipped)) {
-            WebDriver driver = WebdriverManager.getDriver();
-            if (null != driver) {
-                String testMethod = method.getTestMethod().getMethodName();
-                byte[] screenshotBytes = makeScreenshotOnFailure(testMethod, driver);
-                saveScreenshot(method, screenshotBytes);
-                String pageSource = makePageSource(testMethod, driver);
-                savePageSource(method, pageSource);
+            try {
+                WebDriver driver = WebdriverManager.getDriver();
+                if (null != driver) {
+                    String testMethod = method.getTestMethod().getMethodName();
+                    byte[] screenshotBytes = makeScreenshotOnFailure(testMethod, driver);
+                    saveScreenshot(method, screenshotBytes);
+                    String pageSource = makePageSource(testMethod, driver);
+                    savePageSource(method, pageSource);
+                }
+            } catch (Exception exception) {
+                Allure.step(format("%s exception thrown. Exception message:\n%s", exception.getClass().getSimpleName(),
+                        exception.getMessage()), Status.FAILED);
             }
         }
     }
