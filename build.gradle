@@ -1,12 +1,13 @@
 buildscript {
     ext {
-        allureVersion = "2.22.1"
+        allureVersion = "2.22.2"
         aspectjVersion = "1.9.19"
         log4jVersion = "2.20.0"
         jacksonVersion = "2.15.1"
-        seleniumVersion = "4.9.1"
+        seleniumVersion = "4.10.0"
         slf4jVersion = "2.0.7"
         testNGVersion = "7.8.0"
+        lombokVersion = "1.18.28"
     }
 }
 
@@ -50,8 +51,8 @@ dependencies {
     implementation("org.apache.logging.log4j:log4j-to-slf4j:$log4jVersion")
     implementation("org.slf4j:slf4j-simple:$slf4jVersion")
     implementation('org.assertj:assertj-core:3.24.2')
-    testCompileOnly("org.projectlombok:lombok:1.18.28")
-    testAnnotationProcessor("org.projectlombok:lombok:1.18.28")
+    testCompileOnly("org.projectlombok:lombok:$lombokVersion")
+    testAnnotationProcessor("org.projectlombok:lombok:$lombokVersion")
 }
 
 allure {
