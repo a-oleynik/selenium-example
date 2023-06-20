@@ -4,7 +4,9 @@ import com.oleynik.gradle.selenium.example.framework.manager.WebdriverManager;
 import com.oleynik.gradle.selenium.example.framework.reporting.ExecutionStatus;
 import com.oleynik.gradle.selenium.example.framework.reporting.TestExecutionResult;
 import com.oleynik.gradle.selenium.example.framework.reporting.TestExecutionResultCollector;
+import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
+import io.qameta.allure.model.Status;
 import org.junit.jupiter.api.extension.*;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -48,13 +50,18 @@ public class MyTestWatcher implements BeforeEachCallback, TestWatcher {
     @Override
     public void testFailed(ExtensionContext context, Throwable throwable) {
         if (context.getExecutionException().isPresent()) {
-            WebDriver driver = WebdriverManager.getDriver();
-            if (null != driver) {
-                String testMethod = context.getRequiredTestMethod().getName();
-                byte[] screenshotBytes = makeScreenshotOnFailure(testMethod, driver);
-                saveScreenshot(context, screenshotBytes);
-                String pageSource = makePageSource(testMethod, driver);
-                savePageSource(context, pageSource);
+            try {
+                WebDriver driver = WebdriverManager.getDriver();
+                if (null != driver) {
+                    String testMethod = context.getRequiredTestMethod().getName();
+                    byte[] screenshotBytes = makeScreenshotOnFailure(testMethod, driver);
+                    saveScreenshot(context, screenshotBytes);
+                    String pageSource = makePageSource(testMethod, driver);
+                    savePageSource(context, pageSource);
+                }
+            } catch (Exception exception) {
+                Allure.step(format("%s exception thrown. Exception message:\n%s", exception.getClass().getSimpleName(),
+                        exception.getMessage()), Status.FAILED);
             }
         }
         TestExecutionResult testExecutionResult = generateTestExecutionResult(context, ExecutionStatus.FAIL);
