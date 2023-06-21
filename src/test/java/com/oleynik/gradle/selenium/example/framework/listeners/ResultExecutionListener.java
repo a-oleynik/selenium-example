@@ -8,16 +8,11 @@ import org.junit.platform.launcher.TestExecutionListener;
 import org.junit.platform.launcher.TestIdentifier;
 import org.junit.platform.launcher.TestPlan;
 
-import java.util.List;
-import java.util.Map;
 
 import static com.oleynik.gradle.selenium.example.framework.config.ConfigurationManager.configuration;
-import static com.oleynik.gradle.selenium.example.framework.config.Constants.REPORTS_FOLDER;
 import static com.oleynik.gradle.selenium.example.framework.reporting.AllureEnvironmentWriter.writeAllureEnvironment;
-import static com.oleynik.gradle.selenium.example.framework.utils.ExcelUtils.convertExecutionTestResults;
-import static com.oleynik.gradle.selenium.example.framework.utils.ExcelUtils.createExcelFromData;
-import static com.oleynik.gradle.selenium.example.framework.utils.DateTimeUtils.getDateTimeForExcelReport;
-import static com.oleynik.gradle.selenium.example.framework.utils.GeneralUtils.createDirectoryIfNotExist;
+import static com.oleynik.gradle.selenium.example.framework.utils.ReportUtils.generateConsolidatedExcelReport;
+import static com.oleynik.gradle.selenium.example.framework.utils.ReportUtils.saveTestExecutionResults;
 
 public class ResultExecutionListener implements TestExecutionListener {
     public void testPlanExecutionStarted(TestPlan testPlan) {
@@ -29,10 +24,8 @@ public class ResultExecutionListener implements TestExecutionListener {
     }
 
     public void testPlanExecutionFinished(TestPlan testPlan) {
-        List<Map<String, String>> testResults = convertExecutionTestResults(TestExecutionResultCollector.getAllResults());
-        String excelReport = REPORTS_FOLDER + "testExecutionReport_" + getDateTimeForExcelReport() + ".xlsx";
-        createDirectoryIfNotExist(REPORTS_FOLDER);
-        createExcelFromData(excelReport, "Report", testResults);
+        saveTestExecutionResults(TestExecutionResultCollector.getAllResults());
+        generateConsolidatedExcelReport("executionReport");
     }
 
     public void dynamicTestRegistered(TestIdentifier testIdentifier) {
