@@ -14,7 +14,8 @@ buildscript {
 plugins {
     id "java-library"
     id("io.qameta.allure") version "2.11.2"
-    id 'idea'
+    id "idea"
+    id "org.gradle.test-retry" version "1.5.2"
 }
 
 repositories {
@@ -70,6 +71,12 @@ task cleanAllureReport(type: Delete) {
     delete "build\\reports\\allure-report\\allureReport"
 }
 
+task excelReport(type: JavaExec) {
+    description = "Collects and generate consolidated Excel report"
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = "com.oleynik.gradle.selenium.example.framework.utils.ReportUtils"
+}
+
 test {
     systemProperty "file.encoding", "utf-8"
     useTestNG {
@@ -82,9 +89,15 @@ test {
     dependsOn cleanAllureReport
     testLogging.exceptionFormat = 'full'
     testLogging.showStandardStreams = true
+
+    retry {
+        failOnPassedAfterRetry = true
+        maxFailures = 100
+        maxRetries = 1
+    }
 }
 
-test.finalizedBy allureReport
+test.finalizedBy allureReport, excelReport
 
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
