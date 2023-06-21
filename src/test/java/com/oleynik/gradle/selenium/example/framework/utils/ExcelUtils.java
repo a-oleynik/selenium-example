@@ -9,12 +9,14 @@ import java.io.FileOutputStream;
 import java.util.*;
 
 import static com.oleynik.gradle.selenium.example.framework.utils.DateTimeUtils.*;
+import static com.oleynik.gradle.selenium.example.framework.utils.ReportUtils.saveTestExecutionResult;
 
 public class ExcelUtils {
     public static List<Map<String, String>> convertExecutionTestResults(List<TestExecutionResult> results) {
         List<Map<String, String>> data = new ArrayList<>();
         Map<String, String> resultMap;
         for (TestExecutionResult result : results) {
+            saveTestExecutionResult(result);
             resultMap = new LinkedHashMap<>() {{
                 put("TestClass", result.getTestClass());
                 put("TestMethod", result.getTestMethod());

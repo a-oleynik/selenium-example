@@ -15,6 +15,7 @@ public class DateTimeUtils {
     public static final String DATETIME_FORMAT_FOR_EXCEL_FILE = "ddMMyy_hhmmss";
     public static final String DATETIME_FORMAT_FOR_ALLURE_CONSOLE_LOG = "ddMMyy hh:mm:ss.SSS";
     public static final String DATETIME_FORMAT_FOR_SCREENSHOT_NAME = "yyyyMMdd.hh.mm.ss.SSS";
+    public static final String DATETIME_FORMAT_FOR_TEST_RESULT_FILE = "yyMMddhhmmssSSS";
     public static final ZoneId ENVIRONMENT_ZONE_ID = ZoneId.of(configuration().environmentTimeZone());
 
     public static String getDateTimeForAllureConsoleLog() {
@@ -43,6 +44,10 @@ public class DateTimeUtils {
 
     public static String getDateTimeForExcelReport() {
         return getCurrentDateTime(getDateTimeFormatter(DATETIME_FORMAT_FOR_EXCEL_FILE));
+    }
+
+    public static String getDateTimeForTestResultFile() {
+        return getCurrentDateTime(getDateTimeFormatter(DATETIME_FORMAT_FOR_TEST_RESULT_FILE));
     }
 
     public static Duration getDurationBetweenZonedDateTimes(ZonedDateTime dateTimeStart, ZonedDateTime dateTimeEnd) {
