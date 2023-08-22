@@ -1,7 +1,9 @@
 package com.oleynik.gradle.selenium.example.framework.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.oleynik.gradle.selenium.example.framework.reporting.TestExecutionResult;
+import com.oleynik.gradle.selenium.example.framework.reporting.ThrowableJacksonModule;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -27,7 +29,9 @@ import static com.oleynik.gradle.selenium.example.framework.utils.JsonUtils.getO
 public class ReportUtils {
     public static void saveTestExecutionResult(TestExecutionResult result) {
         try {
-            ObjectMapper objectMapper = getObjectMapper();
+            ObjectMapper objectMapper = getObjectMapper()
+                    .registerModule(new JavaTimeModule())
+                    .registerModule(new ThrowableJacksonModule());
             createDirectoryIfNotExist(EXCEL_RESULTS_FOLDER);
             objectMapper.writeValue(new File(EXCEL_RESULTS_FOLDER + "testResult_" + getDateTimeForTestResultFile() + ".json"), result);
         } catch (IOException ioException) {
