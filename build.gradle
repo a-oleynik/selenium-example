@@ -7,6 +7,7 @@ buildscript {
         seleniumVersion = "4.11.0"
         slf4jVersion = "2.0.7"
         junit5Version = "5.10.0"
+        junitPlatformVersion = "1.10.0"
         lombokVersion = "1.18.28"
     }
 }
@@ -44,7 +45,7 @@ dependencies {
     implementation("org.junit.jupiter:junit-jupiter-api:$junit5Version")
     implementation("org.junit.jupiter:junit-jupiter-engine:$junit5Version")
     implementation("org.junit.jupiter:junit-jupiter-params:$junit5Version")
-    implementation('org.junit.platform:junit-platform-runner:1.10.0')
+    implementation("org.junit.platform:junit-platform-runner:$junitPlatformVersion")
     implementation("io.qameta.allure:allure-junit5:$allureVersion")
     implementation("io.qameta.allure:allure-java-commons:$allureVersion")
     implementation("org.aspectj:aspectjweaver:$aspectjVersion")
