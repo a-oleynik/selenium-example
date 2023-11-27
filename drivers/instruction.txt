@@ -1,0 +1,12 @@
+To start standalone:  java -jar selenium-server-4.15.0.jar standalone
+or
+java -jar selenium-server-4.15.0.jar standalone --selenium-manager true
+or
+java -jar selenium-server-4.15.0.jar standalone --config chrome-grid-config.toml
+or
+java -jar selenium-server-4.15.0.jar standalone --config grid-config.toml
+or
+java -jar selenium-server-4.15.0.jar standalone --config two-browsers-grid-config.toml
+
+To open grid UI: http://192.168.0.227:4444 or http://localhost:4444
+or http://localhost:4444/ui
