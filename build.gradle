@@ -16,7 +16,7 @@ plugins {
     id "java-library"
     id("io.qameta.allure") version "2.11.2"
     id "idea"
-    id "org.gradle.test-retry" version "1.5.2"
+    id "org.gradle.test-retry" version "1.5.6"
 }
 
 repositories {
@@ -52,7 +52,7 @@ dependencies {
     implementation("org.seleniumhq.selenium:selenium-java:$seleniumVersion")
     implementation("org.aeonbits.owner:owner:1.0.12")
     implementation("org.apache.poi:poi-ooxml:5.2.3")
-    implementation("com.opencsv:opencsv:5.8")
+    implementation("com.opencsv:opencsv:5.9")
     implementation("org.apache.logging.log4j:log4j-to-slf4j:$log4jVersion")
     implementation("org.slf4j:slf4j-simple:$slf4jVersion")
     implementation('org.assertj:assertj-core:3.24.2')
