@@ -54,4 +54,10 @@ public class WebdriverUtils {
     public static boolean elementExistsAndShown(By by) {
         return elementExists(by) && WebdriverUtils.findElement(by).isDisplayed();
     }
+
+    public static void clickIfElementShown(By by){
+        if (elementExistsAndShown(by)) {
+            WebdriverUtils.findElement(by).click();
+        }
+    }
 }
