@@ -14,6 +14,7 @@ public class CalculatorSteps {
     @Step("Opening \"{url}\"")
     public void openCalculator(String url) {
         calculatorPage = new CalculatorPage(url);
+        calculatorPage.pressConsent();
         calculatorPage.acceptCookie();
     }
 

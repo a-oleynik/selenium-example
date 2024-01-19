@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static com.oleynik.gradle.selenium.example.framework.utils.WebdriverUtils.elementExists;
+import static com.oleynik.gradle.selenium.example.framework.utils.WebdriverUtils.elementExistsAndShown;
 
 public class CalculatorPage {
 
@@ -41,6 +41,8 @@ public class CalculatorPage {
     private WebElement taperoll;
 
     private static final By GOT_IT_BUTTON_BY = By.xpath("//*[@class='tibrr-cookie-consent-button']/button");
+
+    private static final By CONSENT_BUTTON_BY = By.xpath( "//*[@class='fc-button-label' and contains(text(), 'Consent')]");
 
     public String getTitle() {
         WebDriver driver = WebdriverManager.getDriver();
@@ -97,7 +99,11 @@ public class CalculatorPage {
     }
 
     public boolean gotItButtonShown() {
-        return elementExists(GOT_IT_BUTTON_BY) && WebdriverUtils.findElement(GOT_IT_BUTTON_BY).isDisplayed();
+        return elementExistsAndShown(GOT_IT_BUTTON_BY);
+    }
+
+    public boolean consentButtonShown() {
+        return elementExistsAndShown(CONSENT_BUTTON_BY);
     }
 
     public boolean resultInputShown() {
@@ -107,6 +113,12 @@ public class CalculatorPage {
     public void acceptCookie() {
         if (gotItButtonShown()) {
             WebdriverUtils.findElement(GOT_IT_BUTTON_BY).click();
+        }
+    }
+
+    public void pressConsent() {
+        if (consentButtonShown()) {
+            WebdriverUtils.findElement(CONSENT_BUTTON_BY).click();
         }
     }
 
