@@ -3,9 +3,9 @@ buildscript {
         allureVersion = "2.25.0"
         aspectjVersion = "1.9.21"
         log4jVersion = "2.22.0"
-        jacksonVersion = "2.16.0"
+        jacksonVersion = "2.16.1"
         seleniumVersion = "4.16.1"
-        slf4jVersion = "2.0.9"
+        slf4jVersion = "2.0.11"
         junit5Version = "5.10.1"
         junitPlatformVersion = "1.10.1"
         lombokVersion = "1.18.30"
@@ -51,11 +51,11 @@ dependencies {
     implementation("org.aspectj:aspectjweaver:$aspectjVersion")
     implementation("org.seleniumhq.selenium:selenium-java:$seleniumVersion")
     implementation("org.aeonbits.owner:owner:1.0.12")
-    implementation("org.apache.poi:poi-ooxml:5.2.3")
+    implementation("org.apache.poi:poi-ooxml:5.2.5")
     implementation("com.opencsv:opencsv:5.9")
     implementation("org.apache.logging.log4j:log4j-to-slf4j:$log4jVersion")
     implementation("org.slf4j:slf4j-simple:$slf4jVersion")
-    implementation('org.assertj:assertj-core:3.24.2')
+    implementation('org.assertj:assertj-core:3.25.1')
     implementation("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
     implementation("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")

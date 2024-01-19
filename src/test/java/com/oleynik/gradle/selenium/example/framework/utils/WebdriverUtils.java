@@ -48,6 +48,10 @@ public class WebdriverUtils {
 
     public static boolean elementExists(By locator) {
         List<WebElement> elements = WebdriverManager.getDriver().findElements(locator);
-        return elements.size() > 0;
+        return !elements.isEmpty();
+    }
+
+    public static boolean elementExistsAndShown(By by) {
+        return elementExists(by) && WebdriverUtils.findElement(by).isDisplayed();
     }
 }

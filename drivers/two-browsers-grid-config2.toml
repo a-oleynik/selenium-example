@@ -1,0 +1,9 @@
+[server]
+port = 4449
+[node]
+detect-drivers = false
+[[node.driver-configuration]]
+max-sessions = 4
+display-name = "firefox"
+stereotype = "{\"browserName\": \"firefox\", \"browserVersion\": \"120\", \"platformName\": \"Windows 10\", \"moz:firefoxOptions\": {\"binary\": \"firefox.exe\"}}"
+webdriver-executable = "C:\\\\driver\\geckodriver.exe"
