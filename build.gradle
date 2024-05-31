@@ -1,14 +1,14 @@
 buildscript {
     ext {
-        allureVersion = "2.25.0"
-        aspectjVersion = "1.9.21.1"
-        log4jVersion = "2.23.0"
-        jacksonVersion = "2.16.1"
-        seleniumVersion = "4.18.1"
-        slf4jVersion = "2.0.11"
+        allureVersion = "2.27.0"
+        aspectjVersion = "1.9.22.1"
+        log4jVersion = "2.23.1"
+        jacksonVersion = "2.17.1"
+        seleniumVersion = "4.21.0"
+        slf4jVersion = "2.0.13"
         junit5Version = "5.10.2"
         junitPlatformVersion = "1.10.2"
-        lombokVersion = "1.18.30"
+        lombokVersion = "1.18.32"
     }
 }
 
@@ -29,8 +29,8 @@ group 'com.oleynik.selenium.example'
 version '0.0.1-SNAPSHOT'
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 configurations.all {
