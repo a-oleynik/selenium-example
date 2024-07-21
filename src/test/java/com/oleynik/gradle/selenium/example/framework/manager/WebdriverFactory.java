@@ -13,26 +13,25 @@ public class WebdriverFactory {
     public static WebDriver createInstance() {
         WebDriver driver;
         String chosenBrowser = configuration().envBrowser().toLowerCase();
-        switch (chosenBrowser) {
-            case "firefox":
+        driver = switch (chosenBrowser) {
+            case "firefox" -> {
                 System.setProperty("webdriver.gecko.driver", ".\\drivers\\geckodriver.exe");
-                driver = new FirefoxDriver();
-                break;
-            case "chrome":
+                yield new FirefoxDriver();
+            }
+            case "chrome" -> {
                 System.setProperty("webdriver.chrome.driver", ".\\drivers\\chromedriver.exe");
-                driver = new ChromeDriver();
-                break;
-            case "ie":
+                yield new ChromeDriver();
+            }
+            case "ie" -> {
                 System.setProperty("webdriver.ie.driver", ".\\drivers\\IEDriverServer.exe");
-                driver = new InternetExplorerDriver();
-                break;
-            case "edge":
+                yield new InternetExplorerDriver();
+            }
+            case "edge" -> {
                 System.setProperty("webdriver.edge.driver", ".\\drivers\\msedgedriver.exe");
-                driver = new EdgeDriver();
-                break;
-            default:
-                throw new IllegalStateException("Browser is not supported");
-        }
+                yield new EdgeDriver();
+            }
+            default -> throw new IllegalStateException("Browser is not supported");
+        };
 
         return driver;
 
