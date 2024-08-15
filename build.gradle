@@ -12,10 +12,10 @@ buildscript {
 }
 
 plugins {
-    id "java-library"
-    id("io.qameta.allure") version "2.12.0"
-    id "idea"
-    id "org.gradle.test-retry" version "1.5.10"
+    id 'java-library'
+    id('io.qameta.allure') version '2.12.0'
+    id 'idea'
+    id 'org.gradle.test-retry' version '1.5.10'
 }
 
 repositories {
@@ -99,12 +99,12 @@ test {
 
 test.finalizedBy allureReport, excelReport
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
     options.encoding = "UTF-8"
 }
 
 gradle.projectsEvaluated {
-    tasks.withType(JavaCompile) {
+    tasks.withType(JavaCompile).configureEach {
         options.compilerArgs << "-Xlint:unchecked"
     }
 }
