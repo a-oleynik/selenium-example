@@ -41,40 +41,14 @@
 ```
 ### Webdriver
 
-* Supported Webdrivers should be put in 
-```
-{project directory}/drivers
-```
+* Webdrivers are managed by Selenium Manager
+
 * To kill Chromedriver processes on Windows execute
 ```
 taskkill /F /IM chromedriver.exe /T
 ```
 
 ### Webdriver sources
-
-* Chrome WebDriver
-```
-https://googlechromelabs.github.io/chrome-for-testing/
-```
-* Geckodriver (Firefox)
-```
-https://github.com/mozilla/geckodriver/releases
-```
-
-* Microsoft Edge WebDriver
-```
-https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/?form=MA13LH
-```
-
-* Opera WebDriver
-```
-https://github.com/operasoftware/operachromiumdriver/releases
-```
-
-* IE WebDriver
-```
-https://www.selenium.dev/downloads/
-```
 
 * Selenium Server (Grid)
 ```
