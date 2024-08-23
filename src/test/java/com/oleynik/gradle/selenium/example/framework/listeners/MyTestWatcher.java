@@ -99,7 +99,7 @@ public class MyTestWatcher implements BeforeEachCallback, TestWatcher {
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
 
-    @Attachment(value = "{testName} - page source", type = "text/plain", fileExtension = ".html")
+    @Attachment(value = "{testName} - page source", type = "text/html", fileExtension = ".html")
     private String makePageSource(String testName, WebDriver driver) {
         return driver.getPageSource();
     }
