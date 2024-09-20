@@ -12,8 +12,11 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.time.Instant;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,12 +26,9 @@ import static com.oleynik.gradle.selenium.example.framework.utils.GeneralUtils.c
 import static com.oleynik.gradle.selenium.example.framework.utils.GeneralUtils.saveBytesAsFile;
 import static java.lang.String.format;
 
-public class MyTestWatcher implements BeforeEachCallback, TestWatcher {
+public class MyTestWatcher implements BeforeEachCallback, TestWatcher, InvocationInterceptor {
     private long startTime;
-    public static final ExtensionContext.Namespace NAMESPACE =
-            ExtensionContext.Namespace.create("com", "oleynik", "gradle", "selenium", "example", "framework",
-                    "listeners", "MyInvocationInterceptor");
-    public static final String METHOD_PARAMETERS = "method.parameters";
+    List<Object> testMethodParameters;
 
     @Override
     public void beforeEach(ExtensionContext context) {
@@ -53,7 +53,7 @@ public class MyTestWatcher implements BeforeEachCallback, TestWatcher {
             try {
                 WebDriver driver = WebdriverManager.getDriver();
                 if (null != driver) {
-                    String testMethod = context.getRequiredTestMethod().getName();
+                    String testMethod = getTestMethodName(context);
                     byte[] screenshotBytes = makeScreenshotOnFailure(testMethod, driver);
                     saveScreenshot(context, screenshotBytes);
                     String pageSource = makePageSource(testMethod, driver);
@@ -80,12 +80,11 @@ public class MyTestWatcher implements BeforeEachCallback, TestWatcher {
         ZonedDateTime testEndDateTime = ZonedDateTime
                 .ofInstant(Instant.ofEpochMilli(System.currentTimeMillis()), ENVIRONMENT_ZONE_ID);
         String testClass = context.getRequiredTestClass().getSimpleName();
-        String testMethod = context.getRequiredTestMethod().getName();
-        @SuppressWarnings("unchecked")
+        String testMethod = getTestMethodName(context);
         TestExecutionResult testExecutionResult = TestExecutionResult.builder()
                 .testClass(testClass)
                 .testMethod(testMethod)
-                .testParameters((List<Object>) context.getStore(NAMESPACE).get(METHOD_PARAMETERS))
+                .testParameters(testMethodParameters)
                 .testStartDateTime(testStartDateTime)
                 .testEndDateTime(testEndDateTime)
                 .exception(context.getExecutionException().orElse(null))
@@ -106,7 +105,7 @@ public class MyTestWatcher implements BeforeEachCallback, TestWatcher {
 
     private void saveScreenshot(ExtensionContext context, byte[] screenshotBytes) {
         String testClass = context.getRequiredTestClass().getSimpleName();
-        String testMethod = context.getRequiredTestMethod().getName();
+        String testMethod = getTestMethodName(context);
         String screenshotName = format("%s-%s-%s.png", getDateTimeForScreenshotName(), testClass,
                 testMethod);
         String screenshotPath = SCREENSHOTS_FOLDER + screenshotName;
@@ -117,12 +116,40 @@ public class MyTestWatcher implements BeforeEachCallback, TestWatcher {
 
     private void savePageSource(ExtensionContext context, String pageSource) {
         String testClass = context.getRequiredTestClass().getSimpleName();
-        String testMethod = context.getRequiredTestMethod().getName();
+        String testMethod = getTestMethodName(context);
         String pageSourceName = format("%s-%s-%s.html", getDateTimeForScreenshotName(), testClass,
                 testMethod);
         String pageSourcePath = SCREENSHOTS_FOLDER + pageSourceName;
         createDirectoryIfNotExist(SCREENSHOTS_FOLDER);
         saveBytesAsFile(pageSourcePath, pageSource.getBytes());
         System.out.println(getDateTimeForAllureConsoleLog() + ": page source saved in " + pageSourcePath);
+    }
+
+    private String getTestMethodName (ExtensionContext context){
+        return context.getRequiredTestMethod().getName();
+    }
+
+    @Override
+    public void interceptTestTemplateMethod(final Invocation<Void> invocation,
+                                            final ReflectiveInvocationContext<Method> invocationContext,
+                                            final ExtensionContext extensionContext) throws Throwable {
+        sendParameters2Store(invocationContext, extensionContext);
+        invocation.proceed();
+    }
+
+    private void sendParameters2Store(final ReflectiveInvocationContext<Method> invocationContext,
+                                      final ExtensionContext extensionContext) {
+        final Parameter[] parameters = invocationContext.getExecutable().getParameters();
+        List<Object> methodParameters = new ArrayList<>();
+        for (int i = 0; i < parameters.length; i++) {
+            final Parameter parameter = parameters[i];
+            final Class<?> parameterType = parameter.getType();
+            // Skip default jupiter injectables as TestInfo, TestReporter and TempDirectory
+            if (parameterType.getCanonicalName().startsWith("org.junit.jupiter.api")) {
+                continue;
+            }
+            methodParameters.add(invocationContext.getArguments().get(i));
+        }
+        testMethodParameters = methodParameters;
     }
 }
