@@ -3,7 +3,7 @@ buildscript {
         allureVersion = "2.29.0"
         aspectjVersion = "1.9.22.1"
         log4jVersion = "2.24.0"
-        jacksonVersion = "2.17.2"
+        jacksonVersion = "2.18.0"
         seleniumVersion = "4.25.0"
         slf4jVersion = "2.0.16"
         junit5Version = "5.11.0"
