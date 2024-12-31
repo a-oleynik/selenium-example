@@ -2,12 +2,12 @@ buildscript {
     ext {
         allureVersion = "2.29.0"
         aspectjVersion = "1.9.22.1"
-        log4jVersion = "2.24.1"
-        jacksonVersion = "2.18.1"
-        seleniumVersion = "4.26.0"
+        log4jVersion = "2.24.3"
+        jacksonVersion = "2.18.2"
+        seleniumVersion = "4.27.0"
         slf4jVersion = "2.0.16"
         testNGVersion = "7.10.2"
-        lombokVersion = "1.18.34"
+        lombokVersion = "1.18.36"
     }
 }
 
@@ -51,7 +51,7 @@ dependencies {
     implementation("com.opencsv:opencsv:5.9")
     implementation("org.apache.logging.log4j:log4j-to-slf4j:$log4jVersion")
     implementation("org.slf4j:slf4j-simple:$slf4jVersion")
-    implementation('org.assertj:assertj-core:3.26.3')
+    implementation('org.assertj:assertj-core:3.27.0')
     implementation("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
     implementation("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
