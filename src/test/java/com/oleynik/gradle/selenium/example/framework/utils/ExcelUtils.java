@@ -36,7 +36,6 @@ public class ExcelUtils {
         try (FileOutputStream outputStream = new FileOutputStream(file)) {
             workbook.write(outputStream);
         } catch (Exception e) {
-            e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
@@ -68,7 +67,7 @@ public class ExcelUtils {
         Row row;
         row = sheet.createRow(++rowCount);
         int columnCount = 0;
-        for (String value : data.get(0).keySet()) {
+        for (String value : data.getFirst().keySet()) {
             Cell cell = row.createCell(++columnCount);
             cell.setCellValue(value);
             cell.setCellStyle(headerStyle);
