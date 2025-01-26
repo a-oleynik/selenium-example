@@ -26,7 +26,6 @@ public class CsvDataProvider {
                             .toArray())
                     .toArray(Object[][]::new);
         } catch (IOException | NumberFormatException | CsvException e) {
-            e.printStackTrace();
             throw new RuntimeException(e);
         }
     }

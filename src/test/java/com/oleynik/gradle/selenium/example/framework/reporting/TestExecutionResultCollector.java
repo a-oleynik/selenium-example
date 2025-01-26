@@ -7,12 +7,12 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class TestExecutionResultCollector {
-    private static Queue<TestExecutionResult> allResults = new ConcurrentLinkedQueue<>();
+    private static final Queue<TestExecutionResult> allResults = new ConcurrentLinkedQueue<>();
 
     private TestExecutionResultCollector() {
     }
 
-    private static TestExecutionResultCollector instance = new TestExecutionResultCollector();
+    private static final TestExecutionResultCollector instance = new TestExecutionResultCollector();
 
     public static TestExecutionResultCollector getInstance() {
         return instance;
