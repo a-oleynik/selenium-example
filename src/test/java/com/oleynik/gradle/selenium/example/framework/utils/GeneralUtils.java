@@ -10,7 +10,6 @@ public class GeneralUtils {
         try (OutputStream out = new FileOutputStream(path)) {
             out.write(fileBytes);
         } catch (IOException e) {
-            e.printStackTrace();
             throw new RuntimeException(e);
         }
     }

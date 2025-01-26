@@ -71,8 +71,7 @@ public class BasicOperationsTest extends BaseTest {
                 outData.add(new Object[]{Integer.parseInt(data[0].trim()), Integer.parseInt(data[1].trim())});
             }
         } catch (IOException | NumberFormatException e) {
-            e.printStackTrace();
-            return null;
+            throw new RuntimeException(e);
         }
         return outData.toArray(new Object[outData.size()][]);
     }
