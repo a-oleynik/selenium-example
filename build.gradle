@@ -4,7 +4,7 @@ buildscript {
         aspectjVersion = "1.9.22.1"
         log4jVersion = "2.24.3"
         jacksonVersion = "2.18.2"
-        seleniumVersion = "4.27.0"
+        seleniumVersion = "4.28.1"
         slf4jVersion = "2.0.16"
         junit5Version = "5.11.3"
         junitPlatformVersion = "1.11.3"
@@ -16,7 +16,7 @@ plugins {
     id 'java-library'
     id('io.qameta.allure') version '2.12.0'
     id 'idea'
-    id 'org.gradle.test-retry' version '1.5.10'
+    id 'org.gradle.test-retry' version '1.6.1'
 }
 
 repositories {
@@ -52,10 +52,10 @@ dependencies {
     implementation("org.seleniumhq.selenium:selenium-java:$seleniumVersion")
     implementation("org.aeonbits.owner:owner:1.0.12")
     implementation("org.apache.poi:poi-ooxml:5.3.0")
-    implementation("com.opencsv:opencsv:5.9")
+    implementation("com.opencsv:opencsv:5.10")
     implementation("org.apache.logging.log4j:log4j-to-slf4j:$log4jVersion")
     implementation("org.slf4j:slf4j-simple:$slf4jVersion")
-    implementation('org.assertj:assertj-core:3.27.0')
+    implementation('org.assertj:assertj-core:3.27.3')
     implementation("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
     implementation("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
