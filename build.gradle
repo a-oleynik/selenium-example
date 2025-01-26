@@ -6,8 +6,8 @@ buildscript {
         jacksonVersion = "2.18.2"
         seleniumVersion = "4.28.1"
         slf4jVersion = "2.0.16"
-        junit5Version = "5.11.3"
-        junitPlatformVersion = "1.11.3"
+        junit5Version = "5.11.4"
+        junitPlatformVersion = "1.11.4"
         lombokVersion = "1.18.36"
     }
 }
