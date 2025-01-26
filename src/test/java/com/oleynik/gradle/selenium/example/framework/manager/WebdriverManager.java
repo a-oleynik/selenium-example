@@ -3,7 +3,7 @@ package com.oleynik.gradle.selenium.example.framework.manager;
 import org.openqa.selenium.WebDriver;
 
 public class WebdriverManager {
-    private static ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
+    private static final ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
 
     public static WebDriver getDriver() {
         return webDriver.get();

@@ -74,7 +74,7 @@ public class CalculatorPage {
     }
 
     public String getResultValue() {
-        return resultInput.getAttribute("value");
+        return resultInput.getDomProperty("value");
     }
 
     public boolean divideButtonShown() {
