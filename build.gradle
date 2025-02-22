@@ -1,10 +1,11 @@
 buildscript {
     ext {
-        allureVersion = "2.29.0"
+        allureVersion = "2.29.1"
+        allureReportVersion = "2.32.2"
         aspectjVersion = "1.9.22.1"
         log4jVersion = "2.24.3"
         jacksonVersion = "2.18.2"
-        seleniumVersion = "4.28.1"
+        seleniumVersion = "4.29.0"
         slf4jVersion = "2.0.16"
         testNGVersion = "7.10.2"
         lombokVersion = "1.18.36"
@@ -15,7 +16,7 @@ plugins {
     id 'java-library'
     id('io.qameta.allure') version '2.12.0'
     id 'idea'
-    id 'org.gradle.test-retry' version '1.6.1'
+    id 'org.gradle.test-retry' version '1.6.2'
 }
 
 repositories {
@@ -60,7 +61,7 @@ dependencies {
 }
 
 allure {
-    version = allureVersion
+    version = allureReportVersion
 
     useTestNG {
         version = allureVersion
