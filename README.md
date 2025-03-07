@@ -23,6 +23,11 @@
 ```
 .\gradlew clean compileTestJava
 ```
+* Check dependency updates
+
+```
+./gradlew dependencyUpdates
+```
 
 ### Reporting
 
