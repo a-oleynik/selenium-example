@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NonNull;
 import lombok.extern.jackson.Jacksonized;
-import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.time.ZonedDateTime;
 import java.util.Arrays;
