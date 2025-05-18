@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 
 import static com.oleynik.gradle.selenium.example.framework.config.ConfigurationManager.configuration;
+import static com.oleynik.gradle.selenium.example.framework.config.Constants.TEST_RESOURCES;
 
 @Feature("Basic math operations")
 public class BasicDivisionTest extends BaseTest {
@@ -22,7 +23,7 @@ public class BasicDivisionTest extends BaseTest {
 
     @ParameterizedTest
     @Description("Check division using reusable csv data provider")
-    @ParameterizedDataSource(path = "src/test/resources/Division.csv")
+    @ParameterizedDataSource(path = TEST_RESOURCES + "Division.csv")
     public void checkDivisionsFromCSVByReusableDataProviderVerify(int x, int y) {
         calculatorSteps.openCalculator(url);
         calculatorSteps.divide(Integer.toString(x), Integer.toString(y));
