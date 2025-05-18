@@ -14,8 +14,9 @@ public class AllureTestListener implements TestLifecycleListener {
 
     private static final String REPORT_DELIMITER =
             "---------------------------------------------------------------------------------------------------------";
+
     @Override
-    public void beforeTestStart(TestResult result){
+    public void beforeTestStart(TestResult result) {
         String testInfo = REPORT_DELIMITER + "\n" +
                 getDateTimeForAllureConsoleLog() + ": \n\"" + result.getName() + "\"" + " test started\n" +
                 result.getFullName() + "\n" +
@@ -37,7 +38,7 @@ public class AllureTestListener implements TestLifecycleListener {
         Optional<Label> optionalLabel = allureLabels.stream()
                 .filter(label -> label.getName().equals("feature"))
                 .findFirst();
-        if(optionalLabel.isPresent()){
+        if (optionalLabel.isPresent()) {
             return optionalLabel.get().getValue();
         }
         return "";
