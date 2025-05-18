@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.oleynik.gradle.selenium.example.framework.config.ConfigurationManager.configuration;
+import static com.oleynik.gradle.selenium.example.framework.config.Constants.TEST_RESOURCES;
 
 @Feature("Basic math operations")
 public class BasicDivisionTest extends BaseTest {
@@ -21,8 +22,8 @@ public class BasicDivisionTest extends BaseTest {
     }
 
     @Test(dataProvider = "csvIntegerDataProvider", dataProviderClass = CsvDataProvider.class,
-            description="Check division using reusable csv data provider")
-    @CsvSource(path="src/test/resources/Division.csv")
+            description = "Check division using reusable csv data provider")
+    @CsvSource(path = TEST_RESOURCES + "Division.csv")
     public void checkDivisionsFromCSVByReusableDataProviderVerify(int x, int y) {
         calculatorSteps.openCalculator(url);
         calculatorSteps.divide(Integer.toString(x), Integer.toString(y));

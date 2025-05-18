@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import static com.oleynik.gradle.selenium.example.framework.config.ConfigurationManager.configuration;
+import static com.oleynik.gradle.selenium.example.framework.config.Constants.TEST_RESOURCES;
 
 @Feature("Basic math operations")
 public class BasicOperationsTest extends BaseTest {
@@ -65,7 +66,7 @@ public class BasicOperationsTest extends BaseTest {
         String line;
         ArrayList<Object[]> outData = new ArrayList<>();
         try {
-            BufferedReader csvFile = new BufferedReader(new FileReader("src/test/resources/Division.csv"));
+            BufferedReader csvFile = new BufferedReader(new FileReader(TEST_RESOURCES + "Division.csv"));
             while ((line = csvFile.readLine()) != null) {
                 String[] data = line.split(",");
                 outData.add(new Object[]{Integer.parseInt(data[0].trim()), Integer.parseInt(data[1].trim())});
