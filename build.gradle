@@ -68,7 +68,7 @@ allure {
 }
 
 tasks.register('cleanAllureReport', Delete) {
-    delete "build\\reports\\allure-report\\allureReport"
+    delete layout.buildDirectory.file("reports/allure-report/allureReport")
 }
 
 tasks.register('excelReport', JavaExec) {
