@@ -83,8 +83,7 @@ tasks.register('excelReport', JavaExec) {
 
 test {
     systemProperty "file.encoding", "utf-8"
-    useJUnitPlatform {
-    }
+    useJUnitPlatform()
     testLogging.exceptionFormat = 'full'
     testLogging.showStandardStreams = true
 
@@ -93,7 +92,6 @@ test {
     systemProperty("junit.jupiter.extensions.autodetection.enabled", "true")
     dependsOn cleanTest
     dependsOn cleanAllureReport
-    testLogging.showStandardStreams = true
     maxParallelForks = 3
 
     retry {
@@ -101,9 +99,10 @@ test {
         maxFailures = 100
         maxRetries = 1
     }
+
+    finalizedBy allureReport, excelReport
 }
 
-test.finalizedBy allureReport, excelReport
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = "UTF-8"
