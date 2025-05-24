@@ -83,7 +83,7 @@ test {
         parallel = 'classes'
         threadCount = 3
         useDefaultListeners = true
-        outputDirectory = file("$buildDir/reports/testng")
+        outputDirectory = layout.buildDirectory.file("reports/testng").get().asFile
     }
     dependsOn cleanTest
     dependsOn cleanAllureReport
