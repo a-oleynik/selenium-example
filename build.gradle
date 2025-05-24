@@ -5,7 +5,7 @@ buildscript {
         aspectjVersion = "1.9.24"
         log4jVersion = "2.24.3"
         jacksonVersion = "2.19.0"
-        seleniumVersion = "4.32.0"
+        seleniumVersion = "4.33.0"
         slf4jVersion = "2.0.17"
         junit5Version = "5.12.0"
         junitPlatformVersion = "1.12.0"
@@ -35,11 +35,9 @@ java {
     targetCompatibility = JavaVersion.VERSION_21
 }
 
-configurations.all {
+configurations.configureEach {
     resolutionStrategy {
-        force("org.slf4j:slf4j-api:$slf4jVersion",
-                "org.apache.logging.log4j:log4j-api:$log4jVersion"
-        )
+        force("org.aspectj:aspectjweaver:$aspectjVersion")
     }
 }
 
@@ -73,11 +71,11 @@ allure {
     }
 }
 
-task cleanAllureReport(type: Delete) {
+tasks.register('cleanAllureReport', Delete) {
     delete "build\\reports\\allure-report\\allureReport"
 }
 
-task excelReport(type: JavaExec) {
+tasks.register('excelReport', JavaExec) {
     description = "Collects and generate consolidated Excel report"
     classpath = sourceSets.test.runtimeClasspath
     mainClass = "com.oleynik.gradle.selenium.example.framework.utils.ReportUtils"
