@@ -25,9 +25,9 @@ repositories {
     mavenCentral()
 }
 
-description = "Gradle selenium example"
-group 'com.oleynik.selenium.example'
-version '0.0.1-SNAPSHOT'
+description = 'Gradle selenium example'
+group = 'com.oleynik.selenium.example'
+version = '0.0.1-SNAPSHOT'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
