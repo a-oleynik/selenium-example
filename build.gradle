@@ -4,8 +4,8 @@ buildscript {
         allureReportVersion = "2.32.2"
         aspectjVersion = "1.9.24"
         log4jVersion = "2.24.3"
-        jacksonVersion = "2.19.0"
-        seleniumVersion = "4.33.0"
+        jacksonVersion = "2.19.1"
+        seleniumVersion = "4.34.0"
         slf4jVersion = "2.0.17"
         junit5Version = "5.12.0"
         junitPlatformVersion = "1.12.0"
@@ -52,7 +52,7 @@ dependencies {
     implementation("org.seleniumhq.selenium:selenium-java:$seleniumVersion")
     implementation("org.aeonbits.owner:owner:1.0.12")
     implementation("org.apache.poi:poi-ooxml:5.4.1")
-    implementation("com.opencsv:opencsv:5.11")
+    implementation("com.opencsv:opencsv:5.11.2")
     implementation("org.apache.logging.log4j:log4j-to-slf4j:$log4jVersion")
     implementation("org.slf4j:slf4j-simple:$slf4jVersion")
     implementation('org.assertj:assertj-core:3.27.3')
