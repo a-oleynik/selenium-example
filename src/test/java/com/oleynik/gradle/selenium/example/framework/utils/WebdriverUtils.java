@@ -27,7 +27,7 @@ public class WebdriverUtils {
                 System.out.println("Warning: driver.quit() command invoked exception " + exception.getClass().getName());
                 exception.printStackTrace();
             } finally {
-                WebdriverManager.setWebDriver(null);
+                WebdriverManager.removeDriver();
             }
         }
     }
