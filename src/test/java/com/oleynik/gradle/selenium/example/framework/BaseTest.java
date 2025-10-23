@@ -7,18 +7,16 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.WebDriver;
 
 import static com.oleynik.gradle.selenium.example.framework.utils.WebdriverUtils.quitDriver;
 
 @ExtendWith({MyTestWatcher.class})
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class BaseTest {
-    protected WebDriver driver;
 
     @BeforeAll
     public void setUpBrowser() {
-        driver = WebdriverUtils.createNewDriver();
+        WebdriverUtils.createNewDriver();
         BaseTestMethods.setMaximisedBrowserWindow();
     }
 
