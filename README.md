@@ -21,6 +21,8 @@ A comprehensive test automation framework demonstrating best practices with Sele
 - [Advanced Features](#-advanced-features)
 - [Troubleshooting](#-troubleshooting)
 - [License](#-license)
+- [Additional Resources](#-additional-resources)
+- [Useful Links](#-useful-links)
 
 ## ✨ Features
 
@@ -121,16 +123,16 @@ The test execution is configured in `build.gradle`:
 ```groovy
 test {
     useTestNG {
-        parallel = 'classes'      # Parallel execution at class level
-        threadCount = 3           # Number of parallel threads
+        parallel = 'classes'                                                            // Parallel execution at class level
+        threadCount = 3                                                                 // Number of parallel threads
         useDefaultListeners = true
-        outputDirectory = ...     # TestNG report output directory
+        outputDirectory = layout.buildDirectory.file("reports/testng").get().asFile     // TestNG report output directory
     }
     
     retry {
         failOnPassedAfterRetry = true
-        maxFailures = 100         # Maximum failures before stopping
-        maxRetries = 1            # Number of retry attempts
+        maxFailures = 100                                                               // Maximum failures before stopping
+        maxRetries = 1                                                                  // Number of retry attempts
     }
 }
 ```
