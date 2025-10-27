@@ -393,7 +393,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📚 Additional Resources
 
 - [Selenium Documentation](https://www.selenium.dev/documentation/)
-- [TestNG Documentation](https://testng.org/doc/documentation-main.html)
+- [TestNG Documentation](https://testng.org)
 - [Allure Framework](https://docs.qameta.io/allure/)
 - [Gradle User Guide](https://docs.gradle.org/current/userguide/userguide.html)
 - [Selenium Manager](https://www.selenium.dev/documentation/selenium_manager/)
@@ -404,5 +404,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Selenium Grid Downloads:** https://www.selenium.dev/downloads/
 - **Java Download:** https://www.oracle.com/java/technologies/downloads/
 - **Gradle Download:** https://gradle.org/install/
-
-
