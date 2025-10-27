@@ -32,7 +32,7 @@ A comprehensive test automation framework demonstrating best practices with Sele
 
 ## ✨ Features
 
-- 🔧 **Page Object Model (POM)** design pattern
+- 🔧 **Page Object Model (POM)** / **Page Object design pattern**
 - 🔄 **Parallel test execution** with configurable thread count
 - 🎯 **Parameterized tests** using JUnit 6 @ParameterizedTest
 - 📊 **Multiple reporting formats**: Allure and Excel
