@@ -1,4 +1,4 @@
-# 🚀 Gradle Selenium WebDriver TestNG Example
+# 🚀 Gradle Selenium WebDriver TestNG Example (Manual Driver Management)
 
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
 [![Selenium](https://img.shields.io/badge/Selenium-4.37.0-green.svg)](https://www.selenium.dev/)
@@ -8,12 +8,15 @@
 
 A comprehensive test automation framework demonstrating best practices with Selenium WebDriver, TestNG, and Allure reporting. This project showcases parameterized testing, parallel execution, automatic retry logic, and advanced reporting capabilities.
 
+> **Note:** This branch uses manually downloaded WebDriver binaries. For automatic WebDriver management using Selenium Manager, please check out the `main` branch.
+
 ## 📋 Table of Contents
 
 - [Features](#-features)
 - [Tech Stack](#-tech-stack)
 - [Prerequisites](#-prerequisites)
 - [Installation](#-installation)
+- [WebDriver Setup](#-webdriver-setup)
 - [Configuration](#-configuration)
 - [Usage](#-usage)
 - [Project Structure](#-project-structure)
@@ -33,10 +36,9 @@ A comprehensive test automation framework demonstrating best practices with Sele
 - 🔁 **Automatic test retry** on failure
 - 📸 **Screenshot capture** on test failure
 - 📄 **Page source capture** for debugging
-- 🌐 **Cross-browser support** (Chrome, Firefox, Edge)
+- 🌐 **Cross-browser support** (Chrome, Firefox, Edge, Opera, IE)
 - 🎨 **Allure annotations** for rich test documentation
 - 🔍 **AssertJ** for fluent assertions
-- 📦 **Automatic WebDriver management** via Selenium Manager
 - ⚙️ **Configuration management** using Owner library
 - 🔒 **Lombok** for reducing boilerplate code
 
@@ -72,8 +74,8 @@ Before you begin, ensure you have the following installed:
   - [Download Git](https://git-scm.com/downloads)
   - Verify: `git --version`
 
-- **Web Browser** (Chrome, Firefox, or Edge)
-  - Drivers are managed automatically by Selenium Manager
+- **Web Browser** (Chrome, Firefox, Edge, Opera, or IE)
+  - See [WebDriver Setup](#-webdriver-setup) section for driver downloads
 
 ## 🔧 Installation
 
@@ -98,13 +100,60 @@ Before you begin, ensure you have the following installed:
    .\gradlew.bat clean compileTestJava
    ```
 
+## 🚗 WebDriver Setup
+
+This branch uses manually downloaded WebDriver binaries. For automatic driver management with Selenium Manager, switch to the `main` branch.
+
+### WebDriver Installation
+
+1. **Download the appropriate WebDriver** for your browser from the sources below
+2. **Place the WebDriver executable** in the `drivers` folder:
+   ```
+   {project directory}/drivers/
+   ```
+3. **Ensure the driver is accessible** by the framework
+
+### WebDriver Sources
+
+- **Chrome WebDriver**
+  ```
+  https://googlechromelabs.github.io/chrome-for-testing/
+  ```
+
+- **Geckodriver (Firefox)**
+  ```
+  https://github.com/mozilla/geckodriver/releases
+  ```
+
+- **Microsoft Edge WebDriver**
+  ```
+  https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/?form=MA13LH
+  ```
+
+- **Opera WebDriver**
+  ```
+  https://github.com/operasoftware/operachromiumdriver/releases
+  ```
+
+- **IE WebDriver**
+  ```
+  https://www.selenium.dev/downloads/
+  ```
+
+- **Selenium Server (Grid)**
+  ```
+  https://www.selenium.dev/downloads/
+  ```
+
+> **Tip:** Make sure to download the driver version that matches your installed browser version.
+
 ## ⚙️ Configuration
 
 ### General Properties (`src/test/resources/general.properties`)
 
 ```properties
 # Browser configuration
-env.browser = Chrome              # Options: Chrome, Firefox, Edge
+env.browser = Chrome              # Options: Chrome, Firefox, Edge, IE
 
 # Application URL
 env.url = http://calculator.com   # Target application URL
@@ -234,7 +283,7 @@ selenium-example/
 │   │   ├── tests/
 │   │   └── *.xlsx
 │   └── test-results/                   # Test execution results
-├── drivers/                            # WebDriver binaries (managed automatically)
+├── drivers/                            # WebDriver binaries (manually downloaded)
 ├── build.gradle                        # Build configuration
 ├── gradlew.bat                         # Gradle wrapper (Windows)
 ├── gradlew                             # Gradle wrapper (Linux/Mac)
@@ -364,12 +413,12 @@ If you encounter build issues:
 .\gradlew.bat clean --refresh-dependencies
 ```
 
-### Update WebDriver
+### WebDriver Issues
 
-WebDrivers are managed automatically by Selenium Manager. To force update:
-```bash
-.\gradlew.bat clean test --refresh-dependencies
-```
+If you encounter WebDriver compatibility issues:
+1. Ensure your WebDriver version matches your browser version
+2. Download the latest WebDriver from the [WebDriver Setup](#-webdriver-setup) section
+3. Replace the old driver in the `drivers` folder
 
 ### View Detailed Logs
 
@@ -393,8 +442,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [TestNG Documentation](https://testng.org/doc/documentation-main.html)
 - [Allure Framework](https://docs.qameta.io/allure/)
 - [Gradle User Guide](https://docs.gradle.org/current/userguide/userguide.html)
-- [Selenium Manager](https://www.selenium.dev/documentation/selenium_manager/)
 - [Selenium Grid Setup](https://www.selenium.dev/downloads/)
+- [WebDriver Downloads](https://www.selenium.dev/downloads/)
 
 ## 🔗 Useful Links
 
