@@ -31,6 +31,7 @@ A comprehensive test automation framework demonstrating best practices with Sele
 - 🔧 **Page Object Model (POM)** / **Page Object design pattern**
 - 🔄 **Parallel test execution** with configurable thread count
 - 🎯 **Parameterized tests** using JUnit 6 @ParameterizedTest
+- 🧪 **JUnit 6 extensions** for custom test lifecycle management
 - 📊 **Multiple reporting formats**: Allure and Excel
 - 🔁 **Automatic test retry** on failure
 - 📸 **Screenshot capture** on test failure
@@ -41,7 +42,6 @@ A comprehensive test automation framework demonstrating best practices with Sele
 - 📦 **Automatic WebDriver management** via Selenium Manager
 - ⚙️ **Configuration management** using Owner library
 - 🔒 **Lombok** for reducing boilerplate code
-- 🧪 **JUnit 6 extensions** for custom test lifecycle management
 
 ## 🛠️ Tech Stack
 
