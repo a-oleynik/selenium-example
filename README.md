@@ -8,6 +8,8 @@
 
 A comprehensive test automation framework demonstrating best practices with Selenium WebDriver, TestNG, and Allure reporting. This project showcases parameterized testing, parallel execution, automatic retry logic, and advanced reporting capabilities.
 
+> **Note:** This branch uses TestNG 7 as the testing framework. For a JUnit-based implementation, please check out the `junit6` branch.
+
 > **Note:** This branch uses manually downloaded WebDriver binaries. For automatic WebDriver management using Selenium Manager, please check out the `main` branch.
 
 ## 📋 Table of Contents
@@ -321,6 +323,7 @@ selenium-example/
 - ⏱️ Execution time
 - 📋 Test class grouping
 - ❌ Failure details
+- 📊 Test results breakdown
 
 ### Excel Report
 
@@ -442,7 +445,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [TestNG Documentation](https://testng.org/doc/documentation-main.html)
 - [Allure Framework](https://docs.qameta.io/allure/)
 - [Gradle User Guide](https://docs.gradle.org/current/userguide/userguide.html)
-- [Selenium Grid Setup](https://www.selenium.dev/downloads/)
+- [Selenium Grid Setup](https://www.selenium.dev/documentation/grid/)
 - [WebDriver Downloads](https://www.selenium.dev/downloads/)
 
 ## 🔗 Useful Links
