@@ -31,6 +31,7 @@ A comprehensive test automation framework demonstrating best practices with Sele
 - 🔧 **Page Object Model (POM)** / **Page Object design pattern**
 - 🔄 **Parallel test execution** with configurable thread count
 - 🎯 **Parameterized tests** using TestNG DataProviders
+- 🧪 **TestNG listeners** for custom test lifecycle management
 - 📊 **Multiple reporting formats**: Allure, TestNG HTML, and Excel
 - 🔁 **Automatic test retry** on failure
 - 📸 **Screenshot capture** on test failure
