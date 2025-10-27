@@ -10,12 +10,16 @@ A comprehensive test automation framework demonstrating best practices with Sele
 
 > **Note:** This branch uses JUnit 6 as the testing framework. For a TestNG-based implementation, please check out the `main` branch.
 
+> **Note:** This branch uses manually downloaded WebDriver binaries. For automatic WebDriver management using Selenium Manager, please check out the `junit6` branch.
+
+
 ## 📋 Table of Contents
 
 - [Features](#-features)
 - [Tech Stack](#-tech-stack)
 - [Prerequisites](#-prerequisites)
 - [Installation](#-installation)
+- [WebDriver Setup](#-webdriver-setup)
 - [Configuration](#-configuration)
 - [Usage](#-usage)
 - [Project Structure](#-project-structure)
@@ -38,7 +42,6 @@ A comprehensive test automation framework demonstrating best practices with Sele
 - 🌐 **Cross-browser support** (Chrome, Firefox, Edge)
 - 🎨 **Allure annotations** for rich test documentation
 - 🔍 **AssertJ** for fluent assertions
-- 📦 **Automatic WebDriver management** via Selenium Manager
 - ⚙️ **Configuration management** using Owner library
 - 🔒 **Lombok** for reducing boilerplate code
 - 🧪 **JUnit 6 extensions** for custom test lifecycle management
@@ -100,6 +103,53 @@ Before you begin, ensure you have the following installed:
    ```bash
    .\gradlew.bat clean compileTestJava
    ```
+
+## 🚗 WebDriver Setup
+
+This branch uses manually downloaded WebDriver binaries. For automatic driver management with Selenium Manager, switch to the `main` branch.
+
+### WebDriver Installation
+
+1. **Download the appropriate WebDriver** for your browser from the sources below
+2. **Place the WebDriver executable** in the `drivers` folder:
+   ```
+   {project directory}/drivers/
+   ```
+3. **Ensure the driver is accessible** by the framework
+
+### WebDriver Sources
+
+- **Chrome WebDriver**
+  ```
+  https://googlechromelabs.github.io/chrome-for-testing/
+  ```
+
+- **Geckodriver (Firefox)**
+  ```
+  https://github.com/mozilla/geckodriver/releases
+  ```
+
+- **Microsoft Edge WebDriver**
+  ```
+  https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/?form=MA13LH
+  ```
+
+- **Opera WebDriver**
+  ```
+  https://github.com/operasoftware/operachromiumdriver/releases
+  ```
+
+- **IE WebDriver**
+  ```
+  https://www.selenium.dev/downloads/
+  ```
+
+- **Selenium Server (Grid)**
+  ```
+  https://www.selenium.dev/downloads/
+  ```
+
+> **Tip:** Make sure to download the driver version that matches your installed browser version.
 
 ## ⚙️ Configuration
 
@@ -236,7 +286,7 @@ selenium-example/
 │   │   ├── tests/
 │   │   └── *.xlsx
 │   └── test-results/                   # Test execution results
-├── drivers/                            # WebDriver binaries (managed automatically)
+├── drivers/                            # WebDriver binaries (manually downloaded)
 ├── build.gradle                        # Build configuration
 ├── gradlew.bat                         # Gradle wrapper (Windows)
 ├── gradlew                             # Gradle wrapper (Linux/Mac)
@@ -434,13 +484,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [TestNG Documentation](https://testng.org/doc/documentation-main.html)
 - [Allure Framework](https://docs.qameta.io/allure/)
 - [Gradle User Guide](https://docs.gradle.org/current/userguide/userguide.html)
-- [Selenium Manager](https://www.selenium.dev/documentation/selenium_manager/)
 - [Selenium Grid Setup](https://www.selenium.dev/downloads/)
+- [WebDriver Downloads](https://www.selenium.dev/downloads/) 
 
 ## 🔗 Useful Links
 
 - **Selenium Grid Downloads:** https://www.selenium.dev/downloads/
 - **Java Download:** https://www.oracle.com/java/technologies/downloads/
 - **Gradle Download:** https://gradle.org/install/
-
-
