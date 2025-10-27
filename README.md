@@ -1,12 +1,14 @@
-# 🚀 Gradle Selenium WebDriver TestNG Example
+# 🚀 Gradle Selenium WebDriver JUnit 6 Example
 
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
 [![Selenium](https://img.shields.io/badge/Selenium-4.37.0-green.svg)](https://www.selenium.dev/)
-[![TestNG](https://img.shields.io/badge/TestNG-7.11.0-red.svg)](https://testng.org/)
+[![JUnit](https://img.shields.io/badge/JUnit-6.0.0-green.svg)](https://junit.org/junit5/)
 [![Gradle](https://img.shields.io/badge/Gradle-8.x-blue.svg)](https://gradle.org/)
 [![Allure](https://img.shields.io/badge/Allure-2.32.2-yellow.svg)](https://docs.qameta.io/allure/)
 
-A comprehensive test automation framework demonstrating best practices with Selenium WebDriver, TestNG, and Allure reporting. This project showcases parameterized testing, parallel execution, automatic retry logic, and advanced reporting capabilities.
+A comprehensive test automation framework demonstrating best practices with Selenium WebDriver, JUnit 5, and Allure reporting. This project showcases parameterized testing, parallel execution, automatic retry logic, and advanced reporting capabilities.
+
+> **Note:** This branch uses JUnit 6 as the testing framework. For a TestNG-based implementation, please check out the `main` branch.
 
 ## 📋 Table of Contents
 
@@ -28,8 +30,8 @@ A comprehensive test automation framework demonstrating best practices with Sele
 
 - 🔧 **Page Object Model (POM)** design pattern
 - 🔄 **Parallel test execution** with configurable thread count
-- 🎯 **Parameterized tests** using TestNG DataProviders
-- 📊 **Multiple reporting formats**: Allure, TestNG HTML, and Excel
+- 🎯 **Parameterized tests** using JUnit 6 @ParameterizedTest
+- 📊 **Multiple reporting formats**: Allure and Excel
 - 🔁 **Automatic test retry** on failure
 - 📸 **Screenshot capture** on test failure
 - 📄 **Page source capture** for debugging
@@ -39,23 +41,24 @@ A comprehensive test automation framework demonstrating best practices with Sele
 - 📦 **Automatic WebDriver management** via Selenium Manager
 - ⚙️ **Configuration management** using Owner library
 - 🔒 **Lombok** for reducing boilerplate code
+- 🧪 **JUnit 6 extensions** for custom test lifecycle management
 
 ## 🛠️ Tech Stack
 
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| **Java** | 21 | Programming language |
-| **Gradle** | 8.x | Build automation |
-| **Selenium WebDriver** | 4.37.0 | Browser automation |
-| **TestNG** | 7.11.0 | Testing framework |
-| **Allure** | 2.32.2 | Test reporting |
-| **AssertJ** | 3.27.6 | Fluent assertions |
-| **Apache POI** | 5.4.1 | Excel report generation |
-| **OpenCSV** | 5.12.0 | CSV data handling |
-| **Owner** | 1.0.12 | Configuration management |
-| **Lombok** | 1.18.42 | Code generation |
-| **Jackson** | 2.20.0 | JSON processing |
-| **Log4j/SLF4J** | 2.24.3/2.0.17 | Logging |
+| Technology             | Version       | Purpose |
+|------------------------|---------------|---------|
+| **Java**               | 21            | Programming language |
+| **Gradle**             | 8.x           | Build automation |
+| **Selenium WebDriver** | 4.37.0        | Browser automation |
+| **JUnit 6**            | 6.0.0         | Testing framework |
+| **Allure**             | 2.32.2        | Test reporting |
+| **AssertJ**            | 3.27.6        | Fluent assertions |
+| **Apache POI**         | 5.4.1         | Excel report generation |
+| **OpenCSV**            | 5.12.0        | CSV data handling |
+| **Owner**              | 1.0.12        | Configuration management |
+| **Lombok**             | 1.18.42       | Code generation |
+| **Jackson**            | 2.20.0        | JSON processing |
+| **Log4j/SLF4J**        | 2.24.3/2.0.17 | Logging |
 
 ## 📦 Prerequisites
 
@@ -122,12 +125,11 @@ The test execution is configured in `build.gradle`:
 
 ```groovy
 test {
-    useTestNG {
-        parallel = 'classes'                                                            // Parallel execution at class level
-        threadCount = 3                                                                 // Number of parallel threads
-        useDefaultListeners = true
-        outputDirectory = layout.buildDirectory.file("reports/testng").get().asFile     // TestNG report output directory
-    }
+    useJUnitPlatform()                                                                  // Enable JUnit 6
+    systemProperty("junit.jupiter.execution.parallel.enabled", "true")                  // Enable parallel execution
+    systemProperty("junit.jupiter.execution.parallel.config.strategy", "dynamic")       // Dynamic thread allocation
+    systemProperty("junit.jupiter.extensions.autodetection.enabled", "true")            // Auto-detect extensions
+    maxParallelForks = 3                                                                // Number of parallel test processes
     
     retry {
         failOnPassedAfterRetry = true
@@ -213,7 +215,7 @@ selenium-example/
 │       │   └── com/oleynik/gradle/selenium/example/
 │       │       ├── framework/          # Framework utilities
 │       │       │   ├── config/         # Configuration management
-│       │       │   ├── listeners/      # TestNG & JUnit listeners
+│       │       │   ├── listeners/      # JUnit 6 extensions
 │       │       │   ├── manager/        # WebDriver management
 │       │       │   ├── reporting/      # Custom reporting
 │       │       │   └── utils/          # Utility classes
@@ -263,7 +265,7 @@ selenium-example/
 # Then open: build/reports/allure-report/allureReport/index.html
 ```
 
-### TestNG HTML Report
+### JUnit HTML Report
 
 **Location:** `build/reports/tests/test/index.html`
 
@@ -272,6 +274,7 @@ selenium-example/
 - ⏱️ Execution time
 - 📋 Test class grouping
 - ❌ Failure details
+- 📊 Test results breakdown
 
 ### Excel Report
 
@@ -288,15 +291,23 @@ selenium-example/
 
 ### Parallel Execution
 
-Tests run in parallel at the class level with 3 threads by default. Configure in `build.gradle`:
+Tests run in parallel using JUnit 6's parallel execution capabilities. Configure in `build.gradle`:
 
 ```groovy
 test {
-    useTestNG {
-        parallel = 'classes'  // Options: methods, tests, classes, instances
-        threadCount = 3       // Number of parallel threads
-    }
+    useJUnitPlatform()
+    systemProperty("junit.jupiter.execution.parallel.enabled", "true")
+    systemProperty("junit.jupiter.execution.parallel.config.strategy", "dynamic")
+    maxParallelForks = 3  // Number of parallel test processes
 }
+```
+
+You can also configure parallel execution in `junit-platform.properties`:
+
+```properties
+junit.jupiter.execution.parallel.enabled = true
+junit.jupiter.execution.parallel.mode.default = concurrent
+junit.jupiter.execution.parallel.config.strategy = dynamic
 ```
 
 ### Test Retry Mechanism
@@ -313,31 +324,61 @@ retry {
 
 ### Data-Driven Testing
 
-Tests support parameterization via TestNG DataProviders:
+Tests support parameterization via JUnit 6's `@ParameterizedTest`:
 
 ```java
-@DataProvider(name = "additionData")
-public Object[][] additionData() {
-    return new Object[][] {
-        {2, 3, 5},
-        {10, 5, 15},
-        {-1, 1, 0}
-    };
-}
-
-@Test(dataProvider = "additionData")
+@ParameterizedTest
+@CsvSource({
+    "2, 3, 5",
+    "10, 5, 15",
+    "-1, 1, 0"
+})
+@DisplayName("Test addition with multiple inputs")
 public void testAddition(int a, int b, int expected) {
     // Test implementation
 }
 ```
 
-### CSV Data Support
-
-Load test data from CSV files:
+Or using `@MethodSource`:
 
 ```java
-@DataProvider
-public Iterator<Object[]> divisionData() {
+@ParameterizedTest
+@MethodSource("additionData")
+public void testAddition(int a, int b, int expected) {
+    // Test implementation
+}
+
+static Stream<Arguments> additionData() {
+    return Stream.of(
+        Arguments.of(2, 3, 5),
+        Arguments.of(10, 5, 15),
+        Arguments.of(-1, 1, 0)
+    );
+}
+```
+
+### CSV Data Support
+
+Load test data from CSV files using JUnit 5's `@CsvFileSource`:
+
+```java
+@ParameterizedTest
+@CsvFileSource(resources = "/Division.csv", numLinesToSkip = 1)
+public void testDivision(int dividend, int divisor, int expected) {
+    // Test implementation
+}
+```
+
+Or use a custom data provider:
+
+```java
+@ParameterizedTest
+@MethodSource("divisionData")
+public void testDivision(int dividend, int divisor, int expected) {
+    // Test implementation
+}
+
+static Stream<Arguments> divisionData() throws Exception {
     return CsvDataProvider.getData("src/test/resources/Division.csv");
 }
 ```
