@@ -20,7 +20,6 @@ A comprehensive test automation framework demonstrating best practices with Sele
 - [Reporting](#-reporting)
 - [Advanced Features](#-advanced-features)
 - [Troubleshooting](#-troubleshooting)
-- [Contributing](#-contributing)
 - [License](#-license)
 
 ## ✨ Features
