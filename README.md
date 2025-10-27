@@ -6,7 +6,7 @@
 [![Gradle](https://img.shields.io/badge/Gradle-8.x-blue.svg)](https://gradle.org/)
 [![Allure](https://img.shields.io/badge/Allure-2.32.2-yellow.svg)](https://docs.qameta.io/allure/)
 
-A comprehensive test automation framework demonstrating best practices with Selenium WebDriver, JUnit 5, and Allure reporting. This project showcases parameterized testing, parallel execution, automatic retry logic, and advanced reporting capabilities.
+A comprehensive test automation framework demonstrating best practices with Selenium WebDriver, JUnit 6, and Allure reporting. This project showcases parameterized testing, parallel execution, automatic retry logic, and advanced reporting capabilities.
 
 > **Note:** This branch uses JUnit 6 as the testing framework. For a TestNG-based implementation, please check out the `master` branch.
 
@@ -359,7 +359,7 @@ static Stream<Arguments> additionData() {
 
 ### CSV Data Support
 
-Load test data from CSV files using JUnit 5's `@CsvFileSource`:
+Load test data from CSV files using JUnit 6's `@CsvFileSource`:
 
 ```java
 @ParameterizedTest
