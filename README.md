@@ -10,7 +10,7 @@ A comprehensive test automation framework demonstrating best practices with Sele
 
 > **Note:** This branch uses TestNG 7 as the testing framework. For a JUnit-based implementation, please check out the `junit6` branch.
 
-> **Note:** This branch uses manually downloaded WebDriver binaries. For automatic WebDriver management using Selenium Manager, please check out the `main` branch.
+> **Note:** This branch uses manually downloaded WebDriver binaries. For automatic WebDriver management using Selenium Manager, please check out the `master` branch.
 
 ## 📋 Table of Contents
 
