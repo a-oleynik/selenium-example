@@ -1,7 +1,7 @@
 # 🚀 Gradle Selenium WebDriver JUnit 6 Example
 
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
-[![Selenium](https://img.shields.io/badge/Selenium-4.37.0-green.svg)](https://www.selenium.dev/)
+[![Selenium](https://img.shields.io/badge/Selenium-4.38.0-green.svg)](https://www.selenium.dev/)
 [![JUnit](https://img.shields.io/badge/JUnit-6.0.0-green.svg)](https://junit.org/junit5/)
 [![Gradle](https://img.shields.io/badge/Gradle-8.x-blue.svg)](https://gradle.org/)
 [![Allure](https://img.shields.io/badge/Allure-2.32.2-yellow.svg)](https://docs.qameta.io/allure/)
@@ -52,7 +52,7 @@ A comprehensive test automation framework demonstrating best practices with Sele
 |------------------------|---------------|---------|
 | **Java**               | 21            | Programming language |
 | **Gradle**             | 8.x           | Build automation |
-| **Selenium WebDriver** | 4.37.0        | Browser automation |
+| **Selenium WebDriver** | 4.38.0        | Browser automation |
 | **JUnit 6**            | 6.0.0         | Testing framework |
 | **Allure**             | 2.32.2        | Test reporting |
 | **AssertJ**            | 3.27.6        | Fluent assertions |
