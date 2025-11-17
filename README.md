@@ -4,11 +4,15 @@
 [![Selenium](https://img.shields.io/badge/Selenium-4.38.0-green.svg)](https://www.selenium.dev/)
 [![JUnit](https://img.shields.io/badge/JUnit-6.0.1-green.svg)](https://junit.org/)
 [![Gradle](https://img.shields.io/badge/Gradle-8.x-blue.svg)](https://gradle.org/)
-[![Allure](https://img.shields.io/badge/Allure-2.32.2-yellow.svg)](https://docs.qameta.io/allure/)
+[![Allure_Framework](https://img.shields.io/badge/Allure_Framework-2.31.0-purple.svg)](https://allurereport.org/docs/)
+[![Allure_CLI](https://img.shields.io/badge/Allure_CLI-2.35.1-yellow.svg)](https://allurereport.org/docs/)
 
-A comprehensive test automation framework demonstrating best practices with Selenium WebDriver, JUnit 6, and Allure reporting. This project showcases parameterized testing, parallel execution, automatic retry logic, and advanced reporting capabilities.
+A comprehensive test automation framework demonstrating best practices with Selenium WebDriver, JUnit 6, and Allure
+reporting. This project showcases parameterized testing, parallel execution, automatic retry logic, and advanced
+reporting capabilities.
 
-> **Note:** This branch uses JUnit 6 as the testing framework. For a TestNG-based implementation, please check out the `master` branch.
+> **Note:** This branch uses JUnit 6 as the testing framework. For a TestNG-based implementation, please check out the
+`master` branch.
 
 > **Note:** This branch uses manually downloaded WebDriver binaries. For automatic WebDriver management using Selenium Manager, please check out the `junit6` branch.
 
@@ -48,39 +52,39 @@ A comprehensive test automation framework demonstrating best practices with Sele
 
 ## 🛠️ Tech Stack
 
-| Technology             | Version       | Purpose |
-|------------------------|---------------|---------|
-| **Java**               | 21            | Programming language |
-| **Gradle**             | 8.x           | Build automation |
-| **Selenium WebDriver** | 4.38.0        | Browser automation |
-| **JUnit 6**            | 6.0.1         | Testing framework |
-| **Allure**             | 2.31.0        | Test reporting           |
-| **Allure report**      | 2.35.1        | Test reporting           |
-| **AssertJ**            | 3.27.6        | Fluent assertions |
-| **Apache POI**         | 5.4.1         | Excel report generation |
-| **OpenCSV**            | 5.12.0        | CSV data handling |
-| **Owner**              | 1.0.12        | Configuration management |
-| **Lombok**             | 1.18.42       | Code generation |
-| **Jackson**            | 2.20.1        | JSON processing |
-| **Log4j/SLF4J**        | 2.24.3/2.0.17 | Logging |
+| Technology                         | Version       | Purpose                                                           |
+|------------------------------------|---------------|-------------------------------------------------------------------|
+| **Java**                           | 21            | Programming language                                              |
+| **Gradle**                         | 8.x           | Build automation                                                  |
+| **Selenium WebDriver**             | 4.38.0        | Browser automation                                                |
+| **JUnit 6**                        | 6.0.1         | Testing framework                                                 |
+| **Allure Framework (Allure Java)** | 2.31.0        | Used inside tests (annotations, listeners). Produces raw results. |
+| **Allure Report CLI**              | 2.35.1        | Generates interactive HTML report from test results.              |
+| **AssertJ**                        | 3.27.6        | Fluent assertions                                                 |
+| **Apache POI**                     | 5.5.0         | Excel report generation                                           |
+| **OpenCSV**                        | 5.12.0        | CSV data handling                                                 |
+| **Owner**                          | 1.0.12        | Configuration management                                          |
+| **Lombok**                         | 1.18.42       | Code generation                                                   |
+| **Jackson**                        | 2.20.1        | JSON processing                                                   |
+| **Log4j/SLF4J**                    | 2.24.3/2.0.17 | Logging                                                           |
 
 ## 📦 Prerequisites
 
 Before you begin, ensure you have the following installed:
 
 - **Java Development Kit (JDK) 21** or higher
-  - [Download JDK](https://www.oracle.com/java/technologies/downloads/)
-  - Verify: `java -version`
-  
+    - [Download JDK](https://www.oracle.com/java/technologies/downloads/)
+    - Verify: `java -version`
+
 - **Gradle** (optional, wrapper included)
-  - Verify: `gradle -version`
-  
+    - Verify: `gradle -version`
+
 - **Git** (for cloning the repository)
-  - [Download Git](https://git-scm.com/downloads)
-  - Verify: `git --version`
+    - [Download Git](https://git-scm.com/downloads)
+    - Verify: `git --version`
 
 - **Web Browser** (Chrome, Firefox, or Edge)
-  - Drivers are managed automatically by Selenium Manager
+    - Drivers are managed automatically by Selenium Manager
 
 ## 🔧 Installation
 
@@ -158,16 +162,13 @@ This branch uses manually downloaded WebDriver binaries. For automatic driver ma
 
 ```properties
 # Browser configuration
-env.browser = Chrome              # Options: Chrome, Firefox, Edge
-
+env.browser=Chrome              # Options: Chrome, Firefox, Edge
 # Application URL
-env.url = http://calculator.com   # Target application URL
-
+env.url=http://calculator.com   # Target application URL
 # Timeout settings
-default.webdriver.timeout = 180   # WebDriver timeout in seconds
-
+default.webdriver.timeout=180   # WebDriver timeout in seconds
 # Timezone configuration
-env.time.zone = Europe/Warsaw     # Timezone for test execution timestamps
+env.time.zone=Europe/Warsaw     # Timezone for test execution timestamps
 ```
 
 ### Test Execution Configuration
@@ -180,11 +181,13 @@ test {
     systemProperty("junit.jupiter.execution.parallel.enabled", "true")                  // Enable parallel execution
     systemProperty("junit.jupiter.execution.parallel.config.strategy", "dynamic")       // Dynamic thread allocation
     systemProperty("junit.jupiter.extensions.autodetection.enabled", "true")            // Auto-detect extensions
-    maxParallelForks = 3                                                                // Number of parallel test processes
-    
+    maxParallelForks = 3
+    // Number of parallel test processes
+
     retry {
         failOnPassedAfterRetry = true
-        maxFailures = 100                                                               // Maximum failures before stopping
+        maxFailures = 100
+        // Maximum failures before stopping
         maxRetries = 1                                                                  // Number of retry attempts
     }
 }
@@ -368,9 +371,9 @@ test {
 You can also configure parallel execution in `junit-platform.properties`:
 
 ```properties
-junit.jupiter.execution.parallel.enabled = true
-junit.jupiter.execution.parallel.mode.default = concurrent
-junit.jupiter.execution.parallel.config.strategy = dynamic
+junit.jupiter.execution.parallel.enabled=true
+junit.jupiter.execution.parallel.mode.default=concurrent
+junit.jupiter.execution.parallel.config.strategy=dynamic
 ```
 
 ### Test Retry Mechanism
@@ -390,11 +393,12 @@ retry {
 Tests support parameterization via JUnit 6's `@ParameterizedTest`:
 
 ```java
+
 @ParameterizedTest
 @CsvSource({
-    "2, 3, 5",
-    "10, 5, 15",
-    "-1, 1, 0"
+        "2, 3, 5",
+        "10, 5, 15",
+        "-1, 1, 0"
 })
 @DisplayName("Test addition with multiple inputs")
 public void testAddition(int a, int b, int expected) {
@@ -405,6 +409,7 @@ public void testAddition(int a, int b, int expected) {
 Or using `@MethodSource`:
 
 ```java
+
 @ParameterizedTest
 @MethodSource("additionData")
 public void testAddition(int a, int b, int expected) {
@@ -413,9 +418,9 @@ public void testAddition(int a, int b, int expected) {
 
 static Stream<Arguments> additionData() {
     return Stream.of(
-        Arguments.of(2, 3, 5),
-        Arguments.of(10, 5, 15),
-        Arguments.of(-1, 1, 0)
+            Arguments.of(2, 3, 5),
+            Arguments.of(10, 5, 15),
+            Arguments.of(-1, 1, 0)
     );
 }
 ```
@@ -425,6 +430,7 @@ static Stream<Arguments> additionData() {
 Load test data from CSV files using JUnit 6's `@CsvFileSource`:
 
 ```java
+
 @ParameterizedTest
 @CsvFileSource(resources = "/Division.csv", numLinesToSkip = 1)
 public void testDivision(int dividend, int divisor, int expected) {
@@ -435,6 +441,7 @@ public void testDivision(int dividend, int divisor, int expected) {
 Or use a custom data provider:
 
 ```java
+
 @ParameterizedTest
 @MethodSource("divisionData")
 public void testDivision(int dividend, int divisor, int expected) {
