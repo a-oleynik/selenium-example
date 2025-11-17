@@ -6,9 +6,11 @@
 [![Gradle](https://img.shields.io/badge/Gradle-8.x-blue.svg)](https://gradle.org/)
 [![Allure](https://img.shields.io/badge/Allure-2.32.2-yellow.svg)](https://docs.qameta.io/allure/)
 
-A comprehensive test automation framework demonstrating best practices with Selenium WebDriver, TestNG, and Allure reporting. This project showcases parameterized testing, parallel execution, automatic retry logic, and advanced reporting capabilities.
+A comprehensive test automation framework demonstrating best practices with Selenium WebDriver, TestNG, and Allure
+reporting. This project showcases parameterized testing, parallel execution, automatic retry logic, and advanced
+reporting capabilities.
 
-> **Note:** This branch uses TestNG 7 as the testing framework. For a JUnit-based implementation, please check out the `junit6` branch.
+**Note:** This branch uses TestNG 7 as the testing framework. For a JUnit-based implementation, please check out the `junit6` branch.
 
 > **Note:** This branch uses manually downloaded WebDriver binaries. For automatic WebDriver management using Selenium Manager, please check out the `master` branch.
 
@@ -47,35 +49,36 @@ A comprehensive test automation framework demonstrating best practices with Sele
 
 ## 🛠️ Tech Stack
 
-| Technology | Version       | Purpose |
-|------------|---------------|---------|
-| **Java** | 21            | Programming language |
-| **Gradle** | 8.x           | Build automation |
-| **Selenium WebDriver** | 4.38.0        | Browser automation |
-| **TestNG** | 7.11.0        | Testing framework |
-| **Allure** | 2.32.2        | Test reporting |
-| **AssertJ** | 3.27.6        | Fluent assertions |
-| **Apache POI** | 5.4.1         | Excel report generation |
-| **OpenCSV** | 5.12.0        | CSV data handling |
-| **Owner** | 1.0.12        | Configuration management |
-| **Lombok** | 1.18.42       | Code generation |
-| **Jackson** | 2.20.1        | JSON processing |
-| **Log4j/SLF4J** | 2.24.3/2.0.17 | Logging |
+| Technology             | Version       | Purpose                  |
+|------------------------|---------------|--------------------------|
+| **Java**               | 21            | Programming language     |
+| **Gradle**             | 8.x           | Build automation         |
+| **Selenium WebDriver** | 4.38.0        | Browser automation       |
+| **TestNG**             | 7.11.0        | Testing framework        |
+| **Allure**             | 2.31.0        | Test reporting           |
+| **Allure report**      | 2.35.1        | Test reporting           |
+| **AssertJ**            | 3.27.6        | Fluent assertions        |
+| **Apache POI**         | 5.5.0         | Excel report generation  |
+| **OpenCSV**            | 5.12.0        | CSV data handling        |
+| **Owner**              | 1.0.12        | Configuration management |
+| **Lombok**             | 1.18.42       | Code generation          |
+| **Jackson**            | 2.20.1        | JSON processing          |
+| **Log4j/SLF4J**        | 2.24.3/2.0.17 | Logging                  |
 
 ## 📦 Prerequisites
 
 Before you begin, ensure you have the following installed:
 
 - **Java Development Kit (JDK) 21** or higher
-  - [Download JDK](https://www.oracle.com/java/technologies/downloads/)
-  - Verify: `java -version`
-  
+    - [Download JDK](https://www.oracle.com/java/technologies/downloads/)
+    - Verify: `java -version`
+
 - **Gradle** (optional, wrapper included)
-  - Verify: `gradle -version`
-  
+    - Verify: `gradle -version`
+
 - **Git** (for cloning the repository)
-  - [Download Git](https://git-scm.com/downloads)
-  - Verify: `git --version`
+    - [Download Git](https://git-scm.com/downloads)
+    - Verify: `git --version`
 
 - **Web Browser** (Chrome, Firefox, Edge, Opera, or IE)
   - See [WebDriver Setup](#-webdriver-setup) section for driver downloads
@@ -175,15 +178,18 @@ The test execution is configured in `build.gradle`:
 ```groovy
 test {
     useTestNG {
-        parallel = 'classes'                                                            // Parallel execution at class level
+        parallel = 'classes'
+        // Parallel execution at class level
         threadCount = 3                                                                 // Number of parallel threads
         useDefaultListeners = true
-        outputDirectory = layout.buildDirectory.file("reports/testng").get().asFile     // TestNG report output directory
+        outputDirectory = layout.buildDirectory.file("reports/testng").get().asFile
+        // TestNG report output directory
     }
-    
+
     retry {
         failOnPassedAfterRetry = true
-        maxFailures = 100                                                               // Maximum failures before stopping
+        maxFailures = 100
+        // Maximum failures before stopping
         maxRetries = 1                                                                  // Number of retry attempts
     }
 }
@@ -204,6 +210,7 @@ To run tests with different browsers:
 ### Run All Tests
 
 Execute the entire test suite:
+
 ```bash
 .\gradlew.bat clean test
 ```
@@ -211,6 +218,7 @@ Execute the entire test suite:
 ### Run Specific Test Class
 
 Execute a single test class:
+
 ```bash
 .\gradlew.bat clean test --tests com.oleynik.gradle.selenium.example.test.CalculatorSanityTest
 ```
@@ -218,6 +226,7 @@ Execute a single test class:
 ### Run Specific Test Method
 
 Execute a specific test method:
+
 ```bash
 .\gradlew.bat clean test --tests com.oleynik.gradle.selenium.example.test.CalculatorSanityTest.checkCalculatorOpening
 ```
@@ -225,6 +234,7 @@ Execute a specific test method:
 ### Run Tests in a Package
 
 Execute all tests in a specific package:
+
 ```bash
 .\gradlew.bat clean test --tests com.oleynik.gradle.selenium.example.test.*
 ```
@@ -232,6 +242,7 @@ Execute all tests in a specific package:
 ### Run with Custom Parameters
 
 Execute tests with system properties:
+
 ```bash
 .\gradlew.bat clean test -Denv.browser=Firefox -Denv.url=https://example.com
 ```
@@ -239,11 +250,13 @@ Execute tests with system properties:
 ### Generate Reports Only
 
 Generate Allure report from existing test results:
+
 ```bash
 .\gradlew.bat allureReport
 ```
 
 Generate Excel report:
+
 ```bash
 .\gradlew.bat excelReport
 ```
@@ -251,6 +264,7 @@ Generate Excel report:
 ### Check for Dependency Updates
 
 Check for outdated dependencies:
+
 ```bash
 .\gradlew.bat dependencyUpdates
 ```
@@ -300,6 +314,7 @@ selenium-example/
 **Location:** `build/reports/allure-report/allureReport/index.html`
 
 **Features:**
+
 - 📈 Test execution timeline
 - 📊 Test result statistics
 - 📸 Screenshots on failure
@@ -309,6 +324,7 @@ selenium-example/
 - 📉 Trend analysis
 
 **View Report:**
+
 ```bash
 # Generate and open report
 .\gradlew.bat allureReport
@@ -320,6 +336,7 @@ selenium-example/
 **Location:** `build/reports/tests/test/index.html`
 
 **Features:**
+
 - ✅ Pass/Fail statistics
 - ⏱️ Execution time
 - 📋 Test class grouping
@@ -331,6 +348,7 @@ selenium-example/
 **Location:** `build/excel-results/testExecutionReport_ddmmyy_hhmmss.xlsx`
 
 **Features:**
+
 - 📊 Test execution summary
 - 📅 Timestamp information
 - ✅ Status tracking
@@ -369,12 +387,13 @@ retry {
 Tests support parameterization via TestNG DataProviders:
 
 ```java
+
 @DataProvider(name = "additionData")
 public Object[][] additionData() {
-    return new Object[][] {
-        {2, 3, 5},
-        {10, 5, 15},
-        {-1, 1, 0}
+    return new Object[][]{
+            {2, 3, 5},
+            {10, 5, 15},
+            {-1, 1, 0}
     };
 }
 
@@ -389,6 +408,7 @@ public void testAddition(int a, int b, int expected) {
 Load test data from CSV files:
 
 ```java
+
 @DataProvider
 public Iterator<Object[]> divisionData() {
     return CsvDataProvider.getData("src/test/resources/Division.csv");
@@ -398,6 +418,7 @@ public Iterator<Object[]> divisionData() {
 ### Screenshot on Failure
 
 Screenshots are automatically captured on test failure and attached to Allure reports:
+
 - Location: `build/screenshots/`
 - Format: `timestamp-ClassName-testMethod.png`
 
@@ -406,6 +427,7 @@ Screenshots are automatically captured on test failure and attached to Allure re
 ### Kill Chromedriver Processes (Windows)
 
 If Chrome drivers are not closing properly:
+
 ```bash
 taskkill /F /IM chromedriver.exe /T
 ```
@@ -413,6 +435,7 @@ taskkill /F /IM chromedriver.exe /T
 ### Clear Build Cache
 
 If you encounter build issues:
+
 ```bash
 .\gradlew.bat clean --refresh-dependencies
 ```
@@ -427,11 +450,13 @@ If you encounter WebDriver compatibility issues:
 ### View Detailed Logs
 
 Enable verbose logging:
+
 ```bash
 .\gradlew.bat test --info
 ```
 
 Or debug mode:
+
 ```bash
 .\gradlew.bat test --debug
 ```
