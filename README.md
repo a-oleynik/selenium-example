@@ -508,7 +508,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - [Selenium Documentation](https://www.selenium.dev/documentation/)
 - [JUnit 6 User Guide](https://docs.junit.org/current/user-guide/)
-- [Allure Framework](https://docs.qameta.io/allure/)
+- [Allure Framework](https://allurereport.org/docs/)
 - [Gradle User Guide](https://docs.gradle.org/current/userguide/userguide.html)
 - [Selenium Grid Setup](https://www.selenium.dev/documentation/grid/)
 - [WebDriver Downloads](https://www.selenium.dev/downloads/)
