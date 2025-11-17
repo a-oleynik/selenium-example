@@ -51,7 +51,8 @@ A comprehensive test automation framework demonstrating best practices with Sele
 | **Gradle**             | 8.x           | Build automation |
 | **Selenium WebDriver** | 4.38.0        | Browser automation |
 | **JUnit 6**            | 6.0.1         | Testing framework |
-| **Allure**             | 2.32.2        | Test reporting |
+| **Allure**             | 2.31.0        | Test reporting           |
+| **Allure report**      | 2.35.1        | Test reporting           |
 | **AssertJ**            | 3.27.6        | Fluent assertions |
 | **Apache POI**         | 5.4.1         | Excel report generation |
 | **OpenCSV**            | 5.12.0        | CSV data handling |
@@ -154,6 +155,7 @@ To run tests with different browsers:
 ### Run All Tests
 
 Execute the entire test suite:
+
 ```bash
 .\gradlew.bat clean test
 ```
@@ -161,6 +163,7 @@ Execute the entire test suite:
 ### Run Specific Test Class
 
 Execute a single test class:
+
 ```bash
 .\gradlew.bat clean test --tests com.oleynik.gradle.selenium.example.test.CalculatorSanityTest
 ```
@@ -168,6 +171,7 @@ Execute a single test class:
 ### Run Specific Test Method
 
 Execute a specific test method:
+
 ```bash
 .\gradlew.bat clean test --tests com.oleynik.gradle.selenium.example.test.CalculatorSanityTest.checkCalculatorOpening
 ```
@@ -175,6 +179,7 @@ Execute a specific test method:
 ### Run Tests in a Package
 
 Execute all tests in a specific package:
+
 ```bash
 .\gradlew.bat clean test --tests com.oleynik.gradle.selenium.example.test.*
 ```
@@ -182,6 +187,7 @@ Execute all tests in a specific package:
 ### Run with Custom Parameters
 
 Execute tests with system properties:
+
 ```bash
 .\gradlew.bat clean test -Denv.browser=Firefox -Denv.url=https://example.com
 ```
@@ -189,11 +195,13 @@ Execute tests with system properties:
 ### Generate Reports Only
 
 Generate Allure report from existing test results:
+
 ```bash
 .\gradlew.bat allureReport
 ```
 
 Generate Excel report:
+
 ```bash
 .\gradlew.bat excelReport
 ```
@@ -201,6 +209,7 @@ Generate Excel report:
 ### Check for Dependency Updates
 
 Check for outdated dependencies:
+
 ```bash
 .\gradlew.bat dependencyUpdates
 ```
@@ -250,6 +259,7 @@ selenium-example/
 **Location:** `build/reports/allure-report/allureReport/index.html`
 
 **Features:**
+
 - 📈 Test execution timeline
 - 📊 Test result statistics
 - 📸 Screenshots on failure
@@ -259,6 +269,7 @@ selenium-example/
 - 📉 Trend analysis
 
 **View Report:**
+
 ```bash
 # Generate and open report
 .\gradlew.bat allureReport
@@ -270,6 +281,7 @@ selenium-example/
 **Location:** `build/reports/tests/test/index.html`
 
 **Features:**
+
 - ✅ Pass/Fail statistics
 - ⏱️ Execution time
 - 📋 Test class grouping
@@ -281,6 +293,7 @@ selenium-example/
 **Location:** `build/excel-results/testExecutionReport_ddmmyy_hhmmss.xlsx`
 
 **Features:**
+
 - 📊 Test execution summary
 - 📅 Timestamp information
 - ✅ Status tracking
@@ -386,6 +399,7 @@ static Stream<Arguments> divisionData() throws Exception {
 ### Screenshot on Failure
 
 Screenshots are automatically captured on test failure and attached to Allure reports:
+
 - Location: `build/screenshots/`
 - Format: `timestamp-ClassName-testMethod.png`
 
@@ -394,6 +408,7 @@ Screenshots are automatically captured on test failure and attached to Allure re
 ### Kill Chromedriver Processes (Windows)
 
 If Chrome drivers are not closing properly:
+
 ```bash
 taskkill /F /IM chromedriver.exe /T
 ```
@@ -401,6 +416,7 @@ taskkill /F /IM chromedriver.exe /T
 ### Clear Build Cache
 
 If you encounter build issues:
+
 ```bash
 .\gradlew.bat clean --refresh-dependencies
 ```
@@ -408,6 +424,7 @@ If you encounter build issues:
 ### Update WebDriver
 
 WebDrivers are managed automatically by Selenium Manager. To force update:
+
 ```bash
 .\gradlew.bat clean test --refresh-dependencies
 ```
@@ -415,11 +432,13 @@ WebDrivers are managed automatically by Selenium Manager. To force update:
 ### View Detailed Logs
 
 Enable verbose logging:
+
 ```bash
 .\gradlew.bat test --info
 ```
 
 Or debug mode:
+
 ```bash
 .\gradlew.bat test --debug
 ```
