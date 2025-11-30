@@ -82,6 +82,7 @@ tasks.register('excelReport', JavaExec) {
 }
 
 test {
+    systemProperties System.getProperties()
     systemProperty "file.encoding", "utf-8"
     useJUnitPlatform()
     testLogging.exceptionFormat = 'full'
@@ -93,6 +94,28 @@ test {
     dependsOn cleanTest
     dependsOn cleanAllureReport
     maxParallelForks = 3
+
+    String includedTagsProperty = System.getProperty("includeTags")
+    boolean isIncludedTagsProperty = includedTagsProperty != null
+    String excludedTagsProperty = System.getProperty("excludeTags")
+    boolean isExcludedTagsProperty = excludedTagsProperty != null
+    if (isIncludedTagsProperty && isExcludedTagsProperty) {
+        useJUnitPlatform {
+            includeTags includedTagsProperty
+            excludeTags excludedTagsProperty
+        }
+    } else if (isIncludedTagsProperty && !isExcludedTagsProperty) {
+        useJUnitPlatform {
+            includeTags includedTagsProperty
+        }
+    } else if (!isIncludedTagsProperty && isExcludedTagsProperty) {
+        useJUnitPlatform {
+            excludeTags excludedTagsProperty
+        }
+    } else {
+        useJUnitPlatform {
+        }
+    }
 
     retry {
         failOnPassedAfterRetry = true
