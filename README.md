@@ -187,6 +187,30 @@ Execute all tests in a specific package:
 .\gradlew.bat clean test --tests com.oleynik.gradle.selenium.example.test.*
 ```
 
+### Run Tests with Tags
+
+Execute all tests with tag "Regression":
+
+```bash
+.\gradlew.bat clean test -DincludeTags="Regression"
+```
+
+### Run Tests excluding Tags
+
+Execute all tests excluding those with tag "Flaky":
+
+```bash
+.\gradlew.bat clean test -DexcludeTags="Flaky"
+```
+
+### Run Tests from a package filtered by Tags
+
+Execute all tests from a package and tags -DincludeTags="Regression":
+
+```bash
+.\gradlew.bat clean test --tests com.oleynik.gradle.selenium.example.test.* -DincludeTags="Regression"
+```
+
 ### Run with Custom Parameters
 
 Execute tests with system properties:
