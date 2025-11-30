@@ -240,6 +240,30 @@ Execute all tests in a specific package:
 .\gradlew.bat clean test --tests com.oleynik.gradle.selenium.example.test.*
 ```
 
+### Run Tests with Groups
+
+Execute all tests with group "Regression":
+
+```bash
+.\gradlew.bat clean test -Dgroups="Regression"
+```
+
+### Run Tests excluding Groups
+
+Execute all tests excluding those with group "Flaky":
+
+```bash
+.\gradlew.bat clean test -Dexclude="Flaky"
+```
+
+### Run Tests from a package filtered by Groups
+
+Execute all tests from a package and tags -Dgroups="Regression":
+
+```bash
+.\gradlew.bat clean test --tests com.oleynik.gradle.selenium.example.test.* -Dgroups="Regression"
+```
+
 ### Run with Custom Parameters
 
 Execute tests with system properties:

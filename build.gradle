@@ -78,6 +78,7 @@ tasks.register('excelReport', JavaExec) {
 }
 
 test {
+    systemProperties System.getProperties()
     systemProperty "file.encoding", "utf-8"
     useTestNG {
         parallel = 'classes'
@@ -89,6 +90,28 @@ test {
     dependsOn cleanAllureReport
     testLogging.exceptionFormat = 'full'
     testLogging.showStandardStreams = true
+
+    String includedGroupsProperty = System.getProperty("groups")
+    boolean isIncludedGroupsProperty = includedGroupsProperty != null
+    String excludedGroupsProperty = System.getProperty("exclude")
+    boolean isExcludedGroupsProperty = excludedGroupsProperty != null
+    if (isIncludedGroupsProperty && isExcludedGroupsProperty) {
+        useTestNG {
+            includeGroups includedGroupsProperty
+            excludeGroups excludedGroupsProperty
+        }
+    } else if (isIncludedGroupsProperty && !isExcludedGroupsProperty) {
+        useTestNG {
+            includeGroups includedGroupsProperty
+        }
+    } else if (!isIncludedGroupsProperty && isExcludedGroupsProperty) {
+        useTestNG {
+            excludeGroups excludedGroupsProperty
+        }
+    } else {
+        useTestNG {
+        }
+    }
 
     retry {
         failOnPassedAfterRetry = true
