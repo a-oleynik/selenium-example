@@ -1,10 +1,10 @@
 # 🚀 Gradle Selenium WebDriver TestNG Example (Manual Driver Management)
 
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
-[![Selenium](https://img.shields.io/badge/Selenium-4.38.0-green.svg)](https://www.selenium.dev/)
+[![Selenium](https://img.shields.io/badge/Selenium-4.39.0-green.svg)](https://www.selenium.dev/)
 [![TestNG](https://img.shields.io/badge/TestNG-7.11.0-red.svg)](https://testng.org/)
-[![Gradle](https://img.shields.io/badge/Gradle-8.x-blue.svg)](https://gradle.org/)
-[![Allure_Framework](https://img.shields.io/badge/Allure_Framework-2.31.0-purple.svg)](https://allurereport.org/docs/)
+[![Gradle](https://img.shields.io/badge/Gradle-9.1.0-blue.svg)](https://gradle.org/)
+[![Allure_Framework](https://img.shields.io/badge/Allure_Framework-2.32.0-purple.svg)](https://allurereport.org/docs/)
 [![Allure_CLI](https://img.shields.io/badge/Allure_CLI-2.35.1-yellow.svg)](https://allurereport.org/docs/)
 
 A comprehensive test automation framework demonstrating best practices with Selenium WebDriver, TestNG, and Allure
@@ -53,7 +53,7 @@ reporting capabilities.
 | Technology                         | Version       | Purpose                                                           |
 |------------------------------------|---------------|-------------------------------------------------------------------|
 | **Java**                           | 21            | Programming language                                              |
-| **Gradle**                         | 9.1           | Build automation                                                  |
+| **Gradle**                         | 9.1.0         | Build automation                                                  |
 | **Selenium WebDriver**             | 4.39.0        | Browser automation                                                |
 | **TestNG**                         | 7.11.0        | Testing framework                                                 |
 | **Allure Framework (Allure Java)** | 2.32.0        | Used inside tests (annotations, listeners). Produces raw results. |
