@@ -57,7 +57,7 @@ reporting capabilities.
 | **Java**                           | 21            | Programming language                                              |
 | **Gradle**                         | 9.1           | Build automation                                                  |
 | **Selenium WebDriver**             | 4.39.0        | Browser automation                                                |
-| **JUnit 6**                        | 6.0.1         | Testing framework                                                 |
+| **JUnit 6**                        | 6.1.0-M1      | Testing framework                                                 |
 | **Allure Framework (Allure Java)** | 2.31.0        | Used inside tests (annotations, listeners). Produces raw results. |
 | **Allure Report CLI**              | 2.35.1        | Generates interactive HTML report from test results.              |
 | **AssertJ**                        | 3.27.6        | Fluent assertions                                                 |
