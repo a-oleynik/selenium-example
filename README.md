@@ -53,10 +53,10 @@ reporting capabilities.
 | Technology                         | Version       | Purpose                                                           |
 |------------------------------------|---------------|-------------------------------------------------------------------|
 | **Java**                           | 21            | Programming language                                              |
-| **Gradle**                         | 8.x           | Build automation                                                  |
-| **Selenium WebDriver**             | 4.38.0        | Browser automation                                                |
+| **Gradle**                         | 9.1           | Build automation                                                  |
+| **Selenium WebDriver**             | 4.39.0        | Browser automation                                                |
 | **TestNG**                         | 7.11.0        | Testing framework                                                 |
-| **Allure Framework (Allure Java)** | 2.31.0        | Used inside tests (annotations, listeners). Produces raw results. |
+| **Allure Framework (Allure Java)** | 2.32.0        | Used inside tests (annotations, listeners). Produces raw results. |
 | **Allure Report CLI**              | 2.35.1        | Generates interactive HTML report from test results.              |
 | **AssertJ**                        | 3.27.6        | Fluent assertions                                                 |
 | **Apache POI**                     | 5.5.0         | Excel report generation                                           |
