@@ -2,9 +2,9 @@
 
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
 [![Selenium](https://img.shields.io/badge/Selenium-4.39.0-green.svg)](https://www.selenium.dev/)
-[![JUnit](https://img.shields.io/badge/JUnit-6.0.1-green.svg)](https://junit.org/)
+[![JUnit](https://img.shields.io/badge/JUnit-6.1.0_M1-green.svg)](https://junit.org/)
 [![Gradle](https://img.shields.io/badge/Gradle-9.1.0-blue.svg)](https://gradle.org/)
-[![Allure_Framework](https://img.shields.io/badge/Allure_Framework-2.31.0-purple.svg)](https://allurereport.org/docs/)
+[![Allure_Framework](https://img.shields.io/badge/Allure_Framework-2.32.0-purple.svg)](https://allurereport.org/docs/)
 [![Allure_CLI](https://img.shields.io/badge/Allure_CLI-2.35.1-yellow.svg)](https://allurereport.org/docs/)
 
 A comprehensive test automation framework demonstrating best practices with Selenium WebDriver, JUnit 6, and Allure
