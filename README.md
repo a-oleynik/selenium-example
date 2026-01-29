@@ -1,7 +1,7 @@
 # 🚀 Gradle Selenium WebDriver JUnit 6 Example (Manual Driver Management)
 
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
-[![Selenium](https://img.shields.io/badge/Selenium-4.39.0-green.svg)](https://www.selenium.dev/)
+[![Selenium](https://img.shields.io/badge/Selenium-4.40.0-green.svg)](https://www.selenium.dev/)
 [![JUnit](https://img.shields.io/badge/JUnit-6.1.0_M1-green.svg)](https://junit.org/)
 [![Gradle](https://img.shields.io/badge/Gradle-9.1.0-blue.svg)](https://gradle.org/)
 [![Allure_Framework](https://img.shields.io/badge/Allure_Framework-2.32.0-purple.svg)](https://allurereport.org/docs/)
@@ -56,7 +56,7 @@ reporting capabilities.
 |------------------------------------|---------------|-------------------------------------------------------------------|
 | **Java**                           | 21            | Programming language                                              |
 | **Gradle**                         | 9.1.0         | Build automation                                                  |
-| **Selenium WebDriver**             | 4.39.0        | Browser automation                                                |
+| **Selenium WebDriver**             | 4.40.0        | Browser automation                                                |
 | **JUnit 6**                        | 6.1.0-M1      | Testing framework                                                 |
 | **Allure Framework (Allure Java)** | 2.31.0        | Used inside tests (annotations, listeners). Produces raw results. |
 | **Allure Report CLI**              | 2.35.1        | Generates interactive HTML report from test results.              |
@@ -65,7 +65,7 @@ reporting capabilities.
 | **OpenCSV**                        | 5.12.0        | CSV data handling                                                 |
 | **Owner**                          | 1.0.12        | Configuration management                                          |
 | **Lombok**                         | 1.18.42       | Code generation                                                   |
-| **Jackson**                        | 2.20.1        | JSON processing                                                   |
+| **Jackson**                        | 2.21.0        | JSON processing                                                   |
 | **Log4j/SLF4J**                    | 2.24.3/2.0.17 | Logging                                                           |
 
 ## 📦 Prerequisites
