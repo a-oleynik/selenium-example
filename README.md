@@ -2,7 +2,7 @@
 
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
 [![Selenium](https://img.shields.io/badge/Selenium-4.40.0-green.svg)](https://www.selenium.dev/)
-[![TestNG](https://img.shields.io/badge/TestNG-7.11.0-red.svg)](https://testng.org/)
+[![TestNG](https://img.shields.io/badge/TestNG-7.12.0-red.svg)](https://testng.org/)
 [![Gradle](https://img.shields.io/badge/Gradle-9.1.0-blue.svg)](https://gradle.org/)
 [![Allure_Framework](https://img.shields.io/badge/Allure_Framework-2.32.0-purple.svg)](https://allurereport.org/docs/)
 [![Allure_CLI](https://img.shields.io/badge/Allure_CLI-2.35.1-yellow.svg)](https://allurereport.org/docs/)
@@ -55,7 +55,7 @@ reporting capabilities.
 | **Java**                           | 21            | Programming language                                              |
 | **Gradle**                         | 9.1.0         | Build automation                                                  |
 | **Selenium WebDriver**             | 4.40.0        | Browser automation                                                |
-| **TestNG**                         | 7.11.0        | Testing framework                                                 |
+| **TestNG**                         | 7.12.0        | Testing framework                                                 |
 | **Allure Framework (Allure Java)** | 2.32.0        | Used inside tests (annotations, listeners). Produces raw results. |
 | **Allure Report CLI**              | 2.35.1        | Generates interactive HTML report from test results.              |
 | **AssertJ**                        | 3.27.6        | Fluent assertions                                                 |
