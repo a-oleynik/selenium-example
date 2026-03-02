@@ -1,10 +1,10 @@
 # 🚀 Gradle Selenium WebDriver TestNG Example
 
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
-[![Selenium](https://img.shields.io/badge/Selenium-4.40.0-green.svg)](https://www.selenium.dev/)
+[![Selenium](https://img.shields.io/badge/Selenium-4.41.0-green.svg)](https://www.selenium.dev/)
 [![TestNG](https://img.shields.io/badge/TestNG-7.12.0-red.svg)](https://testng.org/)
 [![Gradle](https://img.shields.io/badge/Gradle-9.1.0-blue.svg)](https://gradle.org/)
-[![Allure_Framework](https://img.shields.io/badge/Allure_Framework-2.32.0-purple.svg)](https://allurereport.org/docs/)
+[![Allure_Framework](https://img.shields.io/badge/Allure_Framework-2.33.0-purple.svg)](https://allurereport.org/docs/)
 [![Allure_CLI](https://img.shields.io/badge/Allure_CLI-2.35.1-yellow.svg)](https://allurereport.org/docs/)
 
 A comprehensive test automation framework demonstrating best practices with Selenium WebDriver, TestNG, and Allure
@@ -53,16 +53,16 @@ reporting capabilities.
 |------------------------------------|---------------|-------------------------------------------------------------------|
 | **Java**                           | 21            | Programming language                                              |
 | **Gradle**                         | 9.1.0         | Build automation                                                  |
-| **Selenium WebDriver**             | 4.40.0        | Browser automation                                                |
+| **Selenium WebDriver**             | 4.41.0        | Browser automation                                                |
 | **TestNG**                         | 7.12.0        | Testing framework                                                 |
-| **Allure Framework (Allure Java)** | 2.32.0        | Used inside tests (annotations, listeners). Produces raw results. |
+| **Allure Framework (Allure Java)** | 2.33.0        | Used inside tests (annotations, listeners). Produces raw results. |
 | **Allure Report CLI**              | 2.35.1        | Generates interactive HTML report from test results.              |
 | **AssertJ**                        | 3.27.6        | Fluent assertions                                                 |
 | **Apache POI**                     | 5.5.0         | Excel report generation                                           |
 | **OpenCSV**                        | 5.12.0        | CSV data handling                                                 |
 | **Owner**                          | 1.0.12        | Configuration management                                          |
 | **Lombok**                         | 1.18.42       | Code generation                                                   |
-| **Jackson**                        | 2.21.0        | JSON processing                                                   |
+| **Jackson**                        | 2.21.1        | JSON processing                                                   |
 | **Log4j/SLF4J**                    | 2.24.3/2.0.17 | Logging                                                           |
 
 ## 📦 Prerequisites
