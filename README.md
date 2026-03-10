@@ -64,7 +64,7 @@ reporting capabilities.
 | **Owner**                          | 1.0.12        | Configuration management                                          |
 | **Lombok**                         | 1.18.42       | Code generation                                                   |
 | **Jackson**                        | 2.21.1        | JSON processing                                                   |
-| **Log4j/SLF4J**                    | 2.24.3/2.0.17 | Logging                                                           |
+| **Log4j/SLF4J**                    | 2.25.3/2.0.17 | Logging                                                           |
 
 ## 📦 Prerequisites
 
