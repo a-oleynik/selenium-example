@@ -536,6 +536,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Gradle User Guide](https://docs.gradle.org/current/userguide/userguide.html)
 - [Selenium Grid Setup](https://www.selenium.dev/documentation/grid/)
 - [WebDriver Downloads](https://www.selenium.dev/downloads/)
+- [Forget WebDriverManager: Use Selenium Manager Instead](https://medium.com/@andrei.oleynik/forget-webdrivermanager-use-selenium-manager-instead-1acf7e1076f3)
+- [TestNG XML Is a Legacy Concept: Here's What Modern Test Suites Should Look Like](https://medium.com/@andrei.oleynik/testng-xml-is-a-legacy-concept-heres-what-modern-test-suites-should-look-like-bd5cb380db61)
+- [WebDriver getAttribute() is Back: When to Use It vs getDomAttribute() and getDomProperty()](https://medium.com/@andrei.oleynik/adventures-of-getattribute-back-from-the-dead-846c31f5bcab)
 
 ## 🔗 Useful Links
 
