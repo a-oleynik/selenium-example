@@ -64,8 +64,8 @@ reporting capabilities.
 | **Apache POI**                     | 5.5.0         | Excel report generation                                           |
 | **OpenCSV**                        | 5.12.0        | CSV data handling                                                 |
 | **Owner**                          | 1.0.12        | Configuration management                                          |
-| **Lombok**                         | 1.18.42       | Code generation                                                   |
-| **Jackson**                        | 2.21.1        | JSON processing                                                   |
+| **Lombok**                         | 1.18.44       | Code generation                                                   |
+| **Jackson**                        | 2.21.2        | JSON processing                                                   |
 | **Log4j/SLF4J**                    | 2.25.3/2.0.17 | Logging                                                           |
 
 ## 📦 Prerequisites
