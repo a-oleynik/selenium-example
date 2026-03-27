@@ -2,10 +2,8 @@ package com.oleynik.gradle.selenium.example.framework.listeners;
 
 import com.google.common.collect.ImmutableMap;
 import com.oleynik.gradle.selenium.example.framework.reporting.TestExecutionResultCollector;
-import org.junit.platform.engine.TestExecutionResult;
-import org.junit.platform.engine.reporting.ReportEntry;
+import org.jspecify.annotations.NonNull;
 import org.junit.platform.launcher.TestExecutionListener;
-import org.junit.platform.launcher.TestIdentifier;
 import org.junit.platform.launcher.TestPlan;
 
 
@@ -15,7 +13,8 @@ import static com.oleynik.gradle.selenium.example.framework.utils.ReportUtils.ge
 import static com.oleynik.gradle.selenium.example.framework.utils.ReportUtils.saveTestExecutionResults;
 
 public class ResultExecutionListener implements TestExecutionListener {
-    public void testPlanExecutionStarted(TestPlan testPlan) {
+    @Override
+    public void testPlanExecutionStarted(@NonNull TestPlan testPlan) {
         writeAllureEnvironment(
                 ImmutableMap.<String, String>builder()
                         .put("Browser", configuration().envBrowser())
@@ -23,23 +22,9 @@ public class ResultExecutionListener implements TestExecutionListener {
                         .build());
     }
 
-    public void testPlanExecutionFinished(TestPlan testPlan) {
+    @Override
+    public void testPlanExecutionFinished(@NonNull TestPlan testPlan) {
         saveTestExecutionResults(TestExecutionResultCollector.getAllResults());
         generateConsolidatedExcelReport("executionReport");
-    }
-
-    public void dynamicTestRegistered(TestIdentifier testIdentifier) {
-    }
-
-    public void executionSkipped(TestIdentifier testIdentifier, String reason) {
-    }
-
-    public void executionStarted(TestIdentifier testIdentifier) {
-    }
-
-    public void executionFinished(TestIdentifier testIdentifier, TestExecutionResult testExecutionResult) {
-    }
-
-    public void reportingEntryPublished(TestIdentifier testIdentifier, ReportEntry entry) {
     }
 }
