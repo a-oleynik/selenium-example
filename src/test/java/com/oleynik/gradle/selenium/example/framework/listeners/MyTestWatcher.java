@@ -7,6 +7,7 @@ import com.oleynik.gradle.selenium.example.framework.reporting.TestExecutionResu
 import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.model.Status;
+import org.jspecify.annotations.NonNull;
 import org.junit.jupiter.api.extension.*;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -31,18 +32,18 @@ public class MyTestWatcher implements BeforeEachCallback, TestWatcher, Invocatio
     List<Object> testMethodParameters;
 
     @Override
-    public void beforeEach(ExtensionContext context) {
+    public void beforeEach(@NonNull ExtensionContext context) {
         startTime = System.currentTimeMillis();
     }
 
     @Override
-    public void testAborted(ExtensionContext context, Throwable throwable) {
+    public void testAborted(@NonNull ExtensionContext context, Throwable throwable) {
         TestExecutionResult testExecutionResult = generateTestExecutionResult(context, ExecutionStatus.SKIP);
         TestExecutionResultCollector.addTestExecutionResult(testExecutionResult);
     }
 
     @Override
-    public void testDisabled(ExtensionContext context, Optional<String> optional) {
+    public void testDisabled(@NonNull ExtensionContext context, @NonNull Optional<String> optional) {
         TestExecutionResult testExecutionResult = generateTestExecutionResult(context, ExecutionStatus.DISABLED);
         TestExecutionResultCollector.addTestExecutionResult(testExecutionResult);
     }
@@ -69,7 +70,7 @@ public class MyTestWatcher implements BeforeEachCallback, TestWatcher, Invocatio
     }
 
     @Override
-    public void testSuccessful(ExtensionContext context) {
+    public void testSuccessful(@NonNull ExtensionContext context) {
         TestExecutionResult testExecutionResult = generateTestExecutionResult(context, ExecutionStatus.PASS);
         TestExecutionResultCollector.addTestExecutionResult(testExecutionResult);
     }
@@ -131,8 +132,8 @@ public class MyTestWatcher implements BeforeEachCallback, TestWatcher, Invocatio
 
     @Override
     public void interceptTestTemplateMethod(final Invocation<Void> invocation,
-                                            final ReflectiveInvocationContext<Method> invocationContext,
-                                            final ExtensionContext extensionContext) throws Throwable {
+                                            final @NonNull ReflectiveInvocationContext<Method> invocationContext,
+                                            final @NonNull ExtensionContext extensionContext) throws Throwable {
         sendParameters2Store(invocationContext, extensionContext);
         invocation.proceed();
     }
