@@ -50,12 +50,21 @@ configuration().defaultWebdriverTimeout() // default.webdriver.timeout
 ```
 Override at runtime: `.\gradlew.bat test -Denv.browser=Firefox -Denv.url=https://...`
 
-## Selenium Manager (Automatic Drivers)
-This branch uses **Selenium Manager** — no manual driver binaries are needed.
-Do NOT add `System.setProperty("webdriver.*.driver", ...)` calls anywhere.
+## WebDriver Binaries (No Selenium Manager)
+This branch does **not** use Selenium Manager. Drivers are pre-downloaded binaries in `./drivers/`:
+
+| Binary                       | Browser |
+|------------------------------|---------|
+| `drivers/chromedriver.exe`   | Chrome  |
+| `drivers/geckodriver.exe`    | Firefox |
+| `drivers/msedgedriver.exe`   | Edge    |
+| `drivers/IEDriverServer.exe` | IE      |
+
+Binaries must be manually kept in sync with the installed browser version.
 
 ## Adding a New Browser
-Add a `case` to the switch in `WebdriverFactory.createInstance()` — that is the only place to change.
+1. Place the matching driver binary in `./drivers/`.
+2. Add a `case` to the switch in `WebdriverFactory.createInstance()` — set `System.setProperty("webdriver.*.driver", ".\\drivers\\*.exe")` before yielding the driver instance. That is the **only** place to change.
 
 ## Parameterized Tests
 - Inline data: `@DataProvider(name = "x")` returning `Object[][]` in the same class; wire with `@Test(dataProvider = "x")`.

@@ -23,8 +23,31 @@ test/          → TestNG test classes (extend BaseTest, use @Feature, @Test(des
 Listeners are wired via `@Listeners` directly on this class.
 - **`WebdriverManager`** (`framework/manager/WebdriverManager.java`): `ThreadLocal<WebDriver>` — essential for parallel safety. 
 Always access the driver via `WebdriverManager.getDriver()`, never pass it directly.
-- **`WebdriverFactory`** (`framework/manager/WebdriverFactory.java`): Switch on `configuration().envBrowser()` (case-insensitive). 
-Relies on **Selenium Manager** for automatic driver binary resolution — no manual driver files needed. Add new browsers here.
+- **`WebdriverFactory`** (`framework/manager/WebdriverFactory.java`): Switch on `configuration().envBrowser()` (case-insensitive). Each case sets `System.setProperty("webdriver.*.driver", ".\\drivers\\*.exe")` before instantiating the driver. Add new browsers here.
+
+## WebDriver Binaries
+
+This branch does **not** use Selenium Manager. Binaries are committed to `./drivers/`:
+
+| File                         | Browser           |
+|------------------------------|-------------------|
+| `drivers/chromedriver.exe`   | Chrome            |
+| `drivers/geckodriver.exe`    | Firefox           |
+| `drivers/msedgedriver.exe`   | Edge              |
+| `drivers/IEDriverServer.exe` | Internet Explorer |
+
+**Drivers must be manually updated** to match the installed browser version. Download from the browser vendor and replace the corresponding file in `./drivers/`.
+
+The `./drivers/` folder also contains `selenium-server-4.24.0.jar` and `.toml` grid configs for running a local Selenium Grid:
+```bash
+java -jar drivers/selenium-server-4.24.0.jar standalone
+java -jar drivers/selenium-server-4.24.0.jar standalone --config drivers/two-browsers-grid-config.toml
+# Grid UI: http://localhost:4444/ui
+```
+
+## Adding a New Browser
+1. Place the driver binary in `./drivers/`.
+2. Add a `case` to the switch in `WebdriverFactory.createInstance()` that calls `System.setProperty(...)` with the binary path before yielding the new driver instance.
 
 ---
 
@@ -127,11 +150,6 @@ public class MyTest extends BaseTest {
 
 ---
 
-## Adding a New Browser
-
-Add a `case` to the switch in `WebdriverFactory.createInstance()` — that is the only place to change. Selenium Manager resolves the driver binary automatically.
-
----
 
 ## Reporting Outputs
 
