@@ -316,9 +316,8 @@ selenium-example/
 │       ├── java/
 │       │   └── com/oleynik/gradle/selenium/example/
 │       │       ├── framework/          # Framework utilities
-│       │       │   ├── annotations/    # Custom annotations (@ParameterizedDataSource)
 │       │       │   ├── config/         # Configuration management
-│       │       │   ├── dataproviders/  # CSVDataProvider (OpenCSV ArgumentsProvider)
+│       │       │   ├── dataproviders/  # CSVDataProvider (OpenCSV ArgumentsProvider) + @ParameterizedDataSource annotation
 │       │       │   ├── listeners/      # JUnit 6 extensions
 │       │       │   ├── manager/        # WebDriver management
 │       │       │   ├── reporting/      # Custom reporting

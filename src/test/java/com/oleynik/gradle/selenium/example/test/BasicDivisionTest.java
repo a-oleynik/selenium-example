@@ -1,7 +1,7 @@
 package com.oleynik.gradle.selenium.example.test;
 
 import com.oleynik.gradle.selenium.example.framework.BaseTest;
-import com.oleynik.gradle.selenium.example.framework.annotations.ParameterizedDataSource;
+import com.oleynik.gradle.selenium.example.framework.dataproviders.ParameterizedDataSource;
 import com.oleynik.gradle.selenium.example.steps.CalculatorSteps;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;

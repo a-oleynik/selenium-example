@@ -1,6 +1,5 @@
-package com.oleynik.gradle.selenium.example.framework.annotations;
+package com.oleynik.gradle.selenium.example.framework.dataproviders;
 
-import com.oleynik.gradle.selenium.example.framework.dataproviders.CSVDataProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 
 import java.lang.annotation.ElementType;
