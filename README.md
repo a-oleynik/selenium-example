@@ -144,6 +144,21 @@ test {
 }
 ```
 
+### Lombok Configuration (`lombok.config`)
+
+Located at the project root, this file controls Lombok's annotation-processor behaviour:
+
+```properties
+# Resolve @Jacksonized ambiguity when both Jackson 2 and Jackson 3 are on the classpath
+lombok.jacksonized.jacksonVersion += 2
+```
+
+> **Do not delete `lombok.config`.** Without it, the compiler emits:
+> `warning: Ambiguous: Jackson2 and Jackson3 exist; define which variant(s) you want in 'lombok.config'`
+> for every class annotated with `@Jacksonized` (e.g. `TestExecutionResult`).
+>
+> If you add new Lombok config keys, always add them here — never inline annotation-processor arguments in `build.gradle`.
+
 ### Customizing Configuration
 
 To run tests with different browsers:
@@ -275,6 +290,7 @@ selenium-example/
 │   └── test-results/                   # Test execution results
 ├── drivers/                            # WebDriver binaries (managed automatically)
 ├── build.gradle                        # Build configuration
+├── lombok.config                       # Lombok annotation-processor settings (do not delete)
 ├── gradlew.bat                         # Gradle wrapper (Windows)
 ├── gradlew                             # Gradle wrapper (Linux/Mac)
 └── README.md                           # This file

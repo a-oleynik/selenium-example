@@ -138,7 +138,7 @@ Add a `case` to the switch in `WebdriverFactory.createInstance()` — that is th
 |--------------------|-------------------------------------------------------|
 | Allure HTML        | `build/reports/allure-report/allureReport/index.html` |
 | JUnit HTML         | `build/reports/tests/test/index.html`                 |
-| Excel              | `build/reports/executionReport_*.xlsx`          |
+| Excel              | `build/reports/executionReport_*.xlsx`                |
 | Screenshots        | `build/reports/screenshots/`                          |
 | Allure raw results | `build/allure-results/`                               |
 
@@ -146,13 +146,14 @@ Add a `case` to the switch in `WebdriverFactory.createInstance()` — that is th
 
 ## Key Files Reference
 
-| File                                               | Role                                                                  |
-|----------------------------------------------------|-----------------------------------------------------------------------|
-| `build.gradle`                                     | JUnit parallel config, retry, tag filtering logic, report task wiring |
-| `framework/BaseTest.java`                          | Required superclass; wires `MyTestWatcher` via `@ExtendWith`          |
-| `framework/config/Configuration.java`              | All config keys (Owner `@Config.Key`)                                 |
-| `framework/manager/WebdriverManager.java`          | ThreadLocal driver store                                              |
-| `framework/listeners/MyTestWatcher.java`           | Failure screenshot + Allure attachment (`TestWatcher` + interceptor)  |
-| `framework/listeners/ResultExecutionListener.java` | Suite-level reporting hook (`TestExecutionListener`)                  |
-| `src/test/resources/general.properties`            | Runtime configuration                                                 |
-| `src/test/resources/META-INF/services/`            | SPI registration for `ResultExecutionListener` + `AllureTestListener` |
+| File                                               | Role                                                                                                                                            |
+|----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| `build.gradle`                                     | JUnit parallel config, retry, tag filtering logic, report task wiring                                                                           |
+| `framework/BaseTest.java`                          | Required superclass; wires `MyTestWatcher` via `@ExtendWith`                                                                                    |
+| `framework/config/Configuration.java`              | All config keys (Owner `@Config.Key`)                                                                                                           |
+| `framework/manager/WebdriverManager.java`          | ThreadLocal driver store                                                                                                                        |
+| `framework/listeners/MyTestWatcher.java`           | Failure screenshot + Allure attachment (`TestWatcher` + interceptor)                                                                            |
+| `framework/listeners/ResultExecutionListener.java` | Suite-level reporting hook (`TestExecutionListener`)                                                                                            |
+| `src/test/resources/general.properties`            | Runtime configuration                                                                                                                           |
+| `src/test/resources/META-INF/services/`            | SPI registration for `ResultExecutionListener` + `AllureTestListener`                                                                           |
+| `lombok.config`                                    | Lombok project-level config; sets `lombok.jacksonized.jacksonVersion += 2` to resolve the Jackson2/Jackson3 ambiguity warning on `@Jacksonized` |
