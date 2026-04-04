@@ -117,7 +117,7 @@ Two additional listeners are registered via **Java SPI** (`META-INF/services/`) 
 
 ## Parallel Execution & Retry
 
-- `maxParallelForks = 3` (Gradle JVM forks) + JUnit `parallel.config.strategy=dynamic`
+- `maxParallelForks = 3` (Gradle JVM forks) + JUnit `parallel.config.strategy=dynamic` + `parallel.config.executor-service=WORKER_THREAD_POOL`
 - `TestExecutionResultCollector` uses a `ConcurrentLinkedQueue` — thread-safe result aggregation
 - Gradle test-retry plugin: `maxRetries = 1`, `failOnPassedAfterRetry = true` (a test that only passes on retry is marked as a failure)
 
