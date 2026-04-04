@@ -115,8 +115,8 @@ Use this repository if you want to:
 | **TestNG**                         | 7.12.0        | Testing framework                                                 |
 | **Allure Framework (Allure Java)** | 2.33.0        | Used inside tests (annotations, listeners). Produces raw results. |
 | **Allure Report CLI**              | 2.35.1        | Generates interactive HTML report from test results.              |
-| **AssertJ**                        | 3.27.6        | Fluent assertions                                                 |
-| **Apache POI**                     | 5.5.0         | Excel report generation                                           |
+| **AssertJ**                        | 3.27.7        | Fluent assertions                                                 |
+| **Apache POI**                     | 5.5.1         | Excel report generation                                           |
 | **OpenCSV**                        | 5.12.0        | CSV data handling                                                 |
 | **Owner**                          | 1.0.12        | Configuration management                                          |
 | **Lombok**                         | 1.18.44       | Code generation                                                   |
