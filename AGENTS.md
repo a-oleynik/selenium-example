@@ -138,7 +138,7 @@ Add a `case` to the switch in `WebdriverFactory.createInstance()` — that is th
 |--------------------|-------------------------------------------------------|
 | Allure HTML        | `build/reports/allure-report/allureReport/index.html` |
 | JUnit HTML         | `build/reports/tests/test/index.html`                 |
-| Excel              | `build/excel-results/executionReport_*.xlsx`          |
+| Excel              | `build/reports/executionReport_*.xlsx`          |
 | Screenshots        | `build/reports/screenshots/`                          |
 | Allure raw results | `build/allure-results/`                               |
 

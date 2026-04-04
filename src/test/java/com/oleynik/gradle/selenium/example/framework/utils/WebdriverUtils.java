@@ -12,6 +12,9 @@ import java.util.function.Function;
 import static com.oleynik.gradle.selenium.example.framework.config.ConfigurationManager.configuration;
 
 public class WebdriverUtils {
+    private WebdriverUtils() {
+        throw new IllegalStateException("Utility class");
+    }
 
     public static WebDriver createNewDriver() {
         WebDriver webDriver = WebdriverFactory.createInstance();
@@ -55,7 +58,7 @@ public class WebdriverUtils {
         return elementExists(by) && WebdriverUtils.findElement(by).isDisplayed();
     }
 
-    public static void clickIfElementShown(By by){
+    public static void clickIfElementShown(By by) {
         if (elementExistsAndShown(by)) {
             WebdriverUtils.findElement(by).click();
         }

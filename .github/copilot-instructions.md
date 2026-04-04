@@ -49,6 +49,10 @@ configuration().defaultWebdriverTimeout() // default.webdriver.timeout
 ```
 Override at runtime: `.\gradlew.bat test -Denv.browser=Firefox -Denv.url=https://...`
 
+## Selenium Manager (Automatic Drivers)
+This branch uses **Selenium Manager** — no manual driver binaries are needed.
+Do NOT add `System.setProperty("webdriver.*.driver", ...)` calls anywhere.
+
 ## Adding a New Browser
 Add a `case` to the switch in `WebdriverFactory.createInstance()` — that is the only place to change.
 
@@ -75,6 +79,6 @@ taskkill /F /IM chromedriver.exe /T                          # kill stale driver
 ## Reporting
 Allure HTML → `build/reports/allure-report/allureReport/index.html`
 JUnit HTML  → `build/reports/tests/test/index.html`
-Excel       → `build/excel-results/executionReport_*.xlsx`
+Excel       → `build/reports/executionReport_*.xlsx`
 Screenshots → `build/reports/screenshots/`
 Both Allure and Excel reports are generated automatically after every `test` run (`finalizedBy` in `build.gradle`).
