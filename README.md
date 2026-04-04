@@ -12,10 +12,20 @@ reporting. This project showcases parameterized testing, parallel execution, aut
 reporting capabilities.
 
 > **Note:** This branch uses JUnit 6 as the testing framework. For a TestNG-based implementation, please check out the
-`master` branch.
+[`master`](https://github.com/a-oleynik/selenium-example/tree/master) branch.  
+> For a JUnit 6 implementation with manual WebDriver binary setup see the [`junit6-without-selenium-manager`](https://github.com/a-oleynik/selenium-example/tree/junit6-without-selenium-manager) branch.
+>
+> **Related projects:**
+> - 🧪 [TestNG Workshop](https://github.com/a-oleynik/testng-workshop) — pure TestNG examples (no Selenium) to study the framework in isolation
+> - 🔬 [JUnit Workshop](https://github.com/a-oleynik/junit-workshop) — companion JUnit 6 / 5 / 4 examples for side-by-side comparison
+
+---
 
 ## 📋 Table of Contents
 
+- [Branches](#-branches)
+- [Why this repository?](#-why-this-repository)
+- [Who Is This For?](#-who-is-this-for)
 - [Features](#-features)
 - [Tech Stack](#-tech-stack)
 - [Prerequisites](#-prerequisites)
@@ -25,27 +35,76 @@ reporting capabilities.
 - [Project Structure](#-project-structure)
 - [Reporting](#-reporting)
 - [Advanced Features](#-advanced-features)
+- [Learning Path — Beginners](#-learning-path--beginners)
 - [Troubleshooting](#-troubleshooting)
 - [License](#-license)
 - [Additional Resources](#-additional-resources)
 - [Useful Links](#-useful-links)
+- [Found it useful?](#-found-it-useful)
+
+---
+
+## 🌿 Branches
+
+This repository contains examples for both TestNG and JUnit, with and without Selenium Manager:
+
+| Branch                                                                                                                  | Testing Framework | Description                                                            |
+|-------------------------------------------------------------------------------------------------------------------------|-------------------|------------------------------------------------------------------------|
+| [`master`](https://github.com/a-oleynik/selenium-example/tree/master)                                                   | **TestNG 7**      | Current branch — full-featured framework with TestNG                   |
+| [`junit6`](https://github.com/a-oleynik/selenium-example/tree/junit6)                                                   | **JUnit 6**       | Same framework rebuilt on JUnit 6 — compare patterns side-by-side      |
+| [`testng-without-selenium-manager`](https://github.com/a-oleynik/selenium-example/tree/testng-without-selenium-manager) | **TestNG 7**      | Legacy branch — manual WebDriver binary setup without Selenium Manager |
+| [`junit6-without-selenium-manager`](https://github.com/a-oleynik/selenium-example/tree/junit6-without-selenium-manager) | **JUnit 6**       | JUnit 6 + manual WebDriver binary setup without Selenium Manager       |
+
+---
+
+## 🤔 Why this repository?
+
+Most Selenium tutorials show you how to click a button and check a title.  
+This project goes much further — it demonstrates a **complete, production-ready automation framework** with real architectural decisions you can study, copy, and adapt immediately.
+
+Use this repository if you want to:
+
+- **learn Selenium WebDriver from scratch** with a guided, step-by-step path
+- **understand the 3-layer Page Object Model** — Test → Steps → Page — and why collapsing layers causes long-term pain
+- **see TestNG and JUnit 6 side-by-side** — same framework, two branches, real differences
+- **explore parallel test execution** — class-level and method-level parallelism with ThreadLocal WebDriver
+- **study data-driven testing** — inline `@MethodSource`, `@CsvFileSource` for classpath CSV, and reusable OpenCSV-backed `@ParameterizedDataSource`
+- **understand enterprise-grade reporting** — Allure with steps/attachments/screenshots, JUnit HTML, and Excel
+- **learn automatic retry, screenshot capture, and page source attachment** without writing infrastructure from scratch
+- **use it as a reference** for workshops, tech talks, onboarding sessions, and self-study
+- **compare TestNG and JUnit patterns** with the companion [TestNG Workshop](https://github.com/a-oleynik/testng-workshop) and [JUnit Workshop](https://github.com/a-oleynik/junit-workshop)
+
+---
+
+## 👥 Who Is This For?
+
+| Audience                                                     | What you will get                                                                   |
+|--------------------------------------------------------------|-------------------------------------------------------------------------------------|
+| **QA engineers new to Selenium + JUnit 6**                   | A complete working framework to clone and run on day one                            |
+| **Java developers learning test automation**                 | Real patterns — POM, Steps, ThreadLocal driver, config management                   |
+| **Engineers migrating from JUnit to TestNG** (or vice versa) | Side-by-side branches with identical features, different frameworks                 |
+| **Senior / lead engineers**                                  | Deep-dives into parallel execution, retry, custom listeners, and Allure integration |
+| **Workshop facilitators**                                    | A ready-made project with multiple difficulty levels you can hand to attendees      |
+
+---
 
 ## ✨ Features
 
-- 🔧 **Page Object Model (POM)** / **Page Object design pattern**
-- 🔄 **Parallel test execution** with configurable thread count
+- 🔧 **3-Layer architecture with Page Object Model** — Test → Steps → Page, strictly enforced
+- 🔄 **Parallel test execution** at class level with ThreadLocal WebDriver (thread-safe)
 - 🎯 **Parameterized tests** using JUnit 6 @ParameterizedTest
 - 🧪 **JUnit 6 extensions** for custom test lifecycle management
 - 📊 **Multiple reporting formats**: Allure and Excel
-- 🔁 **Automatic test retry** on failure
-- 📸 **Screenshot capture** on test failure
-- 📄 **Page source capture** for debugging
-- 🌐 **Cross-browser support** (Chrome, Firefox, Edge)
-- 🎨 **Allure annotations** for rich test documentation
-- 🔍 **AssertJ** for fluent assertions
-- 📦 **Automatic WebDriver management** via Selenium Manager
-- ⚙️ **Configuration management** using Owner library
+- 🔁 **Automatic test retry** on failure (Gradle test-retry plugin)
+- 📸 **Screenshot + page source capture** on test failure, attached to Allure
+- 🌐 **Cross-browser support** — Chrome, Firefox, Edge (one `switch` in `WebdriverFactory`)
+- 🎨 **Rich Allure annotations** — `@Feature`, `@Step`, `@Attachment`, `@Description`
+- 🔍 **AssertJ** for fluent assertions and `SoftAssertions`
+- 📦 **Automatic WebDriver management** via Selenium Manager — zero binary setup
+- ⚙️ **Configuration management** via Owner library — override any value with a system property
 - 🔒 **Lombok** for reducing boilerplate code
+
+---
 
 ## 🛠️ Tech Stack
 
@@ -57,13 +116,15 @@ reporting capabilities.
 | **JUnit 6**                        | 6.1.0-M1      | Testing framework                                                 |
 | **Allure Framework (Allure Java)** | 2.33.0        | Used inside tests (annotations, listeners). Produces raw results. |
 | **Allure Report CLI**              | 2.35.1        | Generates interactive HTML report from test results.              |
-| **AssertJ**                        | 3.27.6        | Fluent assertions                                                 |
-| **Apache POI**                     | 5.5.0         | Excel report generation                                           |
+| **AssertJ**                        | 3.27.7        | Fluent assertions                                                 |
+| **Apache POI**                     | 5.5.1         | Excel report generation                                           |
 | **OpenCSV**                        | 5.12.0        | CSV data handling                                                 |
 | **Owner**                          | 1.0.12        | Configuration management                                          |
 | **Lombok**                         | 1.18.44       | Code generation                                                   |
 | **Jackson**                        | 2.21.2        | JSON processing                                                   |
 | **Log4j/SLF4J**                    | 2.25.3/2.0.17 | Logging                                                           |
+
+---
 
 ## 📦 Prerequisites
 
@@ -73,7 +134,7 @@ Before you begin, ensure you have the following installed:
     - [Download JDK](https://www.oracle.com/java/technologies/downloads/)
     - Verify: `java -version`
 
-- **Gradle** (optional, wrapper included)
+- **Gradle** (optional — Gradle Wrapper is included)
     - Verify: `gradle -version`
 
 - **Git** (for cloning the repository)
@@ -81,13 +142,15 @@ Before you begin, ensure you have the following installed:
     - Verify: `git --version`
 
 - **Web Browser** (Chrome, Firefox, or Edge)
-    - Drivers are managed automatically by Selenium Manager
+    - Drivers are managed automatically by Selenium Manager — no manual setup required
+
+---
 
 ## 🔧 Installation
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/selenium-example.git
+   git clone https://github.com/a-oleynik/selenium-example.git
    cd selenium-example
    ```
 
@@ -105,6 +168,8 @@ Before you begin, ensure you have the following installed:
    ```bash
    .\gradlew.bat clean compileTestJava
    ```
+
+---
 
 ## ⚙️ Configuration
 
@@ -137,9 +202,8 @@ test {
 
     retry {
         failOnPassedAfterRetry = true
-        maxFailures = 100
-        // Maximum failures before stopping
-        maxRetries = 1                                                                  // Number of retry attempts
+        maxFailures = 100       // Maximum failures before stopping
+        maxRetries = 1          // Number of retry attempts
     }
 }
 ```
@@ -161,7 +225,7 @@ lombok.jacksonized.jacksonVersion += 2
 
 ### Customizing Configuration
 
-To run tests with different browsers:
+Override any value at runtime with a system property:
 
 1. Edit `general.properties` and change `env.browser` value
 2. Or set system property:
@@ -257,6 +321,8 @@ Check for outdated dependencies:
 .\gradlew.bat dependencyUpdates
 ```
 
+---
+
 ## 📁 Project Structure
 
 ```
@@ -272,9 +338,9 @@ selenium-example/
 │       │       │   ├── manager/        # WebDriver management
 │       │       │   ├── reporting/      # Custom reporting
 │       │       │   └── utils/          # Utility classes
-│       │       ├── pages/              # Page Object classes
-│       │       ├── steps/              # Test step definitions
-│       │       └── test/               # Test classes
+│       │       ├── pages/              # Page Object classes (PageFactory + @FindBy)
+│       │       ├── steps/              # @Step-annotated business actions + assertions
+│       │       └── test/               # JUnit 6 test classes (extend BaseTest)
 │       │           ├── BasicDivisionTest.java
 │       │           ├── BasicOperationsTest.java
 │       │           ├── CalculatorSanityTest.java
@@ -285,11 +351,11 @@ selenium-example/
 │           └── Division.csv            # Test data files
 ├── build/
 │   ├── reports/                        # Generated reports
-│   │   ├── allure-report/
+│   │   ├── allure-report/              # Allure HTML report
 │   │   ├── tests/
-│   │   └── *.xlsx
-│   └── test-results/                   # Test execution results
-├── drivers/                            # WebDriver binaries (managed automatically)
+│   │   └── executionReport_*.xlsx      # Excel execution report
+│   └── test-results/                   # Raw test results
+├── drivers/                            # Selenium Grid config files
 ├── build.gradle                        # Build configuration
 ├── lombok.config                       # Lombok annotation-processor settings (do not delete)
 ├── gradlew.bat                         # Gradle wrapper (Windows)
@@ -297,7 +363,11 @@ selenium-example/
 └── README.md                           # This file
 ```
 
+---
+
 ## 📊 Reporting
+
+Reports are generated **automatically after every `test` run** — no extra step needed.
 
 ### Allure Report
 
@@ -307,11 +377,11 @@ selenium-example/
 
 - 📈 Test execution timeline
 - 📊 Test result statistics
-- 📸 Screenshots on failure
-- 📄 Page source capture
-- 🏷️ Test categorization
-- 📝 Detailed test steps
-- 📉 Trend analysis
+- 📸 Screenshots on failure (attached automatically)
+- 📄 Page source capture for debugging
+- 🏷️ Test categorization by `@Feature` and `@Story`
+- 📝 Detailed `@Step` trace for every test
+- 📉 Trend analysis across runs
 
 **View Report:**
 
@@ -328,28 +398,45 @@ selenium-example/
 **Features:**
 
 - ✅ Pass/Fail statistics
-- ⏱️ Execution time
+- ⏱️ Execution time per test
 - 📋 Test class grouping
-- ❌ Failure details
+- ❌ Failure details with stack traces
 - 📊 Test results breakdown
 
 ### Excel Report
 
-**Location:** `build/reports/testExecutionReport_ddmmyy_hhmmss.xlsx`
+**Location:** `build/reports/consolidatedExecutionReport_ddmmyy_HHmmss.xlsx`
 
 **Features:**
 
 - 📊 Test execution summary
 - 📅 Timestamp information
-- ✅ Status tracking
-- 🔢 Test parameters
+- ✅ Per-test status tracking
+- 🔢 Test parameters captured automatically
 - ⏱️ Duration metrics
+
+---
 
 ## 🎯 Advanced Features
 
+### 3-Layer Architecture
+
+Every feature follows a strict three-layer hierarchy — never skip or collapse layers:
+
+```
+test/    → JUnit test class    (@Feature, @Test, extends BaseTest)
+steps/   → @Step-annotated methods that call page methods and run assertions
+pages/   → Page Object class    (PageFactory + @FindBy, interacts with the DOM only)
+```
+
+Example chain: `CalculatorSanityTest` → `CalculatorSteps` → `CalculatorPage`
+
+This separation keeps tests readable, pages reusable, and assertions in one place.
+
 ### Parallel Execution
 
-Tests run in parallel using JUnit 6's parallel execution capabilities. Configure in `build.gradle`:
+Tests run in parallel using JUnit 6's parallel execution capabilities. Configure in `build.gradle`.
+WebDriver is stored in a `ThreadLocal` — each thread gets its own isolated browser instance.
 
 ```groovy
 test {
@@ -372,11 +459,11 @@ junit.jupiter.execution.parallel.config.executor-service=WORKER_THREAD_POOL
 
 ### Test Retry Mechanism
 
-Failed tests are automatically retried once:
+Failed tests are automatically retried once via the Gradle test-retry plugin:
 
 ```groovy
 retry {
-    failOnPassedAfterRetry = true
+    failOnPassedAfterRetry = true   // a flaky test that only passes on retry is still a failure
     maxFailures = 100
     maxRetries = 1
 }
@@ -384,9 +471,11 @@ retry {
 
 ### Data-Driven Testing
 
-Tests support parameterization via JUnit 6's `@ParameterizedTest` + `@MethodSource`.
-Define a `static Object[][]` method in the same class and reference it by name.
-See `BasicOperationsTest` — `addNumbers()`, `subtractNumbers()`, `multiplyNumbers()`.
+Tests support three styles of parameterization.
+
+**Option 1 — Inline `@MethodSource`** (see `BasicOperationsTest`)
+
+Define a `static Object[][]` method in the same class and reference it by name with `@MethodSource`.
 
 ```java
 public static Object[][] addNumbers() {
@@ -407,14 +496,10 @@ public void checkCalculatorAdditions(int x, int y) {
 }
 ```
 
-
-### CSV Data Support
-
-**Option 1 — JUnit built-in `@CsvFileSource` (classpath resource)**
+**Option 2 — JUnit built-in `@CsvFileSource` (classpath resource)**  
+(see `BasicOperationsTest.checkCalculatorDivision()`)
 
 Place the CSV in `src/test/resources/` and reference it by classpath path.
-No header row skipping is needed unless the file contains one.
-See `BasicOperationsTest.checkCalculatorDivision()`.
 
 ```java
 @ParameterizedTest
@@ -425,11 +510,11 @@ public void checkCalculatorDivision(int x, int y) {
 }
 ```
 
-**Option 2 — Custom `@ParameterizedDataSource` annotation (filesystem path, OpenCSV)**
+**Option 3 — Custom `@ParameterizedDataSource` annotation (filesystem path, OpenCSV)**  
+(see `BasicDivisionTest.checkDivisionsFromCSVByReusableDataProviderVerify()`)
 
 A reusable project-level annotation backed by `CSVDataProvider` (`ArgumentsProvider` + `AnnotationConsumer`).
 Pass the file path relative to the project root using the `TEST_RESOURCES` constant.
-See `BasicDivisionTest.checkDivisionsFromCSVByReusableDataProviderVerify()`.
 
 ```java
 @ParameterizedTest
@@ -448,10 +533,46 @@ public static final String TEST_RESOURCES = "src/test/resources/";
 
 ### Screenshot on Failure
 
-Screenshots are automatically captured on test failure and attached to Allure reports:
+`ScreenshotListener` captures a full-page screenshot and the raw HTML source on every test failure.  
+Both are attached to the Allure report automatically.
 
-- Location: `build/screenshots/`
+- Location: `build/reports/screenshots/`
 - Format: `timestamp-ClassName-testMethod.png`
+
+---
+
+## 🌱 Learning Path — Beginners
+
+New to Selenium + JUnit 6? Work through these topics in order; each builds on the previous one.
+
+1. **Run the project** — clone, run `.\gradlew.bat clean test`, open the Allure report.  
+   Get comfortable with the feedback loop before reading any code.
+
+2. **Read `BaseTest`** — understand `@BeforeAll`/`@AfterAll` (WebDriver lifecycle), `@BeforeEach` (driver self-heal), `@TestInstance(PER_CLASS)` (one driver per class), and `@ExtendWith(MyTestWatcher.class)` (screenshot + page source on failure).
+
+3. **Trace one test end-to-end** → `CalculatorSanityTest` → `CalculatorSteps` → `CalculatorPage`.  
+   Understand why each layer exists and what responsibility it owns.
+
+4. **Study `WebdriverManager`** — see how `ThreadLocal<WebDriver>` makes parallel execution safe.
+
+5. **Read `WebdriverFactory`** — learn how `switch` on `envBrowser()` selects the browser;  
+   add a new browser by adding one `case`.
+
+6. **Study `ConfigurationManager`** — understand Owner-based config and how system properties override the file.
+
+7. **Add a new test** — pick a calculator button, write a test in the 3-layer style:  
+   - `@Test` method in a test class that extends `BaseTest`  
+   - `@Step` method in a Steps class  
+   - `@FindBy` locator + interaction method in the Page class
+
+8. **Try parameterization** — convert your test to use `@ParameterizedTest` + `@MethodSource` with 3 data rows.
+
+9. **Break a test on purpose** — see the screenshot attached to the Allure report automatically.
+
+10. **Explore the `master` branch** — switch branches, run the same tests, compare the TestNG framework code.  
+    Notice what changed (listeners vs extensions, `@DataProvider` vs `@MethodSource`) and what stayed the same.
+
+---
 
 ## 🔧 Troubleshooting
 
@@ -484,18 +605,15 @@ WebDrivers are managed automatically by Selenium Manager. To force update:
 Enable verbose logging:
 
 ```bash
-.\gradlew.bat test --info
-```
-
-Or debug mode:
-
-```bash
-.\gradlew.bat test --debug
+.\gradlew.bat test --info   # verbose
+.\gradlew.bat test --debug  # full debug
 ```
 
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
 
 ## 📚 Additional Resources
 
@@ -506,11 +624,23 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Selenium Manager](https://www.selenium.dev/documentation/selenium_manager/)
 - [Selenium Grid Setup](https://www.selenium.dev/documentation/grid/)
 - [Forget WebDriverManager: Use Selenium Manager Instead](https://medium.com/@andrei.oleynik/forget-webdrivermanager-use-selenium-manager-instead-1acf7e1076f3)
-- [TestNG XML Is a Legacy Concept: Here's What Modern Test Suites Should Look Like](https://medium.com/@andrei.oleynik/testng-xml-is-a-legacy-concept-heres-what-modern-test-suites-should-look-like-bd5cb380db61)
+- [TestNG XML Is a Legacy Concept: Here's What Modern Test Suites Should Look Like](https://medium.com/@andrei.oleynik/testng-xml-is-a-legacy-concept-heres-what-modern-test-suites-should-look-like-bd5cb380db71)
 - [WebDriver getAttribute() is Back: When to Use It vs getDomAttribute() and getDomProperty()](https://medium.com/@andrei.oleynik/adventures-of-getattribute-back-from-the-dead-846c31f5bcab)
+- [JUnit 6 Released — Clean-Up, Modernization & Minimal Disruption](https://medium.com/@andrei.oleynik/junit-6-released-clean-up-modernization-minimal-disruption-d3ecf11b64ad)
+
+---
 
 ## 🔗 Useful Links
 
-- **Selenium Grid Downloads:** https://www.selenium.dev/downloads/
-- **Java Download:** https://www.oracle.com/java/technologies/downloads/
-- **Gradle Download:** https://gradle.org/install/
+- [**Selenium Grid Downloads**](https://www.selenium.dev/downloads/)
+- [**Java Download**](https://www.oracle.com/java/technologies/downloads/)
+- [**Gradle Download**](https://gradle.org/install/)
+- [**Lombok Download**](https://projectlombok.org/download)
+- [**IntelliJ Lombok Plugin**](https://plugins.jetbrains.com/plugin/6317-lombok)
+
+---
+
+## ⭐ Found it useful?
+
+If you found useful examples or information in this repository, please give it a ⭐  
+Your support helps the project reach more Java and QA engineers.
