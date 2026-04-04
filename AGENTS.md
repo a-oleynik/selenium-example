@@ -99,7 +99,7 @@ taskkill /F /IM chromedriver.exe /T
 
 ---
 
-## Listener Registration
+## Listener & SPI Auto-Registration
 
 Listeners are wired via **`@Listeners` on `BaseTest`** — do not add them again in subclasses:
 
@@ -165,14 +165,15 @@ public class MyTest extends BaseTest {
 
 ## Key Files Reference
 
-| File                                                   | Role                                                                     |
-|--------------------------------------------------------|--------------------------------------------------------------------------|
-| `build.gradle`                                         | TestNG parallel config, retry, group filtering logic, report task wiring |
-| `framework/BaseTest.java`                              | Required superclass; wires all three TestNG listeners via `@Listeners`   |
-| `framework/config/Configuration.java`                  | All config keys (Owner `@Config.Key`)                                    |
-| `framework/manager/WebdriverManager.java`              | ThreadLocal driver store                                                 |
-| `framework/listeners/ScreenshotListener.java`          | Failure screenshot + Allure attachment                                   |
-| `framework/listeners/ResultExecutionListener.java`     | Suite-level reporting hook (`IExecutionListener`)                        |
-| `framework/listeners/TestExecutionMethodListener.java` | Per-test result collector (`IInvokedMethodListener`)                     |
-| `src/test/resources/general.properties`                | Runtime configuration                                                    |
-| `src/test/resources/META-INF/services/`                | SPI registration for `AllureTestListener` only                           |
+| File                                                   | Role                                                                                                                                            |
+|--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| `build.gradle`                                         | TestNG parallel config, retry, group filtering logic, report task wiring                                                                        |
+| `framework/BaseTest.java`                              | Required superclass; wires all three TestNG listeners via `@Listeners`                                                                          |
+| `framework/config/Configuration.java`                  | All config keys (Owner `@Config.Key`)                                                                                                           |
+| `framework/manager/WebdriverManager.java`              | ThreadLocal driver store                                                                                                                        |
+| `framework/listeners/ScreenshotListener.java`          | Failure screenshot + Allure attachment                                                                                                          |
+| `framework/listeners/ResultExecutionListener.java`     | Suite-level reporting hook (`IExecutionListener`)                                                                                               |
+| `framework/listeners/TestExecutionMethodListener.java` | Per-test result collector (`IInvokedMethodListener`)                                                                                            |
+| `src/test/resources/general.properties`                | Runtime configuration                                                                                                                           |
+| `src/test/resources/META-INF/services/`                | SPI registration for `AllureTestListener` only                                                                                                  |
+| `lombok.config`                                        | Lombok project-level config; sets `lombok.jacksonized.jacksonVersion += 2` to resolve the Jackson2/Jackson3 ambiguity warning on `@Jacksonized` |
