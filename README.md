@@ -128,9 +128,10 @@ The test execution is configured in `build.gradle`:
 ```groovy
 test {
     useJUnitPlatform()                                                                  // Enable JUnit 6
-    systemProperty("junit.jupiter.execution.parallel.enabled", "true")                  // Enable parallel execution
-    systemProperty("junit.jupiter.execution.parallel.config.strategy", "dynamic")       // Dynamic thread allocation
-    systemProperty("junit.jupiter.extensions.autodetection.enabled", "true")            // Auto-detect extensions
+    systemProperty("junit.jupiter.execution.parallel.enabled", "true")                          // Enable parallel execution
+    systemProperty("junit.jupiter.execution.parallel.config.strategy", "dynamic")             // Dynamic thread allocation
+    systemProperty("junit.jupiter.execution.parallel.config.executor-service", "WORKER_THREAD_POOL") // Use regular thread pool
+    systemProperty("junit.jupiter.extensions.autodetection.enabled", "true")                  // Auto-detect extensions
     maxParallelForks = 3
     // Number of parallel test processes
 
@@ -338,6 +339,7 @@ test {
     useJUnitPlatform()
     systemProperty("junit.jupiter.execution.parallel.enabled", "true")
     systemProperty("junit.jupiter.execution.parallel.config.strategy", "dynamic")
+    systemProperty("junit.jupiter.execution.parallel.config.executor-service", "WORKER_THREAD_POOL")
     maxParallelForks = 3  // Number of parallel test processes
 }
 ```
@@ -348,6 +350,7 @@ You can also configure parallel execution in `junit-platform.properties`:
 junit.jupiter.execution.parallel.enabled=true
 junit.jupiter.execution.parallel.mode.default=concurrent
 junit.jupiter.execution.parallel.config.strategy=dynamic
+junit.jupiter.execution.parallel.config.executor-service=WORKER_THREAD_POOL
 ```
 
 ### Test Retry Mechanism

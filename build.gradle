@@ -90,6 +90,7 @@ test {
 
     systemProperty("junit.jupiter.execution.parallel.enabled", "true")
     systemProperty("junit.jupiter.execution.parallel.config.strategy", "dynamic")
+    systemProperty("junit.jupiter.execution.parallel.config.executor-service", "WORKER_THREAD_POOL")
     systemProperty("junit.jupiter.extensions.autodetection.enabled", "true")
     dependsOn cleanTest
     dependsOn cleanAllureReport
