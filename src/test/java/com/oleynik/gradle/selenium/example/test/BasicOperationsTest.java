@@ -65,8 +65,7 @@ public class BasicOperationsTest extends BaseTest {
     public static Object[][] divideNumbers() {
         String line;
         ArrayList<Object[]> outData = new ArrayList<>();
-        try {
-            BufferedReader csvFile = new BufferedReader(new FileReader(TEST_RESOURCES + "Division.csv"));
+        try (BufferedReader csvFile = new BufferedReader(new FileReader(TEST_RESOURCES + "Division.csv"))) {
             while ((line = csvFile.readLine()) != null) {
                 String[] data = line.split(",");
                 outData.add(new Object[]{Integer.parseInt(data[0].trim()), Integer.parseInt(data[1].trim())});

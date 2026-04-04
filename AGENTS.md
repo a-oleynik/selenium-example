@@ -157,7 +157,7 @@ public class MyTest extends BaseTest {
 |--------------------|-------------------------------------------------------|
 | Allure HTML        | `build/reports/allure-report/allureReport/index.html` |
 | TestNG HTML        | `build/reports/testng/`                               |
-| Excel              | `build/excel-results/executionReport_*.xlsx`          |
+| Excel              | `build/reports/executionReport_*.xlsx`                |
 | Screenshots        | `build/reports/screenshots/`                          |
 | Allure raw results | `build/allure-results/`                               |
 

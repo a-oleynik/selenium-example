@@ -10,12 +10,15 @@ import java.util.concurrent.TimeUnit;
 import static com.oleynik.gradle.selenium.example.framework.config.ConfigurationManager.configuration;
 
 public class DateTimeUtils {
+    private DateTimeUtils() {
+        throw new IllegalStateException("Utility class");
+    }
 
     public static final String STANDARD_DATE_TIME = "dd/MM/yyyy - HH:mm:ss.SSS";
-    public static final String DATETIME_FORMAT_FOR_EXCEL_FILE = "ddMMyy_hhmmss";
-    public static final String DATETIME_FORMAT_FOR_ALLURE_CONSOLE_LOG = "ddMMyy hh:mm:ss.SSS";
-    public static final String DATETIME_FORMAT_FOR_SCREENSHOT_NAME = "yyyyMMdd.hh.mm.ss.SSS";
-    public static final String DATETIME_FORMAT_FOR_TEST_RESULT_FILE = "yyMMddhhmmssSSS";
+    public static final String DATETIME_FORMAT_FOR_EXCEL_FILE = "ddMMyy_HHmmss";
+    public static final String DATETIME_FORMAT_FOR_ALLURE_CONSOLE_LOG = "ddMMyy HH:mm:ss.SSS";
+    public static final String DATETIME_FORMAT_FOR_SCREENSHOT_NAME = "yyyyMMdd.HH.mm.ss.SSS";
+    public static final String DATETIME_FORMAT_FOR_TEST_RESULT_FILE = "yyMMddHHmmssSSS";
     public static final ZoneId ENVIRONMENT_ZONE_ID = ZoneId.of(configuration().environmentTimeZone());
 
     public static String getDateTimeForAllureConsoleLog() {
