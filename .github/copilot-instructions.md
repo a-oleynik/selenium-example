@@ -50,6 +50,11 @@ configuration().defaultWebdriverTimeout() // default.webdriver.timeout
 ```
 Override at runtime: `.\gradlew.bat test -Denv.browser=Firefox -Denv.url=https://...`
 
+## Lombok
+- `lombok.config` lives at the project root — do **not** delete it.
+- `lombok.jacksonized.jacksonVersion += 2` is required to suppress the *"Ambiguous: Jackson2 and Jackson3"* warning produced by `@Jacksonized` when both Jackson versions are detectable on the classpath.
+- If you add new Lombok config keys, add them to `lombok.config` — never inline annotation-processor arguments in `build.gradle`.
+
 ## Selenium Manager (Automatic Drivers)
 This branch uses **Selenium Manager** — no manual driver binaries are needed.
 Do NOT add `System.setProperty("webdriver.*.driver", ...)` calls anywhere.
