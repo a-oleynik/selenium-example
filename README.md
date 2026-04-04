@@ -420,30 +420,40 @@ static Stream<Arguments> additionData() {
 
 ### CSV Data Support
 
-Load test data from CSV files using JUnit 6's `@CsvFileSource`:
+**Option 1 — JUnit built-in `@CsvFileSource` (classpath resource)**
+
+Place the CSV in `src/test/resources/` and reference it by classpath path.
+No header row skipping is needed unless the file contains one.
+See `BasicOperationsTest.checkCalculatorDivision()`.
 
 ```java
-
 @ParameterizedTest
-@CsvFileSource(resources = "/Division.csv", numLinesToSkip = 1)
-public void testDivision(int dividend, int divisor, int expected) {
+@Description("Check division")
+@CsvFileSource(resources = "/Division.csv")
+public void checkCalculatorDivision(int x, int y) {
     // Test implementation
 }
 ```
 
-Or use a custom data provider:
+**Option 2 — Custom `@ParameterizedDataSource` annotation (filesystem path, OpenCSV)**
+
+A reusable project-level annotation backed by `CSVDataProvider` (`ArgumentsProvider` + `AnnotationConsumer`).
+Pass the file path relative to the project root using the `TEST_RESOURCES` constant.
+See `BasicDivisionTest.checkDivisionsFromCSVByReusableDataProviderVerify()`.
 
 ```java
-
 @ParameterizedTest
-@MethodSource("divisionData")
-public void testDivision(int dividend, int divisor, int expected) {
+@Description("Check division using reusable csv data provider")
+@ParameterizedDataSource(path = TEST_RESOURCES + "Division.csv")
+public void checkDivisionsFromCSVByReusableDataProviderVerify(int x, int y) {
     // Test implementation
 }
+```
 
-static Stream<Arguments> divisionData() throws Exception {
-    return CsvDataProvider.getData("src/test/resources/Division.csv");
-}
+`TEST_RESOURCES` is defined in `framework/config/Constants.java`:
+
+```java
+public static final String TEST_RESOURCES = "src/test/resources/";
 ```
 
 ### Screenshot on Failure
