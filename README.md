@@ -319,6 +319,7 @@ selenium-example/
 │       │   └── com/oleynik/gradle/selenium/example/
 │       │       ├── framework/          # Framework utilities
 │       │       │   ├── config/         # Configuration management
+│       │       │   ├── dataproviders/  # CsvDataProvider + @CsvSource annotation
 │       │       │   ├── listeners/      # TestNG listeners
 │       │       │   ├── manager/        # WebDriver management
 │       │       │   ├── reporting/      # Custom reporting
