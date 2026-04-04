@@ -3,6 +3,9 @@ package com.oleynik.gradle.selenium.example.framework.manager;
 import org.openqa.selenium.WebDriver;
 
 public class WebdriverManager {
+    private WebdriverManager() {
+        throw new IllegalStateException("Utility class");
+    }
     private static final ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
 
     public static WebDriver getDriver() {

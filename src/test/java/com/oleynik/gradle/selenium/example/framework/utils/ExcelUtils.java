@@ -6,11 +6,16 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.*;
 
 import static com.oleynik.gradle.selenium.example.framework.utils.DateTimeUtils.*;
 
 public class ExcelUtils {
+    private ExcelUtils() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static List<Map<String, String>> convertExecutionTestResults(List<TestExecutionResult> results) {
         List<Map<String, String>> data = new ArrayList<>();
         Map<String, String> resultMap;
@@ -32,11 +37,11 @@ public class ExcelUtils {
     }
 
     public static void createExcelFromData(String file, String sheetName, List<Map<String, String>> data) {
-        XSSFWorkbook workbook = createWorkbook(sheetName, data);
-        try (FileOutputStream outputStream = new FileOutputStream(file)) {
+        try (XSSFWorkbook workbook = createWorkbook(sheetName, data);
+             FileOutputStream outputStream = new FileOutputStream(file)) {
             workbook.write(outputStream);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to write Excel report: " + file, e);
         }
     }
 

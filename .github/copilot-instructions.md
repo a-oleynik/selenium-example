@@ -89,6 +89,6 @@ taskkill /F /IM chromedriver.exe /T                          # kill stale driver
 ## Reporting
 Allure HTML → `build/reports/allure-report/allureReport/index.html`
 JUnit HTML  → `build/reports/tests/test/index.html`
-Excel       → `build/excel-results/executionReport_*.xlsx`
+Excel       → `build/reports/executionReport_*.xlsx`
 Screenshots → `build/reports/screenshots/`
 Both Allure and Excel reports are generated automatically after every `test` run (`finalizedBy` in `build.gradle`).

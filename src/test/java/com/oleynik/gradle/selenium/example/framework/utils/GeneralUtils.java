@@ -6,6 +6,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 public class GeneralUtils {
+    private GeneralUtils() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static void saveBytesAsFile(String path, byte[] fileBytes) {
         try (OutputStream out = new FileOutputStream(path)) {
             out.write(fileBytes);

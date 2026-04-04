@@ -10,6 +10,9 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import static com.oleynik.gradle.selenium.example.framework.config.ConfigurationManager.configuration;
 
 public class WebdriverFactory {
+    private WebdriverFactory() {
+        throw new IllegalStateException("Utility class");
+    }
 
     public static WebDriver createInstance() {
         WebDriver driver;
