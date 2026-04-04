@@ -425,35 +425,73 @@ retry {
 
 ### Data-Driven Testing
 
-Tests support parameterization via TestNG DataProviders:
+Tests support parameterization via TestNG `@DataProvider`:
 
 ```java
-
 @DataProvider(name = "additionData")
-public Object[][] additionData() {
+public static Object[][] additionData() {
     return new Object[][]{
-            {2, 3, 5},
-            {10, 5, 15},
-            {-1, 1, 0}
+            {2, 10},
+            {99, 7},
+            {111, 11}
     };
 }
 
-@Test(dataProvider = "additionData")
-public void testAddition(int a, int b, int expected) {
+@Test(dataProvider = "additionData", description = "Check addition")
+public void checkCalculatorAdditions(int x, int y) {
     // Test implementation
 }
 ```
 
 ### CSV Data Support
 
-Load test data from CSV files:
+**Option 1 — Manual `BufferedReader` inside an inline `@DataProvider`**
+
+Define the `@DataProvider` directly in the test class and read the CSV file line-by-line using `BufferedReader`.
+Use the `TEST_RESOURCES` constant from `framework/config/Constants.java` for the file path.
+See `BasicOperationsTest.divideNumbers()`.
 
 ```java
-
-@DataProvider
-public Iterator<Object[]> divisionData() {
-    return CsvDataProvider.getData("src/test/resources/Division.csv");
+@DataProvider(name = "division")
+public static Object[][] divideNumbers() {
+    String line;
+    ArrayList<Object[]> outData = new ArrayList<>();
+    try (BufferedReader csvFile = new BufferedReader(new FileReader(TEST_RESOURCES + "Division.csv"))) {
+        while ((line = csvFile.readLine()) != null) {
+            String[] data = line.split(",");
+            outData.add(new Object[]{Integer.parseInt(data[0].trim()), Integer.parseInt(data[1].trim())});
+        }
+    } catch (IOException | NumberFormatException e) {
+        throw new RuntimeException(e);
+    }
+    return outData.toArray(new Object[outData.size()][]);
 }
+
+@Test(dataProvider = "division", description = "Check division")
+public void checkCalculatorDivision(int x, int y) {
+    // Test implementation
+}
+```
+
+**Option 2 — Reusable `CsvDataProvider` + `@CsvSource` annotation (OpenCSV)**
+
+A reusable project-level `@DataProvider` backed by `CsvDataProvider` (uses OpenCSV internally).
+Annotate the test method with both `@Test(dataProvider = "csvIntegerDataProvider", dataProviderClass = CsvDataProvider.class)` and `@CsvSource(path = ...)`.
+See `BasicDivisionTest.checkDivisionsFromCSVByReusableDataProviderVerify()`.
+
+```java
+@Test(dataProvider = "csvIntegerDataProvider", dataProviderClass = CsvDataProvider.class,
+        description = "Check division using reusable csv data provider")
+@CsvSource(path = TEST_RESOURCES + "Division.csv")
+public void checkDivisionsFromCSVByReusableDataProviderVerify(int x, int y) {
+    // Test implementation
+}
+```
+
+`TEST_RESOURCES` is defined in `framework/config/Constants.java`:
+
+```java
+public static final String TEST_RESOURCES = "src/test/resources/";
 ```
 
 ### Screenshot on Failure

@@ -144,8 +144,9 @@ public class MyTest extends BaseTest {
 
 ## Parameterized Tests & Test Data
 
-- Inline data: `@DataProvider(name = "x")` returning `Object[][]` in the same class; reference with `@Test(dataProvider = "x")`.
-- File-driven data: read `Division.csv` manually via `BufferedReader` inside the `@DataProvider` method using `Constants.TEST_RESOURCES` as the base path (see `BasicOperationsTest.divideNumbers()`).
+- Inline data: `@DataProvider(name = "x")` returning `Object[][]` in the same class; reference with `@Test(dataProvider = "x")` (see `BasicOperationsTest` — `additionNumbers()`, `subtractNumbers()`, `multiplyNumbers()`).
+- Manual CSV: `@DataProvider` reads `Division.csv` line-by-line via `BufferedReader` inside the test class, using `Constants.TEST_RESOURCES` as the base path (see `BasicOperationsTest.divideNumbers()`).
+- Reusable CSV: `@Test(dataProvider = "csvIntegerDataProvider", dataProviderClass = CsvDataProvider.class)` + `@CsvSource(path = TEST_RESOURCES + "Division.csv")` — `CsvDataProvider` uses OpenCSV to parse the file (see `BasicDivisionTest`).
 - Parameters are automatically captured by `TestExecutionMethodListener` via `ITestResult.getParameters()` and stored for Excel reporting.
 
 ---

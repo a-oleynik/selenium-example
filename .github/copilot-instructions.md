@@ -73,7 +73,8 @@ Binaries must be manually kept in sync with the installed browser version.
 
 ## Parameterized Tests
 - Inline data: `@DataProvider(name = "x")` returning `Object[][]` in the same class; wire with `@Test(dataProvider = "x")`.
-- File-driven data: read `Division.csv` manually via `BufferedReader` in the `@DataProvider` method using `Constants.TEST_RESOURCES` as the base path.
+- Manual CSV: define a `@DataProvider` in the test class and read the CSV via `BufferedReader` using `Constants.TEST_RESOURCES` as the base path (see `BasicOperationsTest.divideNumbers()`).
+- Reusable CSV: annotate the test with `@Test(dataProvider = "csvIntegerDataProvider", dataProviderClass = CsvDataProvider.class)` and `@CsvSource(path = TEST_RESOURCES + "YourData.csv")` — `CsvDataProvider` (OpenCSV) resolves the path from `@CsvSource` (see `BasicDivisionTest`).
 
 ## Listeners — Do Not Touch
 Three TestNG listeners are already wired via `@Listeners` on `BaseTest` — never add them again in subclasses:
