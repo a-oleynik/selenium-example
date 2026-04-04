@@ -316,7 +316,9 @@ selenium-example/
 │       ├── java/
 │       │   └── com/oleynik/gradle/selenium/example/
 │       │       ├── framework/          # Framework utilities
+│       │       │   ├── annotations/    # Custom annotations (@ParameterizedDataSource)
 │       │       │   ├── config/         # Configuration management
+│       │       │   ├── dataproviders/  # CSVDataProvider (OpenCSV ArgumentsProvider)
 │       │       │   ├── listeners/      # JUnit 6 extensions
 │       │       │   ├── manager/        # WebDriver management
 │       │       │   ├── reporting/      # Custom reporting
@@ -433,40 +435,29 @@ retry {
 
 ### Data-Driven Testing
 
-Tests support parameterization via JUnit 6's `@ParameterizedTest`:
+Tests support parameterization via JUnit 6's `@ParameterizedTest` + `@MethodSource`.
+Define a `static Object[][]` method in the same class and reference it by name.
+See `BasicOperationsTest` — `addNumbers()`, `subtractNumbers()`, `multiplyNumbers()`.
 
 ```java
+public static Object[][] addNumbers() {
+    return new Object[][]{
+            {2, 10},
+            {99, 7},
+            {111, 11},
+            {0, 0},
+            {1, 1}
+    };
+}
 
 @ParameterizedTest
-@CsvSource({
-        "2, 3, 5",
-        "10, 5, 15",
-        "-1, 1, 0"
-})
-@DisplayName("Test addition with multiple inputs")
-public void testAddition(int a, int b, int expected) {
+@MethodSource("addNumbers")
+@Description("Check addition")
+public void checkCalculatorAdditions(int x, int y) {
     // Test implementation
 }
 ```
 
-Or using `@MethodSource`:
-
-```java
-
-@ParameterizedTest
-@MethodSource("additionData")
-public void testAddition(int a, int b, int expected) {
-    // Test implementation
-}
-
-static Stream<Arguments> additionData() {
-    return Stream.of(
-            Arguments.of(2, 3, 5),
-            Arguments.of(10, 5, 15),
-            Arguments.of(-1, 1, 0)
-    );
-}
-```
 
 ### CSV Data Support
 
