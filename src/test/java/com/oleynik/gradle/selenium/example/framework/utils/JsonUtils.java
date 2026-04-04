@@ -5,6 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 public class JsonUtils {
+    private JsonUtils() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static ObjectMapper getObjectMapper(boolean isFailOnUnknownProperties) {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, isFailOnUnknownProperties);

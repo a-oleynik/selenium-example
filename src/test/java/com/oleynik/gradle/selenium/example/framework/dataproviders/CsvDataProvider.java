@@ -14,15 +14,11 @@ import java.util.List;
 public class CsvDataProvider {
     @DataProvider
     public static Object[][] csvIntegerDataProvider(Method m) {
-        try {
-            String dataSource = getCsvSourcePathFromMethod(m);
-            CSVReader csvReader = new CSVReaderBuilder(new FileReader(dataSource))
-                    .build();
+        String dataSource = getCsvSourcePathFromMethod(m);
+        try (CSVReader csvReader = new CSVReaderBuilder(new FileReader(dataSource)).build()) {
             List<String[]> allData = csvReader.readAll();
-            return allData
-                    .stream()
-                    .map(e -> Arrays.stream(e)
-                            .map(num -> (Object) Integer.parseInt(num))
+            return allData.stream()
+                    .map(e -> Arrays.stream(e).map(num -> (Object) Integer.parseInt(num))
                             .toArray())
                     .toArray(Object[][]::new);
         } catch (IOException | NumberFormatException | CsvException e) {

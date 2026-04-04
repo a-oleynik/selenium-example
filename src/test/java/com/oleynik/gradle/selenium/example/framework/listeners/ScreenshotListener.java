@@ -26,7 +26,7 @@ public class ScreenshotListener implements IInvokedMethodListener {
 
     @Override
     public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
-        boolean isTestSkipped = (testResult.getStatus() == 3);
+        boolean isTestSkipped = (testResult.getStatus() == ITestResult.SKIP);
         if (!testResult.isSuccess() && (!isTestSkipped)) {
             try {
                 WebDriver driver = WebdriverManager.getDriver();

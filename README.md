@@ -319,7 +319,7 @@ selenium-example/
 
 ### Excel Report
 
-**Location:** `build/excel-results/testExecutionReport_ddmmyy_hhmmss.xlsx`
+**Location:** `build/reports/testExecutionReport_ddmmyy_hhmmss.xlsx`
 
 **Features:**
 

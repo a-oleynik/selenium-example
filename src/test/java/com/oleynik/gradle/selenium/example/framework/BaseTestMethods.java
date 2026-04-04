@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import java.time.Duration;
 
 public class BaseTestMethods {
+    private static final int IMPLICIT_WAIT_SECONDS = 2;
 
     /**
      * Check if Webdriver is available for test execution.
@@ -38,6 +39,6 @@ public class BaseTestMethods {
         WebDriver driver = WebdriverManager.getDriver();
         //Maximize the browser window
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(IMPLICIT_WAIT_SECONDS));
     }
 }

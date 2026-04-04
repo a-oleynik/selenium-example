@@ -27,6 +27,10 @@ import static com.oleynik.gradle.selenium.example.framework.utils.GeneralUtils.c
 import static com.oleynik.gradle.selenium.example.framework.utils.JsonUtils.getObjectMapper;
 
 public class ReportUtils {
+    private ReportUtils() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static void saveTestExecutionResult(TestExecutionResult result) {
         try {
             ObjectMapper objectMapper = getObjectMapper()
