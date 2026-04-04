@@ -73,7 +73,8 @@ That is the **only** place to change.
 
 ## Parameterized Tests
 - Inline data: `@MethodSource` pointing to a `static Object[][]` method in the same class.
-- File-driven data: `@CsvFileSource(resources = "/YourData.csv")` — place the CSV in `src/test/resources/`.
+- Classpath CSV: `@CsvFileSource(resources = "/YourData.csv")` — place the CSV in `src/test/resources/`.
+- Filesystem CSV: `@ParameterizedDataSource(path = TEST_RESOURCES + "YourData.csv")` — custom annotation backed by `CSVDataProvider` (OpenCSV); path relative to project root via `Constants.TEST_RESOURCES`.
 
 ## Listeners — Do Not Touch
 `ResultExecutionListener` and `AllureTestListener` are auto-registered via Java SPI in

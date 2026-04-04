@@ -147,8 +147,9 @@ public class MyTest extends BaseTest {
 
 ## Parameterized Tests & Test Data
 
-- Inline data: `@MethodSource` with a static `Object[][]` method in the same class; reference with `@ParameterizedTest` (see `BasicOperationsTest`).
-- File-driven data: `@CsvFileSource(resources = "/Division.csv")` — file lives in `src/test/resources/` (see `BasicOperationsTest.divideNumbers()`).
+- Inline data: `@MethodSource` with a static `Object[][]` method in the same class; reference with `@ParameterizedTest` (see `BasicOperationsTest` — `addNumbers()`, `subtractNumbers()`, `multiplyNumbers()`).
+- Classpath CSV: `@CsvFileSource(resources = "/Division.csv")` — file lives in `src/test/resources/` (see `BasicOperationsTest.checkCalculatorDivision()`).
+- Filesystem CSV: `@ParameterizedDataSource(path = TEST_RESOURCES + "Division.csv")` — custom project annotation backed by `CSVDataProvider` (OpenCSV `ArgumentsProvider`); path is relative to the project root via `Constants.TEST_RESOURCES` (see `BasicDivisionTest`).
 - Parameters are automatically captured by `MyTestWatcher.interceptTestTemplateMethod()` and stored for Excel reporting.
 
 ---
