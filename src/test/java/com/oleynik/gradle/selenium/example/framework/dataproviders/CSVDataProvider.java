@@ -1,6 +1,5 @@
 package com.oleynik.gradle.selenium.example.framework.dataproviders;
 
-import com.oleynik.gradle.selenium.example.framework.annotations.ParameterizedDataSource;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvException;
