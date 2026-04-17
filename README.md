@@ -1,10 +1,10 @@
 # 🚀 Gradle Selenium WebDriver JUnit 6 Example
 
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
-[![Selenium](https://img.shields.io/badge/Selenium-4.41.0-green.svg)](https://www.selenium.dev/)
+[![Selenium](https://img.shields.io/badge/Selenium-4.43.0-green.svg)](https://www.selenium.dev/)
 [![JUnit](https://img.shields.io/badge/JUnit-6.1.0_M1-green.svg)](https://junit.org/)
 [![Gradle](https://img.shields.io/badge/Gradle-9.1.0-blue.svg)](https://gradle.org/)
-[![Allure_Framework](https://img.shields.io/badge/Allure_Framework-2.33.0-purple.svg)](https://allurereport.org/docs/)
+[![Allure_Framework](https://img.shields.io/badge/Allure_Framework-2.34.0-purple.svg)](https://allurereport.org/docs/)
 [![Allure_CLI](https://img.shields.io/badge/Allure_CLI-2.35.1-yellow.svg)](https://allurereport.org/docs/)
 
 A comprehensive test automation framework demonstrating best practices with Selenium WebDriver, JUnit 6, and Allure
@@ -112,9 +112,9 @@ Use this repository if you want to:
 |------------------------------------|---------------|-------------------------------------------------------------------|
 | **Java**                           | 21            | Programming language                                              |
 | **Gradle**                         | 9.1.0         | Build automation                                                  |
-| **Selenium WebDriver**             | 4.41.0        | Browser automation                                                |
+| **Selenium WebDriver**             | 4.43.0        | Browser automation                                                |
 | **JUnit 6**                        | 6.1.0-M1      | Testing framework                                                 |
-| **Allure Framework (Allure Java)** | 2.33.0        | Used inside tests (annotations, listeners). Produces raw results. |
+| **Allure Framework (Allure Java)** | 2.34.0        | Used inside tests (annotations, listeners). Produces raw results. |
 | **Allure Report CLI**              | 2.35.1        | Generates interactive HTML report from test results.              |
 | **AssertJ**                        | 3.27.7        | Fluent assertions                                                 |
 | **Apache POI**                     | 5.5.1         | Excel report generation                                           |
