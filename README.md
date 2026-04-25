@@ -28,6 +28,7 @@ reporting capabilities.
 - [Who Is This For?](#-who-is-this-for)
 - [Features](#-features)
 - [Tech Stack](#-tech-stack)
+  - [Gradle Plugins](#-gradle-plugins)
 - [Prerequisites](#-prerequisites)
 - [Installation](#-installation)
 - [Configuration](#-configuration)
@@ -120,9 +121,19 @@ Use this repository if you want to:
 | **Apache POI**                     | 5.5.1         | Excel report generation                                           |
 | **OpenCSV**                        | 5.12.0        | CSV data handling                                                 |
 | **Owner**                          | 1.0.12        | Configuration management                                          |
-| **Lombok**                         | 1.18.44       | Code generation                                                   |
+| **Lombok**                         | 1.18.46       | Code generation                                                   |
 | **Jackson**                        | 2.21.2        | JSON processing                                                   |
 | **Log4j/SLF4J**                    | 2.25.3/2.0.17 | Logging                                                           |
+
+### 🔌 Gradle Plugins
+
+| Plugin                         | Version  | Purpose                                                                 |
+|--------------------------------|----------|-------------------------------------------------------------------------|
+| `io.qameta.allure`             | 4.0.0    | Allure reporting integration for Gradle                                 |
+| `org.gradle.test-retry`        | 1.6.4    | Automatically retries failed tests to handle flakiness                  |
+| `com.github.ben-manes.versions`| 0.54.0   | Checks for dependency updates via `.\gradlew.bat dependencyUpdates`     |
+| `java-library`                 | Built-in | Core Java project support                                               |
+| `idea`                         | Built-in | IntelliJ IDEA project file generation and integration                   |
 
 ---
 
