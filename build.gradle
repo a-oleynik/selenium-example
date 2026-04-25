@@ -8,7 +8,7 @@ buildscript {
         seleniumVersion = "4.43.0"
         slf4jVersion = "2.0.17"
         testNGVersion = "7.12.0"
-        lombokVersion = "1.18.44"
+        lombokVersion = "1.18.46"
     }
 }
 
@@ -17,7 +17,7 @@ plugins {
     id('io.qameta.allure') version '4.0.0'
     id 'idea'
     id 'org.gradle.test-retry' version '1.6.4'
-    id 'com.github.ben-manes.versions' version '0.53.0'
+    id 'com.github.ben-manes.versions' version '0.54.0'
 }
 
 repositories {
