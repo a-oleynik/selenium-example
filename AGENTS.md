@@ -178,3 +178,31 @@ public class MyTest extends BaseTest {
 | `src/test/resources/general.properties`                | Runtime configuration                                                                                                                           |
 | `src/test/resources/META-INF/services/`                | SPI registration for `AllureTestListener` only                                                                                                  |
 | `lombok.config`                                        | Lombok project-level config; sets `lombok.jacksonized.jacksonVersion += 2` to resolve the Jackson2/Jackson3 ambiguity warning on `@Jacksonized` |
+
+---
+
+## AI Instructions
+
+### 🤖 Coding Standards
+- **Strict 3-Layer Hierarchy**:
+    - `pages/` (DOM only, no business logic)
+    - `steps/` (Reusable business actions, uses `@Step`)
+    - `test/` (TestNG classes, uses `@Feature` and `@Test(description = "...")`)
+- **Driver Access**: ALWAYS use `WebdriverManager.getDriver()`. NEVER pass `WebDriver` instances as method arguments.
+- **Config Access**: Use `ConfigurationManager.configuration()` for any property. NEVER hardcode URLs, timeouts, or browser names.
+- **Page Objects**: Use `PageFactory.initElements(WebdriverManager.getDriver(), this)` in constructors. Use `@FindBy` annotations.
+
+### 🧪 Testing Guidelines
+- **Annotations**:
+    - Test classes MUST extend `BaseTest`.
+    - Use `@Feature` on class level.
+    - Use `@Test(description = "...")` for TestNG.
+- **Data Driven**:
+    - Prefer CSV-based data providers for complex scenarios.
+    - Reference files via `Constants.TEST_RESOURCES`.
+- **Validation**: Use `org.assertj.core.api.Assertions` for expressive assertions.
+
+### 🛠️ Workflow & Maintenance
+- **Environment**: Use Windows PowerShell for terminal commands (e.g., `.\gradlew.bat`).
+- **Cleaning**: Always include `clean` in test commands (`.\gradlew.bat clean test`) to ensure reports are fresh.
+- **Dependencies**: Before updating dependencies, check `build.gradle` and synchronize versions in `README.md`.
