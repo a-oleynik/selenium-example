@@ -24,6 +24,7 @@ Listeners are wired via `@Listeners` directly on this class.
 - **`WebdriverManager`** (`framework/manager/WebdriverManager.java`): `ThreadLocal<WebDriver>` — essential for parallel safety. 
 Always access the driver via `WebdriverManager.getDriver()`, never pass it directly.
 - **`WebdriverFactory`** (`framework/manager/WebdriverFactory.java`): Switch on `configuration().envBrowser()` (case-insensitive). Each case sets `System.setProperty("webdriver.*.driver", ".\\drivers\\*.exe")` before instantiating the driver. Add new browsers here.
+- **`BaseTestMethods`** (`framework/BaseTestMethods.java`): Sets browser to maximised and applies a **2-second implicit wait** (`IMPLICIT_WAIT_SECONDS = 2`) after every driver creation. Do not add additional implicit waits elsewhere.
 
 ## WebDriver Binaries
 
@@ -151,33 +152,51 @@ public class MyTest extends BaseTest {
 
 ---
 
+## Adding a New Browser
+
+Add a `case` to the switch in `WebdriverFactory.createInstance()` — that is the only place to change. Selenium Manager resolves the driver binary automatically.
+
+The Chrome case shows the pattern for passing browser-specific options — e.g., `--disable-search-engine-choice-screen` suppresses the Search Engine Choice popup on Chrome:
+
+```java
+case "chrome" -> {
+    ChromeOptions options = new ChromeOptions();
+    options.addArguments("--disable-search-engine-choice-screen");
+    yield new ChromeDriver(options);
+}
+```
+
+---
 
 ## Reporting Outputs
 
-| Report             | Location                                              |
-|--------------------|-------------------------------------------------------|
-| Allure HTML        | `build/reports/allure-report/allureReport/index.html` |
-| TestNG HTML        | `build/reports/testng/`                               |
-| Excel              | `build/reports/executionReport_*.xlsx`                |
-| Screenshots        | `build/reports/screenshots/`                          |
-| Allure raw results | `build/allure-results/`                               |
+| Report             | Location                                                              |
+|--------------------|-----------------------------------------------------------------------|
+| Allure HTML        | `build/reports/allure-report/allureReport/index.html`                 |
+| TestNG HTML        | `build/reports/testng/`                                               |
+| Excel              | `build/reports/consolidatedExecutionReport_ddmmyy_HHmmss.xlsx`        |
+| Screenshots        | `build/reports/screenshots/`                                          |
+| Allure raw results | `build/allure-results/`                                               |
+| Excel raw results  | `build/excel-results/testResult_*.json` (intermediate per-test JSON)  |
 
 ---
 
 ## Key Files Reference
 
-| File                                                   | Role                                                                                                                                            |
-|--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
-| `build.gradle`                                         | TestNG parallel config, retry, group filtering logic, report task wiring                                                                        |
-| `framework/BaseTest.java`                              | Required superclass; wires all three TestNG listeners via `@Listeners`                                                                          |
-| `framework/config/Configuration.java`                  | All config keys (Owner `@Config.Key`)                                                                                                           |
-| `framework/manager/WebdriverManager.java`              | ThreadLocal driver store                                                                                                                        |
-| `framework/listeners/ScreenshotListener.java`          | Failure screenshot + Allure attachment                                                                                                          |
-| `framework/listeners/ResultExecutionListener.java`     | Suite-level reporting hook (`IExecutionListener`)                                                                                               |
-| `framework/listeners/TestExecutionMethodListener.java` | Per-test result collector (`IInvokedMethodListener`)                                                                                            |
-| `src/test/resources/general.properties`                | Runtime configuration                                                                                                                           |
-| `src/test/resources/META-INF/services/`                | SPI registration for `AllureTestListener` only                                                                                                  |
-| `lombok.config`                                        | Lombok project-level config; sets `lombok.jacksonized.jacksonVersion += 2` to resolve the Jackson2/Jackson3 ambiguity warning on `@Jacksonized` |
+| File                                                   | Role                                                                                                                                                                                                                                                                                      |
+|--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `build.gradle`                                         | TestNG parallel config, retry, group filtering logic, report task wiring                                                                                                                                                                                                                  |
+| `framework/BaseTest.java`                              | Required superclass; wires all three TestNG listeners via `@Listeners`                                                                                                                                                                                                                    |
+| `framework/config/Configuration.java`                  | All config keys (Owner `@Config.Key`)                                                                                                                                                                                                                                                     |
+| `framework/manager/WebdriverManager.java`              | ThreadLocal driver store                                                                                                                                                                                                                                                                  |
+| `framework/listeners/ScreenshotListener.java`          | Failure screenshot + Allure attachment                                                                                                                                                                                                                                                    |
+| `framework/listeners/ResultExecutionListener.java`     | Suite-level reporting hook (`IExecutionListener`)                                                                                                                                                                                                                                         |
+| `framework/listeners/TestExecutionMethodListener.java` | Per-test result collector (`IInvokedMethodListener`)                                                                                                                                                                                                                                      |
+| `framework/utils/WebdriverUtils.java`                  | Driver lifecycle + explicit wait helpers: `createNewDriver()`, `quitDriver()`, `findElement(By)` (FluentWait, `presenceOfElementLocated`), `findElement(By, Function, Integer)` (custom condition + timeout), `elementExists(By)`, `elementExistsAndShown(By)`, `clickIfElementShown(By)` |
+| `framework/config/Constants.java`                      | Path constants: `BUILD_FOLDER`, `REPORTS_FOLDER`, `SCREENSHOTS_FOLDER`, `EXCEL_RESULTS_FOLDER`, `TEST_RESOURCES` — use these whenever referencing file system paths                                                                                                                       |
+| `src/test/resources/general.properties`                | Runtime configuration                                                                                                                                                                                                                                                                     |
+| `src/test/resources/META-INF/services/`                | SPI registration for `AllureTestListener` only                                                                                                                                                                                                                                            |
+| `lombok.config`                                        | Lombok project-level config; sets `lombok.jacksonized.jacksonVersion += 2` to resolve the Jackson2/Jackson3 ambiguity warning on `@Jacksonized` (e.g. `TestExecutionResult`)                                                                                                              |
 
 ---
 
@@ -189,8 +208,9 @@ public class MyTest extends BaseTest {
     - `steps/` (Reusable business actions, uses `@Step`)
     - `test/` (TestNG classes, uses `@Feature` and `@Test(description = "...")`)
 - **Driver Access**: ALWAYS use `WebdriverManager.getDriver()`. NEVER pass `WebDriver` instances as method arguments.
-- **Config Access**: Use `ConfigurationManager.configuration()` for any property. NEVER hardcode URLs, timeouts, or browser names.
+- **Config Access**: Use `ConfigurationManager.configuration()` for any property. NEVER hardcode URLs, timeouts, or browser names. Available keys: `environmentUrl()`, `envBrowser()`, `defaultWebdriverTimeout()`, `environmentTimeZone()`.
 - **Page Objects**: Use `PageFactory.initElements(WebdriverManager.getDriver(), this)` in constructors. Use `@FindBy` annotations.
+  For conditional/dynamic locators use `static final By` constants and call `WebdriverUtils.findElement(By)` (explicit wait via `FluentWait` up to `defaultWebdriverTimeout` seconds).
 
 ### 🧪 Testing Guidelines
 - **Annotations**:
@@ -201,6 +221,7 @@ public class MyTest extends BaseTest {
     - Prefer CSV-based data providers for complex scenarios.
     - Reference files via `Constants.TEST_RESOURCES`.
 - **Validation**: Use `org.assertj.core.api.Assertions` for expressive assertions.
+  For soft assertions, use TestNG `org.testng.asserts.SoftAssert` (as seen in `CalculatorSteps.checkSoftAsserts()`); AssertJ `SoftAssertions` is also acceptable for new code.
 
 ### 🛠️ Workflow & Maintenance
 - **Environment**: Use Windows PowerShell for terminal commands (e.g., `.\gradlew.bat`).
