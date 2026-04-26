@@ -25,6 +25,8 @@ test/          → JUnit 6 test classes (extend BaseTest, use @Feature, @Descrip
 Always access the driver via `WebdriverManager.getDriver()`, never pass it directly.
 - **`WebdriverFactory`** (`framework/manager/WebdriverFactory.java`): Switch on `configuration().envBrowser()` (case-insensitive). 
 Each case sets `System.setProperty("webdriver.*.driver", ".\\drivers\\*.exe")` before instantiating the driver. Add new browsers here.
+- **`BaseTestMethods`** (`framework/BaseTestMethods.java`): Sets browser to maximised and applies a **2-second implicit wait** (`IMPLICIT_WAIT_SECONDS = 2`) after every driver creation. Do not add additional implicit waits elsewhere.
+    - `@BeforeEach checkWebDriver()` in `BaseTest` calls `setMaximisedBrowserWindow()` **first**, then `instantiateDriver()` — both run before every test method.
 
 ---
 
@@ -113,6 +115,8 @@ Two additional listeners are registered via **Java SPI** (`META-INF/services/`) 
 | `ResultExecutionListener`  | `TestExecutionListener` (SPI)           | Writes Allure `environment.properties`, saves JSON results, triggers Excel generation at end of suite |
 | `AllureTestListener`       | `TestLifecycleListener` (SPI)           | Console log with test name + feature on start/stop                                                    |
 
+`AllureTestListener` (implements `TestLifecycleListener`) is registered separately via Java SPI in
+`src/test/resources/META-INF/services/io.qameta.allure.listener.TestLifecycleListener` — prints test start/stop to console.
 ---
 
 ## Parallel Execution & Retry
@@ -158,56 +162,70 @@ public class MyTest extends BaseTest {
 
 Add a `case` to the switch in `WebdriverFactory.createInstance()` — that is the only place to change.
 
+The Chrome case shows the pattern for passing browser-specific options — e.g., `--disable-search-engine-choice-screen` suppresses the Search Engine Choice popup on Chrome:
+
+```java
+case "chrome" -> {
+    ChromeOptions options = new ChromeOptions();
+    options.addArguments("--disable-search-engine-choice-screen");
+    yield new ChromeDriver(options);
+}
+```
+
 ---
 
 ## Reporting Outputs
 
-| Report             | Location                                              |
-|--------------------|-------------------------------------------------------|
-| Allure HTML        | `build/reports/allure-report/allureReport/index.html` |
-| JUnit HTML         | `build/reports/tests/test/index.html`                 |
-| Excel              | `build/reports/executionReport_*.xlsx`                |
-| Screenshots        | `build/reports/screenshots/`                          |
-| Allure raw results | `build/allure-results/`                               |
+| Report             | Location                                                             |
+|--------------------|----------------------------------------------------------------------|
+| Allure HTML        | `build/reports/allure-report/allureReport/index.html`                |
+| JUnit HTML         | `build/reports/tests/test/index.html`                                |
+| Excel              | `build/reports/consolidatedExecutionReport_ddmmyy_HHmmss.xlsx`       |
+| Screenshots        | `build/reports/screenshots/`                                         |
+| Allure raw results | `build/allure-results/`                                              |
+| Excel raw results  | `build/excel-results/testResult_*.json` (intermediate per-test JSON) |
 
 ---
 
 ## Key Files Reference
 
-| File                                               | Role                                                                                                                                            |
-|----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
-| `build.gradle`                                     | JUnit parallel config, retry, tag filtering logic, report task wiring                                                                           |
-| `framework/BaseTest.java`                          | Required superclass; wires `MyTestWatcher` via `@ExtendWith`                                                                                    |
-| `framework/config/Configuration.java`              | All config keys (Owner `@Config.Key`)                                                                                                           |
-| `framework/manager/WebdriverManager.java`          | ThreadLocal driver store                                                                                                                        |
-| `framework/listeners/MyTestWatcher.java`           | Failure screenshot + Allure attachment (`TestWatcher` + interceptor)                                                                            |
-| `framework/listeners/ResultExecutionListener.java` | Suite-level reporting hook (`TestExecutionListener`)                                                                                            |
-| `src/test/resources/general.properties`            | Runtime configuration                                                                                                                           |
-| `src/test/resources/META-INF/services/`            | SPI registration for `ResultExecutionListener` + `AllureTestListener`                                                                           |
-| `lombok.config`                                    | Lombok project-level config; sets `lombok.jacksonized.jacksonVersion += 2` to resolve the Jackson2/Jackson3 ambiguity warning on `@Jacksonized` |
+| File                                               | Role                                                                                                                                             |
+|----------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| `build.gradle`                                     | JUnit parallel config, retry, tag filtering logic, report task wiring                                                                            |
+| `framework/BaseTest.java`                          | Required superclass; wires `MyTestWatcher` via `@ExtendWith`                                                                                     |
+| `framework/config/Configuration.java`              | All config keys (Owner `@Config.Key`)                                                                                                            |
+| `framework/manager/WebdriverManager.java`          | ThreadLocal driver store                                                                                                                         |
+| `framework/listeners/MyTestWatcher.java`           | Failure screenshot + Allure attachment (`TestWatcher` + interceptor)                                                                             |
+| `framework/listeners/ResultExecutionListener.java` | Suite-level reporting hook (`TestExecutionListener`)                                                                                             |
+| `framework/utils/WebdriverUtils.java`              | `createNewDriver()`, `quitDriver()`, `findElement(By)` (FluentWait), `elementExists(By)`, `elementExistsAndShown(By)`, `clickIfElementShown(By)` |
+| `src/test/resources/general.properties`            | Runtime configuration                                                                                                                            |
+| `src/test/resources/META-INF/services/`            | SPI registration for `ResultExecutionListener` + `AllureTestListener`                                                                            |
+| `lombok.config`                                    | Lombok project-level config; sets `lombok.jacksonized.jacksonVersion += 2` to resolve the Jackson2/Jackson3 ambiguity warning on `@Jacksonized`  |
 
 ---
 
 ## AI Instructions
 
 ### 🤖 Coding Standards
-- **Strict 3-Layer Hierarchy**: 
-    - `pages/` (DOM only, no business logic) 
-    - `steps/` (Reusable business actions, uses `@Step`)
-    - `test/` (JUnit classes, uses `@Feature` and `@Description`)
+- **Strict 3-Layer Hierarchy**:
+  - `pages/` (DOM only, no business logic)
+  - `steps/` (Reusable business actions, uses `@Step`)
+  - `test/` (JUnit classes, uses `@Feature` and `@Description`)
 - **Driver Access**: ALWAYS use `WebdriverManager.getDriver()`. NEVER pass `WebDriver` instances as method arguments.
 - **Config Access**: Use `ConfigurationManager.configuration()` for any property. NEVER hardcode URLs, timeouts, or browser names.
 - **Page Objects**: Use `PageFactory.initElements(WebdriverManager.getDriver(), this)` in constructors. Use `@FindBy` annotations.
+  For conditional/dynamic locators use `static final By` constants and call `WebdriverUtils.findElement(By)` (explicit wait via `FluentWait` up to `defaultWebdriverTimeout` seconds).
 
 ### 🧪 Testing Guidelines
-- **Annotations**: 
-    - Test classes MUST extend `BaseTest`.
-    - Use `@Feature` on class level.
-    - Use `@Test` + `@Description` for JUnit 5.
-- **Data Driven**: 
-    - Prefer CSV-based data providers for complex scenarios.
-    - Reference files via `Constants.TEST_RESOURCES`.
+- **Annotations**:
+  - Test classes MUST extend `BaseTest`.
+  - Use `@Feature` on class level.
+  - Use `@Test` + `@Description` for JUnit 5.
+- **Data Driven**:
+  - Prefer CSV-based data providers for complex scenarios.
+  - Reference files via `Constants.TEST_RESOURCES`.
 - **Validation**: Use `org.assertj.core.api.Assertions` for expressive assertions.
+  For soft assertions, use AssertJ `SoftAssertions` — see `CalculatorSteps.checkSoftAsserts()` for the canonical example (`softly.assertThat(...).isEqualTo(...); softly.assertAll()`). There is no TestNG dependency in this project.
 
 ### 🛠️ Workflow & Maintenance
 - **Environment**: Use Windows PowerShell for terminal commands (e.g., `.\gradlew.bat`).
