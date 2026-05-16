@@ -128,7 +128,7 @@ Use this repository if you want to:
 
 | Plugin                         | Version  | Purpose                                                                 |
 |--------------------------------|----------|-------------------------------------------------------------------------|
-| `io.qameta.allure`             | 4.0.0    | Allure reporting integration for Gradle                                 |
+| `io.qameta.allure`             | 4.0.2    | Allure reporting integration for Gradle                                 |
 | `org.gradle.test-retry`        | 1.6.4    | Automatically retries failed tests to handle flakiness                  |
 | `com.github.ben-manes.versions`| 0.54.0   | Checks for dependency updates via `.\gradlew.bat dependencyUpdates`     |
 | `java-library`                 | Built-in | Core Java project support                                               |
