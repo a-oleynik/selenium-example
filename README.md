@@ -1,7 +1,7 @@
 # 🚀 Gradle Selenium WebDriver TestNG Example
 
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
-[![Selenium](https://img.shields.io/badge/Selenium-4.43.0-green.svg)](https://www.selenium.dev/)
+[![Selenium](https://img.shields.io/badge/Selenium-4.44.0-green.svg)](https://www.selenium.dev/)
 [![TestNG](https://img.shields.io/badge/TestNG-7.12.0-red.svg)](https://testng.org/)
 [![Gradle](https://img.shields.io/badge/Gradle-9.1.0-blue.svg)](https://gradle.org/)
 [![Allure_Framework](https://img.shields.io/badge/Allure_Framework-2.34.0-purple.svg)](https://allurereport.org/docs/)
@@ -112,7 +112,7 @@ Use this repository if you want to:
 |------------------------------------|---------------|-------------------------------------------------------------------|
 | **Java**                           | 21            | Programming language                                              |
 | **Gradle**                         | 9.1.0         | Build automation                                                  |
-| **Selenium WebDriver**             | 4.43.0        | Browser automation                                                |
+| **Selenium WebDriver**             | 4.44.0        | Browser automation                                                |
 | **TestNG**                         | 7.12.0        | Testing framework                                                 |
 | **Allure Framework (Allure Java)** | 2.34.0        | Used inside tests (annotations, listeners). Produces raw results. |
 | **Allure Report CLI**              | 2.35.1        | Generates interactive HTML report from test results.              |
@@ -121,7 +121,7 @@ Use this repository if you want to:
 | **OpenCSV**                        | 5.12.0        | CSV data handling                                                 |
 | **Owner**                          | 1.0.12        | Configuration management                                          |
 | **Lombok**                         | 1.18.46       | Code generation                                                   |
-| **Jackson**                        | 2.21.2        | JSON processing                                                   |
+| **Jackson**                        | 2.21.3        | JSON processing                                                   |
 | **Log4j/SLF4J**                    | 2.25.3/2.0.17 | Logging                                                           |
 
 ### 🔌 Gradle Plugins
