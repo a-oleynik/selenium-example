@@ -23,6 +23,7 @@ reporting capabilities.
 
 ## 📋 Table of Contents
 
+- [Found it useful?](#-found-it-useful)
 - [Branches](#-branches)
 - [Why this repository?](#-why-this-repository)
 - [Who Is This For?](#-who-is-this-for)
@@ -46,6 +47,15 @@ reporting capabilities.
 
 ---
 
+## ⭐ Found it useful?
+
+If you found useful examples or information in this repository, please give it a ⭐  
+Your support helps the project reach more Java and QA engineers.
+
+[⬆ Back to Table of Contents](#-table-of-contents)
+
+---
+
 ## 🌿 Branches
 
 This repository contains examples for both TestNG and JUnit, with and without Selenium Manager:
@@ -56,6 +66,8 @@ This repository contains examples for both TestNG and JUnit, with and without Se
 | [`junit6`](https://github.com/a-oleynik/selenium-example/tree/junit6)                                                   | **JUnit 6**       | Same framework rebuilt on JUnit 6 — compare patterns side-by-side      |
 | [`testng-without-selenium-manager`](https://github.com/a-oleynik/selenium-example/tree/testng-without-selenium-manager) | **TestNG 7**      | Legacy branch — manual WebDriver binary setup without Selenium Manager |
 | [`junit6-without-selenium-manager`](https://github.com/a-oleynik/selenium-example/tree/junit6-without-selenium-manager) | **JUnit 6**       | JUnit 6 + manual WebDriver binary setup without Selenium Manager       |
+
+[⬆ Back to Table of Contents](#-table-of-contents)
 
 ---
 
@@ -76,6 +88,8 @@ Use this repository if you want to:
 - **use it as a reference** for workshops, tech talks, onboarding sessions, and self-study
 - **compare TestNG and JUnit patterns** with the companion [TestNG Workshop](https://github.com/a-oleynik/testng-workshop) and [JUnit Workshop](https://github.com/a-oleynik/junit-workshop)
 
+[⬆ Back to Table of Contents](#-table-of-contents)
+
 ---
 
 ## 👥 Who Is This For?
@@ -87,6 +101,8 @@ Use this repository if you want to:
 | **Engineers migrating from JUnit to TestNG** (or vice versa) | Side-by-side branches with identical features, different frameworks                 |
 | **Senior / lead engineers**                                  | Deep-dives into parallel execution, retry, custom listeners, and Allure integration |
 | **Workshop facilitators**                                    | A ready-made project with multiple difficulty levels you can hand to attendees      |
+
+[⬆ Back to Table of Contents](#-table-of-contents)
 
 ---
 
@@ -104,6 +120,8 @@ Use this repository if you want to:
 - 🔍 **AssertJ** for fluent assertions and `SoftAssertions`
 - ⚙️ **Configuration management** via Owner library — override any value with a system property
 - 🔒 **Lombok** for reducing boilerplate code
+
+[⬆ Back to Table of Contents](#-table-of-contents)
 
 ---
 
@@ -135,6 +153,8 @@ Use this repository if you want to:
 | `java-library`                  | Built-in | Core Java project support                                           |
 | `idea`                          | Built-in | IntelliJ IDEA project file generation and integration               |
 
+[⬆ Back to Table of Contents](#-table-of-contents)
+
 ---
 
 ## 📦 Prerequisites
@@ -154,6 +174,10 @@ Before you begin, ensure you have the following installed:
 
 - **Web Browser** (Chrome, Firefox, Edge, Opera, or IE)
   - See [WebDriver Setup](#-webdriver-setup) section for driver downloads
+
+    [⬆ Back to Table of Contents](#-table-of-contents)
+
+---
 
 ## 🔧 Installation
 
@@ -177,6 +201,10 @@ Before you begin, ensure you have the following installed:
    ```bash
    .\gradlew.bat clean compileTestJava
    ```
+
+[⬆ Back to Table of Contents](#-table-of-contents)
+
+---
 
 ## 🚗 WebDriver Setup
 
@@ -224,6 +252,8 @@ This branch uses manually downloaded WebDriver binaries. For automatic driver ma
   ```
 
 > **Tip:** Make sure to download the driver version that matches your installed browser version.
+
+[⬆ Back to Table of Contents](#-table-of-contents)
 
 ---
 
@@ -288,6 +318,8 @@ Override any value at runtime with a system property:
    ```bash
    .\gradlew.bat test -Denv.browser=Firefox
    ```
+
+[⬆ Back to Table of Contents](#-table-of-contents)
 
 ## 🚀 Usage
 
@@ -374,8 +406,10 @@ Generate Excel report:
 Check for outdated dependencies:
 
 ```bash
-.\gradlew.bat dependencyUpdates
-```
+   .\gradlew.bat dependencyUpdates
+   ```
+
+[⬆ Back to Table of Contents](#-table-of-contents)
 
 ---
 
@@ -418,6 +452,8 @@ selenium-example/
 ├── gradlew                             # Gradle wrapper (Linux/Mac)
 └── README.md                           # This file
 ```
+
+[⬆ Back to Table of Contents](#-table-of-contents)
 
 ---
 
@@ -470,6 +506,8 @@ Reports are generated **automatically after every `test` run** — no extra step
 - ✅ Per-test status tracking
 - 🔢 Test parameters captured automatically
 - ⏱️ Duration metrics
+
+[⬆ Back to Table of Contents](#-table-of-contents)
 
 ---
 
@@ -589,6 +627,8 @@ Both are attached to the Allure report automatically.
 - Location: `build/reports/screenshots/`
 - Format: `timestamp-ClassName-testMethod.png`
 
+[⬆ Back to Table of Contents](#-table-of-contents)
+
 ---
 
 ## 🌱 Learning Path — Beginners
@@ -621,6 +661,8 @@ New to Selenium + TestNG? Work through these topics in order; each builds on the
 
 10. **Explore the `junit6` branch** — switch branches, run the same tests, compare the framework code.  
     Notice what changed and what stayed the same.
+
+[⬆ Back to Table of Contents](#-table-of-contents)
 
 ---
 
@@ -658,9 +700,13 @@ Enable verbose logging:
 .\gradlew.bat test --debug  # full debug
 ```
 
+[⬆ Back to Table of Contents](#-table-of-contents)
+
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+[⬆ Back to Table of Contents](#-table-of-contents)
 
 ---
 
@@ -677,6 +723,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [WebDriver getAttribute() is Back: When to Use It vs getDomAttribute() and getDomProperty()](https://medium.com/@andrei.oleynik/adventures-of-getattribute-back-from-the-dead-846c31f5bcab)
 - [JUnit 6 Released — Clean-Up, Modernization & Minimal Disruption](https://medium.com/@andrei.oleynik/junit-6-released-clean-up-modernization-minimal-disruption-d3ecf11b64ad)
 
+[⬆ Back to Table of Contents](#-table-of-contents)
+
 ---
 
 ## 🔗 Useful Links
@@ -687,9 +735,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [**Lombok Download**](https://projectlombok.org/download)
 - [**IntelliJ Lombok Plugin**](https://plugins.jetbrains.com/plugin/6317-lombok)
 
----
-
-## ⭐ Found it useful?
-
-If you found useful examples or information in this repository, please give it a ⭐  
-Your support helps the project reach more Java and QA engineers.
+[⬆ Back to Table of Contents](#-table-of-contents)
