@@ -60,12 +60,12 @@ Your support helps the project reach more Java and QA engineers.
 
 This repository contains examples for both TestNG and JUnit, with and without Selenium Manager:
 
-| Branch                                                                                                                  | Testing Framework | Description                                                            |
-|-------------------------------------------------------------------------------------------------------------------------|-------------------|------------------------------------------------------------------------|
-| [`master`](https://github.com/a-oleynik/selenium-example/tree/master)                                                   | **TestNG 7**      | Current branch — full-featured framework with TestNG                   |
-| [`junit6`](https://github.com/a-oleynik/selenium-example/tree/junit6)                                                   | **JUnit 6**       | Same framework rebuilt on JUnit 6 — compare patterns side-by-side      |
-| [`testng-without-selenium-manager`](https://github.com/a-oleynik/selenium-example/tree/testng-without-selenium-manager) | **TestNG 7**      | Legacy branch — manual WebDriver binary setup without Selenium Manager |
-| [`junit6-without-selenium-manager`](https://github.com/a-oleynik/selenium-example/tree/junit6-without-selenium-manager) | **JUnit 6**       | JUnit 6 + manual WebDriver binary setup without Selenium Manager       |
+| Branch                                                                                                                  | Testing Framework | Description                                                               |
+|-------------------------------------------------------------------------------------------------------------------------|-------------------|---------------------------------------------------------------------------|
+| [`master`](https://github.com/a-oleynik/selenium-example/tree/master)                                                   | **TestNG 7**      | Full-featured framework with TestNG + Selenium Manager (auto drivers)     |
+| [`junit6`](https://github.com/a-oleynik/selenium-example/tree/junit6)                                                   | **JUnit 6**       | **Current branch** — same framework rebuilt on JUnit 6 + Selenium Manager |
+| [`testng-without-selenium-manager`](https://github.com/a-oleynik/selenium-example/tree/testng-without-selenium-manager) | **TestNG 7**      | Legacy branch — manual WebDriver binary setup without Selenium Manager    |
+| [`junit6-without-selenium-manager`](https://github.com/a-oleynik/selenium-example/tree/junit6-without-selenium-manager) | **JUnit 6**       | JUnit 6 + manual WebDriver binary setup without Selenium Manager          |
 
 [⬆ Back to Table of Contents](#-table-of-contents)
 
@@ -667,8 +667,8 @@ Each file teaches the assistant about the 3-layer architecture, naming conventio
 - **Driver access** — always via `WebdriverManager.getDriver()`, never injected
 - **Configuration** — always via `ConfigurationManager.configuration()`, never hardcoded
 - **Page Objects** — `PageFactory` + `@FindBy`, explicit waits via `WebdriverUtils`, no assertions
-- **Steps** — `@Step`-annotated, own all assertions (AssertJ / TestNG SoftAssert)
-- **Listeners** — three listeners wired on `BaseTest`; do not re-add in subclasses
+- **Steps** — `@Step`-annotated, own all assertions (AssertJ `SoftAssertions`)
+- **Listeners** — `MyTestWatcher` via `@ExtendWith` on `BaseTest`; `ResultExecutionListener` + `AllureTestListener` via Java SPI; do not re-add anywhere
 - **Lombok** — `lombok.config` at project root must not be deleted
 - **Selenium Manager** — no manual driver binaries; no `System.setProperty` calls
 

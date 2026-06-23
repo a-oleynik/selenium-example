@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Gradle + Java 21 Selenium WebDriver test automation framework using **TestNG** and **Allure** reporting.
+Gradle + Java 21 Selenium WebDriver test automation framework using **JUnit 6 (Jupiter)** and **Allure** reporting.
 The target application is an online calculator at `http://calculator.com`.
 Tests run in parallel across Chrome/Firefox/Edge with automatic retry, screenshot capture, and dual reporting (Allure + Excel).
 
@@ -99,7 +99,7 @@ case "chrome" -> {
 - Filesystem CSV: `@ParameterizedDataSource(path = TEST_RESOURCES + "YourData.csv")` — custom annotation backed by `CSVDataProvider` (OpenCSV); path relative to project root via `Constants.TEST_RESOURCES`.
 
 ## Parallel Execution & Retry
-- TestNG `parallel = 'classes'`, `threadCount = 3` (configured in `build.gradle` `useTestNG {}` block).
+- `maxParallelForks = 3` (Gradle JVM forks) + JUnit `parallel.config.strategy=dynamic` + `parallel.config.executor-service=WORKER_THREAD_POOL`.
 - `TestExecutionResultCollector` uses a `ConcurrentLinkedQueue` — thread-safe result aggregation.
 - Gradle test-retry plugin: `maxRetries = 1`, `failOnPassedAfterRetry = true` (a test that only passes on retry is marked as a failure).
 
@@ -107,6 +107,12 @@ case "chrome" -> {
 `ResultExecutionListener` and `AllureTestListener` are auto-registered via Java SPI in
 `src/test/resources/META-INF/services/`. Do not add them with `@ExtendWith`.
 `MyTestWatcher` is already wired on `BaseTest` via `@ExtendWith(MyTestWatcher.class)` — screenshots and page-source capture on failure happen automatically.
+
+| Class                     | Registration                | Purpose                                                                                              |
+|---------------------------|-----------------------------|------------------------------------------------------------------------------------------------------|
+| `MyTestWatcher`           | `@ExtendWith` on `BaseTest` | Captures screenshot + page source on failure, attaches to Allure; captures test parameters for Excel |
+| `ResultExecutionListener` | Java SPI                    | Writes Allure `environment.properties`; triggers Excel generation at end of suite                    |
+| `AllureTestListener`      | Java SPI                    | Console log with test name + feature on start/stop                                                   |
 
 ## Gradle Commands (Windows)
 ```bash
@@ -120,27 +126,32 @@ taskkill /F /IM chromedriver.exe /T                          # kill stale driver
 ```
 
 ## Reporting
-Allure HTML → `build/reports/allure-report/allureReport/index.html`
-JUnit HTML  → `build/reports/tests/test/index.html`
-Excel       → `build/reports/executionReport_*.xlsx`
-Screenshots → `build/reports/screenshots/`
+
+| Report             | Location                                                              |
+|--------------------|-----------------------------------------------------------------------|
+| Allure HTML        | `build/reports/allure-report/allureReport/index.html`                 |
+| JUnit HTML         | `build/reports/tests/test/index.html`                                 |
+| Excel              | `build/reports/consolidatedExecutionReport_ddmmyy_HHmmss.xlsx`        |
+| Screenshots        | `build/reports/screenshots/`                                          |
+| Allure raw results | `build/allure-results/`                                               |
+| Excel raw results  | `build/excel-results/testResult_*.json`                               |
+
 Both Allure and Excel reports are generated automatically after every `test` run (`finalizedBy` in `build.gradle`).
 
 ## Key Files Reference
 
-| File                                                   | Role                                                                                                                                                                                                                                                                                      |
-|--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `build.gradle`                                         | TestNG parallel config, retry, group filtering logic, report task wiring                                                                                                                                                                                                                  |
-| `framework/BaseTest.java`                              | Required superclass; wires all three TestNG listeners via `@Listeners`                                                                                                                                                                                                                    |
-| `framework/config/Configuration.java`                  | All config keys (Owner `@Config.Key`)                                                                                                                                                                                                                                                     |
-| `framework/manager/WebdriverManager.java`              | ThreadLocal driver store                                                                                                                                                                                                                                                                  |
-| `framework/listeners/ScreenshotListener.java`          | Failure screenshot + Allure attachment                                                                                                                                                                                                                                                    |
-| `framework/listeners/ResultExecutionListener.java`     | Suite-level reporting hook (`IExecutionListener`)                                                                                                                                                                                                                                         |
-| `framework/listeners/TestExecutionMethodListener.java` | Per-test result collector (`IInvokedMethodListener`)                                                                                                                                                                                                                                      |
-| `framework/utils/WebdriverUtils.java`                  | Driver lifecycle + explicit wait helpers: `createNewDriver()`, `quitDriver()`, `findElement(By)` (FluentWait, `presenceOfElementLocated`), `findElement(By, Function, Integer)` (custom condition + timeout), `elementExists(By)`, `elementExistsAndShown(By)`, `clickIfElementShown(By)` |
-| `framework/config/Constants.java`                      | Path constants: `BUILD_FOLDER`, `REPORTS_FOLDER`, `SCREENSHOTS_FOLDER`, `EXCEL_RESULTS_FOLDER`, `TEST_RESOURCES` — use these whenever referencing file system paths                                                                                                                       |
-| `src/test/resources/general.properties`                | Runtime configuration                                                                                                                                                                                                                                                                     |
-| `src/test/resources/META-INF/services/`                | SPI registration for `AllureTestListener` only                                                                                                                                                                                                                                            |
-| `lombok.config`                                        | Lombok project-level config; sets `lombok.jacksonized.jacksonVersion += 2` to resolve the Jackson2/Jackson3 ambiguity warning on `@Jacksonized`                                                                                                                                           |
-| `AGENTS.md`                                            | Full agent/AI guide — architecture, workflow, key files, commands                                                                                                                                                                                                                         |
-| `.junie/guidelines.md`                                 | JetBrains Junie AI coding guidelines                                                                                                                                                                                                                                                      |
+| File                                               | Role                                                                                                                                                                                                                                                                                      |
+|----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `build.gradle`                                     | JUnit parallel config, retry, tag filtering logic, report task wiring                                                                                                                                                                                                                     |
+| `framework/BaseTest.java`                          | Required superclass; wires `MyTestWatcher` via `@ExtendWith`; `@TestInstance(PER_CLASS)` — one driver per class                                                                                                                                                                           |
+| `framework/config/Configuration.java`              | All config keys (Owner `@Config.Key`)                                                                                                                                                                                                                                                     |
+| `framework/manager/WebdriverManager.java`          | ThreadLocal driver store                                                                                                                                                                                                                                                                  |
+| `framework/listeners/MyTestWatcher.java`           | Failure screenshot + Allure attachment; captures test parameters (`TestWatcher` + `InvocationInterceptor`)                                                                                                                                                                                |
+| `framework/listeners/ResultExecutionListener.java` | Suite-level reporting hook (SPI `TestExecutionListener`) — Allure environment + Excel trigger                                                                                                                                                                                             |
+| `framework/utils/WebdriverUtils.java`              | Driver lifecycle + explicit wait helpers: `createNewDriver()`, `quitDriver()`, `findElement(By)` (FluentWait, `presenceOfElementLocated`), `findElement(By, Function, Integer)` (custom condition + timeout), `elementExists(By)`, `elementExistsAndShown(By)`, `clickIfElementShown(By)` |
+| `framework/config/Constants.java`                  | Path constants: `BUILD_FOLDER`, `REPORTS_FOLDER`, `SCREENSHOTS_FOLDER`, `EXCEL_RESULTS_FOLDER`, `TEST_RESOURCES` — use these whenever referencing file system paths                                                                                                                       |
+| `src/test/resources/general.properties`            | Runtime configuration                                                                                                                                                                                                                                                                     |
+| `src/test/resources/META-INF/services/`            | SPI registration for `ResultExecutionListener` + `AllureTestListener`                                                                                                                                                                                                                     |
+| `lombok.config`                                    | Lombok project-level config; sets `lombok.jacksonized.jacksonVersion += 2` to resolve the Jackson2/Jackson3 ambiguity warning on `@Jacksonized`                                                                                                                                           |
+| `AGENTS.md`                                        | Full agent/AI guide — architecture, workflow, key files, commands                                                                                                                                                                                                                         |
+| `.junie/guidelines.md`                             | JetBrains Junie AI coding guidelines                                                                                                                                                                                                                                                      |
