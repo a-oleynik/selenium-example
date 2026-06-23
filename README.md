@@ -1,11 +1,11 @@
 # 🚀 Gradle Selenium WebDriver JUnit 6 Example (Manual Driver Management)
 
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
-[![Selenium](https://img.shields.io/badge/Selenium-4.44.0-green.svg)](https://www.selenium.dev/)
+[![Selenium](https://img.shields.io/badge/Selenium-4.45.0-green.svg)](https://www.selenium.dev/)
 [![JUnit](https://img.shields.io/badge/JUnit-6.1.0-green.svg)](https://junit.org/)
 [![Gradle](https://img.shields.io/badge/Gradle-9.1.0-blue.svg)](https://gradle.org/)
-[![Allure_Framework](https://img.shields.io/badge/Allure_Framework-2.34.0-purple.svg)](https://allurereport.org/docs/)
-[![Allure_CLI](https://img.shields.io/badge/Allure_CLI-2.35.1-yellow.svg)](https://allurereport.org/docs/)
+[![Allure_Framework](https://img.shields.io/badge/Allure_Framework-2.43.0-purple.svg)](https://allurereport.org/docs/)
+[![Allure_CLI](https://img.shields.io/badge/Allure_CLI-2.43.0-yellow.svg)](https://allurereport.org/docs/)
 
 A comprehensive test automation framework demonstrating best practices with Selenium WebDriver, JUnit 6, and Allure
 reporting. This project showcases parameterized testing, parallel execution, automatic retry logic, and advanced
@@ -138,23 +138,23 @@ Use this repository if you want to:
 |------------------------------------|---------------|-------------------------------------------------------------------|
 | **Java**                           | 21            | Programming language                                              |
 | **Gradle**                         | 9.1.0         | Build automation                                                  |
-| **Selenium WebDriver**             | 4.44.0        | Browser automation                                                |
+| **Selenium WebDriver**             | 4.45.0        | Browser automation                                                |
 | **JUnit 6**                        | 6.1.0         | Testing framework                                                 |
-| **Allure Framework (Allure Java)** | 2.34.0        | Used inside tests (annotations, listeners). Produces raw results. |
-| **Allure Report CLI**              | 2.35.1        | Generates interactive HTML report from test results.              |
+| **Allure Framework (Allure Java)** | 2.35.2        | Used inside tests (annotations, listeners). Produces raw results. |
+| **Allure Report CLI**              | 2.43.0        | Generates interactive HTML report from test results.              |
 | **AssertJ**                        | 3.27.7        | Fluent assertions                                                 |
 | **Apache POI**                     | 5.5.1         | Excel report generation                                           |
 | **OpenCSV**                        | 5.12.0        | CSV data handling                                                 |
 | **Owner**                          | 1.0.12        | Configuration management                                          |
 | **Lombok**                         | 1.18.46       | Code generation                                                   |
-| **Jackson**                        | 2.21.3        | JSON processing                                                   |
-| **Log4j/SLF4J**                    | 2.25.3/2.0.17 | Logging                                                           |
+| **Jackson**                        | 2.22.0        | JSON processing                                                   |
+| **Log4j/SLF4J**                    | 2.26.0/2.0.18 | Logging                                                           |
 
 ### 🔌 Gradle Plugins
 
 | Plugin                          | Version  | Purpose                                                             |
 |---------------------------------|----------|---------------------------------------------------------------------|
-| `io.qameta.allure`              | 4.0.2    | Allure reporting integration for Gradle                             |
+| `io.qameta.allure`              | 4.1.0    | Allure reporting integration for Gradle                             |
 | `org.gradle.test-retry`         | 1.6.5    | Automatically retries failed tests to handle flakiness              |
 | `com.github.ben-manes.versions` | 0.54.0   | Checks for dependency updates via `.\gradlew.bat dependencyUpdates` |
 | `java-library`                  | Built-in | Core Java project support                                           |
