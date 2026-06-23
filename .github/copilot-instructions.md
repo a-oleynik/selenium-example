@@ -87,6 +87,7 @@ Binaries must be manually kept in sync with the installed browser version.
 
 ```java
 case "chrome" -> {
+    System.setProperty("webdriver.chrome.driver", ".\\drivers\\chromedriver.exe");
     ChromeOptions options = new ChromeOptions();
     options.addArguments("--disable-search-engine-choice-screen");
     yield new ChromeDriver(options);

@@ -667,7 +667,7 @@ Each file teaches the assistant about the 3-layer architecture, naming conventio
 - **Steps** — `@Step`-annotated, own all assertions (AssertJ / TestNG SoftAssert)
 - **Listeners** — three listeners wired on `BaseTest`; do not re-add in subclasses
 - **Lombok** — `lombok.config` at project root must not be deleted
-- **Selenium Manager** — no manual driver binaries; no `System.setProperty` calls
+- **WebDriver binaries** — pre-downloaded in `./drivers/`, must match browser version; `System.setProperty` is set in `WebdriverFactory` per browser case
 
 [⬆ Back to Table of Contents](#-table-of-contents)
 

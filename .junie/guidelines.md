@@ -26,7 +26,7 @@ Example chain: `CalculatorSanityTest` → `CalculatorSteps` → `CalculatorPage`
 - **`WebdriverManager`** (`framework/manager/WebdriverManager.java`): `ThreadLocal<WebDriver>` — essential for parallel safety.
   Always access the driver via `WebdriverManager.getDriver()`, never pass it directly.
 - **`WebdriverFactory`** (`framework/manager/WebdriverFactory.java`): Switch on `configuration().envBrowser()` (case-insensitive).
-  Relies on **Selenium Manager** for automatic driver binary resolution — no manual driver files needed. Add new browsers here.
+  Each case sets `System.setProperty("webdriver.*.driver", ".\\drivers\\*.exe")` before instantiating the driver — **no Selenium Manager**. Add new browsers here.
 - **`BaseTestMethods`** (`framework/BaseTestMethods.java`): Sets browser to maximised and applies a **2-second implicit wait** (`IMPLICIT_WAIT_SECONDS = 2`) after every driver creation. Do not add additional implicit waits elsewhere.
 
 ---
@@ -37,6 +37,20 @@ Example chain: `CalculatorSanityTest` → `CalculatorSteps` → `CalculatorPage`
 - `pages/` — DOM only, no business logic, no assertions
 - `steps/` — Reusable business actions, uses `@Step`, owns all assertions
 - `test/` — TestNG classes, uses `@Feature` and `@Test(description = "...")`
+
+## WebDriver Binaries (No Selenium Manager)
+
+This branch does **not** use Selenium Manager. Drivers are pre-downloaded binaries in `./drivers/`:
+
+| Binary                       | Browser           |
+|------------------------------|-------------------|
+| `drivers/chromedriver.exe`   | Chrome            |
+| `drivers/geckodriver.exe`    | Firefox           |
+| `drivers/msedgedriver.exe`   | Edge              |
+| `drivers/IEDriverServer.exe` | Internet Explorer |
+
+Binaries must be manually kept in sync with the installed browser version.
+Download from the browser vendor and replace the corresponding file in `./drivers/`.
 
 ### Driver Access
 ```java
@@ -130,17 +144,19 @@ Three TestNG listeners are already wired via `@Listeners` on `BaseTest` — neve
 
 ## Adding a New Browser
 
-Add a `case` to the switch in `WebdriverFactory.createInstance()` — that is the only place to change:
+1. Place the matching driver binary in `./drivers/`.
+2. Add a `case` to the switch in `WebdriverFactory.createInstance()` — set `System.setProperty("webdriver.*.driver", ".\\drivers\\*.exe")` before yielding the driver instance. That is the **only** place to change.
 
 ```java
 case "chrome" -> {
+    System.setProperty("webdriver.chrome.driver", ".\\drivers\\chromedriver.exe");
     ChromeOptions options = new ChromeOptions();
     options.addArguments("--disable-search-engine-choice-screen");
     yield new ChromeDriver(options);
 }
 ```
 
-Selenium Manager resolves the driver binary automatically — no `System.setProperty(...)` calls.
+Do **not** rely on Selenium Manager — this branch requires explicit `System.setProperty` calls in `WebdriverFactory`.
 
 ---
 
