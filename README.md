@@ -60,12 +60,12 @@ Your support helps the project reach more Java and QA engineers.
 
 This repository contains examples for both TestNG and JUnit, with and without Selenium Manager:
 
-| Branch                                                                                                                  | Testing Framework | Description                                                               |
-|-------------------------------------------------------------------------------------------------------------------------|-------------------|---------------------------------------------------------------------------|
-| [`master`](https://github.com/a-oleynik/selenium-example/tree/master)                                                   | **TestNG 7**      | Full-featured framework with TestNG + Selenium Manager (auto drivers)     |
-| [`junit6`](https://github.com/a-oleynik/selenium-example/tree/junit6)                                                   | **JUnit 6**       | **Current branch** — same framework rebuilt on JUnit 6 + Selenium Manager |
-| [`testng-without-selenium-manager`](https://github.com/a-oleynik/selenium-example/tree/testng-without-selenium-manager) | **TestNG 7**      | Legacy branch — manual WebDriver binary setup without Selenium Manager    |
-| [`junit6-without-selenium-manager`](https://github.com/a-oleynik/selenium-example/tree/junit6-without-selenium-manager) | **JUnit 6**       | JUnit 6 + manual WebDriver binary setup without Selenium Manager          |
+| Branch                                                                                                                  | Testing Framework | Description                                                            |
+|-------------------------------------------------------------------------------------------------------------------------|-------------------|------------------------------------------------------------------------|
+| [`master`](https://github.com/a-oleynik/selenium-example/tree/master)                                                   | **TestNG 7**      | Full-featured framework with TestNG + Selenium Manager (auto drivers)  |
+| [`junit6`](https://github.com/a-oleynik/selenium-example/tree/junit6)                                                   | **JUnit 6**       | Same framework rebuilt on JUnit 6 + Selenium Manager                   |
+| [`testng-without-selenium-manager`](https://github.com/a-oleynik/selenium-example/tree/testng-without-selenium-manager) | **TestNG 7**      | Legacy branch — manual WebDriver binary setup without Selenium Manager |
+| [`junit6-without-selenium-manager`](https://github.com/a-oleynik/selenium-example/tree/junit6-without-selenium-manager) | **JUnit 6**       | **Current branch** — JUnit 6 + manual WebDriver binary setup           |
 
 [⬆ Back to Table of Contents](#-table-of-contents)
 
@@ -181,7 +181,7 @@ Before you begin, ensure you have the following installed:
     - Verify: `git --version`
 
 - **Web Browser** (Chrome, Firefox, or Edge)
-    - Drivers are managed automatically by Selenium Manager — no manual setup required
+    - See [WebDriver Setup](#-webdriver-setup) below — driver binaries must be downloaded manually
 
     [⬆ Back to Table of Contents](#-table-of-contents)
 
@@ -216,7 +216,7 @@ Before you begin, ensure you have the following installed:
 
 ## 🚗 WebDriver Setup
 
-This branch uses manually downloaded WebDriver binaries. For automatic driver management with Selenium Manager, switch to the `main` branch.
+This branch uses manually downloaded WebDriver binaries. For automatic driver management with Selenium Manager, switch to the [`junit6`](https://github.com/a-oleynik/selenium-example/tree/junit6) branch.
 
 ### WebDriver Installation
 
@@ -670,7 +670,7 @@ Each file teaches the assistant about the 3-layer architecture, naming conventio
 - **Steps** — `@Step`-annotated, own all assertions (AssertJ `SoftAssertions`)
 - **Listeners** — `MyTestWatcher` via `@ExtendWith` on `BaseTest`; `ResultExecutionListener` + `AllureTestListener` via Java SPI; do not re-add anywhere
 - **Lombok** — `lombok.config` at project root must not be deleted
-- **Selenium Manager** — no manual driver binaries; no `System.setProperty` calls
+- **WebDriver binaries** — pre-downloaded in `./drivers/`, must match browser version; `System.setProperty` is set in `WebdriverFactory` per browser case
 
 [⬆ Back to Table of Contents](#-table-of-contents)
 
@@ -731,11 +731,10 @@ If you encounter build issues:
 
 ### Update WebDriver
 
-WebDrivers are managed automatically by Selenium Manager. To force update:
-
-```bash
-.\gradlew.bat clean test --refresh-dependencies
-```
+WebDrivers are **not** managed automatically on this branch. To update:
+1. Check your installed browser version.
+2. Download the matching driver from the [WebDriver Setup](#-webdriver-setup) sources.
+3. Replace the old binary in the `drivers/` folder.
 
 ### View Detailed Logs
 

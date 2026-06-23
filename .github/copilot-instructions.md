@@ -87,6 +87,7 @@ That is the **only** place to change.
 
 ```java
 case "chrome" -> {
+    System.setProperty("webdriver.chrome.driver", ".\\drivers\\chromedriver.exe");
     ChromeOptions options = new ChromeOptions();
     options.addArguments("--disable-search-engine-choice-screen");
     yield new ChromeDriver(options);
