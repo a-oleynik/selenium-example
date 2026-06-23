@@ -1,4 +1,4 @@
-# GitHub Copilot Instructions — selenium-example
+# JetBrains Junie Guidelines — selenium-example
 
 ## Project Overview
 
@@ -6,40 +6,39 @@ Gradle + Java 21 Selenium WebDriver test automation framework using **TestNG** a
 The target application is an online calculator at `http://calculator.com`.
 Tests run in parallel across Chrome/Firefox/Edge with automatic retry, screenshot capture, and dual reporting (Allure + Excel).
 
-## Stack
-Java 21 · Gradle · Selenium WebDriver 4 · TestNG 7 · Allure · AssertJ · Owner (config) · Lombok · Apache POI · Log4j/SLF4J
+---
 
-## Mandatory 3-Layer Architecture
-Every feature must follow this hierarchy — never collapse or skip layers:
+## Architecture: 3-Layer Test Pattern
+
+All tests follow a strict three-layer hierarchy — never skip or collapse layers:
 
 ```
-test/    → TestNG test class    (@Feature, @Test(description="..."), extends BaseTest)
-steps/   → @Step-annotated methods that call page methods and run assertions
-pages/   → Page Object class    (PageFactory + @FindBy, interacts with the DOM only)
+test/          → TestNG test classes (extend BaseTest, use @Feature, @Test(description="..."))
+  └── steps/   → Business-level steps (annotated with @Step for Allure tracing)
+        └── pages/ → Selenium Page Object classes (PageFactory + @FindBy, interacts with the DOM only)
 ```
 
 Example chain: `CalculatorSanityTest` → `CalculatorSteps` → `CalculatorPage`
 
-## Test Classes
-- Always `extend BaseTest` — never manage WebDriver lifecycle manually in a test class.
-- Annotate each class with `@Feature("...")` (Allure) and each test method with `@Test(description = "...")`.
-- Use `@Test(groups = {"Regression"})` / `@Test(groups = {"Flaky"})` for group-based filtering.
-- Read the target URL via `configuration().environmentUrl()` — never hardcode URLs.
-- Instantiate a fresh `Steps` object in `@BeforeMethod(alwaysRun = true)`, not as a class field.
-- Always add `alwaysRun = true` to `@BeforeMethod` so setup runs even when groups are filtered.
+- **`BaseTest`** (`framework/BaseTest.java`): One WebDriver instance per test class via `@BeforeClass(alwaysRun = true)` / `@AfterClass(alwaysRun = true)`.
+  `@BeforeMethod(alwaysRun = true)` calls `BaseTestMethods.instantiateDriver()` to self-heal a crashed driver before each test.
+  Listeners are wired via `@Listeners` directly on this class.
+- **`WebdriverManager`** (`framework/manager/WebdriverManager.java`): `ThreadLocal<WebDriver>` — essential for parallel safety.
+  Always access the driver via `WebdriverManager.getDriver()`, never pass it directly.
+- **`WebdriverFactory`** (`framework/manager/WebdriverFactory.java`): Switch on `configuration().envBrowser()` (case-insensitive).
+  Relies on **Selenium Manager** for automatic driver binary resolution — no manual driver files needed. Add new browsers here.
+- **`BaseTestMethods`** (`framework/BaseTestMethods.java`): Sets browser to maximised and applies a **2-second implicit wait** (`IMPLICIT_WAIT_SECONDS = 2`) after every driver creation. Do not add additional implicit waits elsewhere.
 
-## Steps Classes
-- Every public method must carry `@Step("descriptive action string with {param} placeholders")`.
-- Steps own assertions (`assertEquals`, `assertTrue`, AssertJ `assertThat`) — pages must not assert.
-- For multi-assertion scenarios use AssertJ `SoftAssertions` and call `softly.assertAll()` at the end.
+---
 
-## Page Classes
-- Constructor signature: navigate first, then `PageFactory.initElements(WebdriverManager.getDriver(), this)`.
-- Use `@FindBy` fields for stable locators; fall back to `By` constants (static final) for dynamic or conditional locators.
-- Cookie/consent pop-ups: dismiss via `WebdriverUtils.clickIfElementShown(By)` — never add hard waits.
-- Never call `WebdriverManager.getDriver()` outside page/utils classes.
+## Coding Standards
 
-## WebDriver Access
+### Strict 3-Layer Hierarchy
+- `pages/` — DOM only, no business logic, no assertions
+- `steps/` — Reusable business actions, uses `@Step`, owns all assertions
+- `test/` — TestNG classes, uses `@Feature` and `@Test(description = "...")`
+
+### Driver Access
 ```java
 // CORRECT — always use ThreadLocal accessor
 WebDriver driver = WebdriverManager.getDriver();
@@ -47,14 +46,13 @@ WebDriver driver = WebdriverManager.getDriver();
 // WRONG — never inject or pass the driver directly
 ```
 
-## Configuration
+### Configuration Access
 ```java
 // Read config values via the singleton — never hardcode
 configuration().environmentUrl()          // env.url
 configuration().envBrowser()              // env.browser
 configuration().defaultWebdriverTimeout() // default.webdriver.timeout
 ```
-Override at runtime: `.\gradlew.bat test -Denv.browser=Firefox -Denv.url=https://...`
 
 Config is managed via the **Owner** library reading `src/test/resources/general.properties`:
 ```properties
@@ -64,46 +62,60 @@ default.webdriver.timeout = 180
 env.time.zone = Europe/Warsaw
 ```
 
-## Lombok
-- `lombok.config` lives at the project root — do **not** delete it.
-- `lombok.jacksonized.jacksonVersion += 2` is required to suppress the *"Ambiguous: Jackson2 and Jackson3"* warning produced by `@Jacksonized` when both Jackson versions are detectable on the classpath.
-- If you add new Lombok config keys, add them to `lombok.config` — never inline annotation-processor arguments in `build.gradle`.
+### Page Objects
+- Constructor: navigate first, then `PageFactory.initElements(WebdriverManager.getDriver(), this)`.
+- Use `@FindBy` annotations for stable locators.
+- For conditional/dynamic locators use `static final By` constants and call `WebdriverUtils.findElement(By)`.
+- Dismiss pop-ups via `WebdriverUtils.clickIfElementShown(By)` — never add hard waits.
 
-## WebDriver Binaries (No Selenium Manager)
-This branch does **not** use Selenium Manager. Drivers are pre-downloaded binaries in `./drivers/`:
+---
 
-| Binary                       | Browser |
-|------------------------------|---------|
-| `drivers/chromedriver.exe`   | Chrome  |
-| `drivers/geckodriver.exe`    | Firefox |
-| `drivers/msedgedriver.exe`   | Edge    |
-| `drivers/IEDriverServer.exe` | IE      |
-
-Binaries must be manually kept in sync with the installed browser version.
-
-## Adding a New Browser
-1. Place the matching driver binary in `./drivers/`.
-2. Add a `case` to the switch in `WebdriverFactory.createInstance()` — set `System.setProperty("webdriver.*.driver", ".\\drivers\\*.exe")` before yielding the driver instance. That is the **only** place to change.
+## Test Annotations (TestNG)
 
 ```java
-case "chrome" -> {
-    ChromeOptions options = new ChromeOptions();
-    options.addArguments("--disable-search-engine-choice-screen");
-    yield new ChromeDriver(options);
+@Feature("My feature")                     // Allure feature grouping — on the class
+public class MyTest extends BaseTest {
+
+    @BeforeMethod(alwaysRun = true)
+    public void setUp() { steps = new MySteps(); }
+
+    @Test(description = "My scenario", groups = {"Regression"})
+    public void myTest() { ... }
 }
 ```
 
-## Parameterized Tests
-- Inline data: `@DataProvider(name = "x")` returning `Object[][]` in the same class; wire with `@Test(dataProvider = "x")`.
-- Manual CSV: define a `@DataProvider` in the test class and read the CSV via `BufferedReader` using `Constants.TEST_RESOURCES` as the base path (see `BasicOperationsTest.divideNumbers()`).
-- Reusable CSV: annotate the test with `@Test(dataProvider = "csvIntegerDataProvider", dataProviderClass = CsvDataProvider.class)` and `@CsvSource(path = TEST_RESOURCES + "YourData.csv")` — `CsvDataProvider` (OpenCSV) resolves the path from `@CsvSource` (see `BasicDivisionTest`).
+- Use `@Test(description = "...")` — not a separate `@Description` annotation.
+- Use `@Test(groups = {"Regression"})` / `@Test(groups = {"Flaky"})` for tag filtering.
+- Always add `alwaysRun = true` to `@BeforeMethod` so setup runs even when groups are filtered.
+
+---
+
+## Parameterized Tests & Test Data
+
+- **Inline**: `@DataProvider(name = "x")` returning `Object[][]` in the same class; reference with `@Test(dataProvider = "x")`.
+- **Manual CSV**: `@DataProvider` reads CSV line-by-line via `BufferedReader` using `Constants.TEST_RESOURCES` as the base path (see `BasicOperationsTest.divideNumbers()`).
+- **Reusable CSV**: `@Test(dataProvider = "csvIntegerDataProvider", dataProviderClass = CsvDataProvider.class)` + `@CsvSource(path = TEST_RESOURCES + "Division.csv")` — `CsvDataProvider` uses OpenCSV (see `BasicDivisionTest`).
+
+---
+
+## Validation & Assertions
+
+- Use `org.assertj.core.api.Assertions` for expressive assertions in step methods.
+- For soft assertions, use TestNG `org.testng.asserts.SoftAssert` or AssertJ `SoftAssertions`; always call `assertAll()` at the end.
+- **Assertions belong only in the steps layer** — never in page classes.
+
+---
 
 ## Parallel Execution & Retry
-- TestNG `parallel = 'classes'`, `threadCount = 3` (configured in `build.gradle` `useTestNG {}` block).
+
+- TestNG `parallel = 'classes'`, `threadCount = 3` (configured in `build.gradle`).
 - `TestExecutionResultCollector` uses a `ConcurrentLinkedQueue` — thread-safe result aggregation.
-- Gradle test-retry plugin: `maxRetries = 1`, `failOnPassedAfterRetry = true` (a test that only passes on retry is marked as a failure).
+- Gradle test-retry plugin: `maxRetries = 1`, `failOnPassedAfterRetry = true`.
+
+---
 
 ## Listeners — Do Not Touch
+
 Three TestNG listeners are already wired via `@Listeners` on `BaseTest` — never add them again in subclasses:
 
 | Class                         | Interface                | Purpose                                                                                                   |
@@ -114,7 +126,34 @@ Three TestNG listeners are already wired via `@Listeners` on `BaseTest` — neve
 
 `AllureTestListener` is registered via Java SPI in `src/test/resources/META-INF/services/` — do not add it with `@Listeners`.
 
+---
+
+## Adding a New Browser
+
+Add a `case` to the switch in `WebdriverFactory.createInstance()` — that is the only place to change:
+
+```java
+case "chrome" -> {
+    ChromeOptions options = new ChromeOptions();
+    options.addArguments("--disable-search-engine-choice-screen");
+    yield new ChromeDriver(options);
+}
+```
+
+Selenium Manager resolves the driver binary automatically — no `System.setProperty(...)` calls.
+
+---
+
+## Lombok
+
+- `lombok.config` lives at the project root — do **not** delete it.
+- `lombok.jacksonized.jacksonVersion += 2` is required to suppress the *"Ambiguous: Jackson2 and Jackson3"* warning.
+- Add new Lombok config keys to `lombok.config` — never inline annotation-processor arguments in `build.gradle`.
+
+---
+
 ## Gradle Commands (Windows)
+
 ```bash
 .\gradlew.bat clean test                                    # full run + Allure + Excel reports
 .\gradlew.bat clean test --tests *.CalculatorSanityTest     # single class
@@ -125,7 +164,11 @@ Three TestNG listeners are already wired via `@Listeners` on `BaseTest` — neve
 taskkill /F /IM chromedriver.exe /T                        # kill stale drivers
 ```
 
-## Reporting
+Always include `clean` in test commands (`.\gradlew.bat clean test`) to ensure reports are fresh.
+
+---
+
+## Reporting Outputs
 
 | Report             | Location                                                              |
 |--------------------|-----------------------------------------------------------------------|
@@ -136,7 +179,7 @@ taskkill /F /IM chromedriver.exe /T                        # kill stale drivers
 | Allure raw results | `build/allure-results/`                                               |
 | Excel raw results  | `build/excel-results/testResult_*.json`                               |
 
-Both Allure and Excel reports are generated automatically after every `test` run (`finalizedBy` in `build.gradle`).
+---
 
 ## Key Files Reference
 
@@ -149,10 +192,11 @@ Both Allure and Excel reports are generated automatically after every `test` run
 | `framework/listeners/ScreenshotListener.java`          | Failure screenshot + Allure attachment                                                                                                                                                                                                                                                    |
 | `framework/listeners/ResultExecutionListener.java`     | Suite-level reporting hook (`IExecutionListener`)                                                                                                                                                                                                                                         |
 | `framework/listeners/TestExecutionMethodListener.java` | Per-test result collector (`IInvokedMethodListener`)                                                                                                                                                                                                                                      |
-| `framework/utils/WebdriverUtils.java`                  | Driver lifecycle + explicit wait helpers: `createNewDriver()`, `quitDriver()`, `findElement(By)` (FluentWait, `presenceOfElementLocated`), `findElement(By, Function, Integer)` (custom condition + timeout), `elementExists(By)`, `elementExistsAndShown(By)`, `clickIfElementShown(By)` |
-| `framework/config/Constants.java`                      | Path constants: `BUILD_FOLDER`, `REPORTS_FOLDER`, `SCREENSHOTS_FOLDER`, `EXCEL_RESULTS_FOLDER`, `TEST_RESOURCES` — use these whenever referencing file system paths                                                                                                                       |
+| `framework/utils/WebdriverUtils.java`                  | Driver lifecycle + explicit wait helpers: `createNewDriver()`, `quitDriver()`, `findElement(By)`, `elementExists(By)`, `elementExistsAndShown(By)`, `clickIfElementShown(By)`                                                                                                             |
+| `framework/config/Constants.java`                      | Path constants: `BUILD_FOLDER`, `REPORTS_FOLDER`, `SCREENSHOTS_FOLDER`, `EXCEL_RESULTS_FOLDER`, `TEST_RESOURCES`                                                                                                                                                                          |
 | `src/test/resources/general.properties`                | Runtime configuration                                                                                                                                                                                                                                                                     |
 | `src/test/resources/META-INF/services/`                | SPI registration for `AllureTestListener` only                                                                                                                                                                                                                                            |
-| `lombok.config`                                        | Lombok project-level config; sets `lombok.jacksonized.jacksonVersion += 2` to resolve the Jackson2/Jackson3 ambiguity warning on `@Jacksonized`                                                                                                                                           |
+| `lombok.config`                                        | Lombok project-level config                                                                                                                                                                                                                                                               |
 | `AGENTS.md`                                            | Full agent/AI guide — architecture, workflow, key files, commands                                                                                                                                                                                                                         |
-| `.junie/guidelines.md`                                 | JetBrains Junie AI coding guidelines                                                                                                                                                                                                                                                      |
+| `.github/copilot-instructions.md`                      | GitHub Copilot coding instructions                                                                                                                                                                                                                                                        |
+

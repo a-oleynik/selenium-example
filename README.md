@@ -38,6 +38,7 @@ reporting capabilities.
 - [Project Structure](#-project-structure)
 - [Reporting](#-reporting)
 - [Advanced Features](#-advanced-features)
+- [AI Assistant Configuration](#-ai-assistant-configuration)
 - [Learning Path — Beginners](#-learning-path--beginners)
 - [Troubleshooting](#-troubleshooting)
 - [Additional Resources](#-additional-resources)
@@ -427,6 +428,10 @@ Check for outdated dependencies:
 
 ```
 selenium-example/
+├── .github/
+│   └── copilot-instructions.md         # GitHub Copilot coding instructions
+├── .junie/
+│   └── guidelines.md                   # JetBrains Junie AI coding guidelines
 ├── src/
 │   └── test/
 │       ├── java/
@@ -456,6 +461,7 @@ selenium-example/
 │   │   └── executionReport_*.xlsx      # Excel execution report
 │   └── test-results/                   # Raw test results
 ├── drivers/                            # WebDriver binaries (manually downloaded) and Selenium Grid config files
+├── AGENTS.md                           # AI agent guide (OpenAI Codex / autonomous agents)
 ├── build.gradle                        # Build configuration
 ├── lombok.config                       # Lombok annotation-processor settings (do not delete)
 ├── gradlew.bat                         # Gradle wrapper (Windows)
@@ -636,6 +642,32 @@ Both are attached to the Allure report automatically.
 
 - Location: `build/reports/screenshots/`
 - Format: `timestamp-ClassName-testMethod.png`
+
+[⬆ Back to Table of Contents](#-table-of-contents)
+
+---
+
+## 🤖 AI Assistant Configuration
+
+This project ships with dedicated instruction files for the most common AI coding assistants.
+Each file teaches the assistant about the 3-layer architecture, naming conventions, driver access patterns, and reporting structure so that generated code fits the project without manual correction.
+
+| File                              | Assistant                        | Description                                                                           |
+|-----------------------------------|----------------------------------|---------------------------------------------------------------------------------------|
+| `AGENTS.md`                       | OpenAI Codex / autonomous agents | Full agent guide — architecture, workflow, key file reference, and developer commands |
+| `.github/copilot-instructions.md` | GitHub Copilot                   | Coding rules automatically injected into every Copilot chat session in this workspace |
+| `.junie/guidelines.md`            | JetBrains Junie                  | Project guidelines loaded by Junie before generating any code in JetBrains IDEs       |
+
+### What the instructions cover
+
+- **Mandatory 3-layer pattern** — test → steps → pages, never collapse layers
+- **Driver access** — always via `WebdriverManager.getDriver()`, never injected
+- **Configuration** — always via `ConfigurationManager.configuration()`, never hardcoded
+- **Page Objects** — `PageFactory` + `@FindBy`, explicit waits via `WebdriverUtils`, no assertions
+- **Steps** — `@Step`-annotated, own all assertions (AssertJ / TestNG SoftAssert)
+- **Listeners** — three listeners wired on `BaseTest`; do not re-add in subclasses
+- **Lombok** — `lombok.config` at project root must not be deleted
+- **Selenium Manager** — no manual driver binaries; no `System.setProperty` calls
 
 [⬆ Back to Table of Contents](#-table-of-contents)
 
