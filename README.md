@@ -27,7 +27,7 @@ reporting capabilities.
 - [Branches](#-branches)
 - [Why this repository?](#-why-this-repository)
 - [Who Is This For?](#-who-is-this-for)
-- [Features](#-features)
+- [Feature Map](#-feature-map)
 - [Tech Stack](#-tech-stack)
   - [Gradle Plugins](#-gradle-plugins)
 - [Prerequisites](#-prerequisites)
@@ -39,10 +39,9 @@ reporting capabilities.
 - [Advanced Features](#-advanced-features)
 - [Learning Path — Beginners](#-learning-path--beginners)
 - [Troubleshooting](#-troubleshooting)
-- [License](#-license)
 - [Additional Resources](#-additional-resources)
 - [Useful Links](#-useful-links)
-- [Found it useful?](#-found-it-useful)
+- [License](#-license)
 
 ---
 
@@ -105,21 +104,30 @@ Use this repository if you want to:
 
 ---
 
-## ✨ Features
+## 🌍 Feature Map
 
-- 🔧 **3-Layer architecture with Page Object Model** — Test → Steps → Page, strictly enforced
-- 🔄 **Parallel test execution** at class level with ThreadLocal WebDriver (thread-safe)
-- 🎯 **Parameterized tests** using JUnit 6 @ParameterizedTest
-- 🧪 **JUnit 6 extensions** for custom test lifecycle management
-- 📊 **Multiple reporting formats**: Allure and Excel
-- 🔁 **Automatic test retry** on failure (Gradle test-retry plugin)
-- 📸 **Screenshot + page source capture** on test failure, attached to Allure
-- 🌐 **Cross-browser support** — Chrome, Firefox, Edge (one `switch` in `WebdriverFactory`)
-- 🎨 **Rich Allure annotations** — `@Feature`, `@Step`, `@Attachment`, `@Description`
-- 🔍 **AssertJ** for fluent assertions and `SoftAssertions`
-- 📦 **Automatic WebDriver management** via Selenium Manager — zero binary setup
-- ⚙️ **Configuration management** via Owner library — override any value with a system property
-- 🔒 **Lombok** for reducing boilerplate code
+| Feature                         | Key Classes / Files                                                            | Description                                                                                               |
+|---------------------------------|--------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
+| **3-Layer POM**                 | `BaseTest`, `CalculatorSteps`, `CalculatorPage`                                | Strict separation of test logic, business steps, and DOM interaction                                      |
+| **Parallel Execution**          | `WebdriverManager`, `WebdriverFactory`, `build.gradle`                         | Thread-safe `ThreadLocal` WebDriver management for parallel runs                                          |
+| **Cross-Browser Support**       | `WebdriverFactory`                                                             | Chrome, Firefox, Edge — add a new browser with a single `case`                                            |
+| **Automatic Driver Management** | Selenium Manager (built into Selenium 4)                                       | Zero binary setup — drivers resolved automatically at runtime                                             |
+| **Data-Driven (Inline)**        | `BasicOperationsTest.additionNumbers()`                                        | TestNG `@DataProvider` providing data within the same class                                               |
+| **Data-Driven (CSV)**           | `BasicOperationsTest.divideNumbers()`, `Division.csv`                          | Manual CSV parsing via `BufferedReader`                                                                   |
+| **Data-Driven (Reusable)**      | `CsvDataProvider`, `BasicDivisionTest`                                         | OpenCSV-backed reusable data provider with `@CsvSource`                                                   |
+| **Reporting (Allure)**          | `AllureEnvironmentWriter`, `ResultExecutionListener`                           | Detailed HTML reports with steps, screenshots, and environment info                                       |
+| **Reporting (Gradle HTML)**     | Gradle `test` task (`build/reports/tests/test/index.html`)                     | Standard Gradle HTML report — class/method breakdown, timings, stack traces                               |
+| **Reporting (TestNG HTML)**     | TestNG default listeners, `build.gradle` (`outputDirectory`)                   | Built-in TestNG HTML report with pass/fail stats, timings, and stack traces                               |
+| **Reporting (Excel)**           | `TestExecutionResultCollector`, `ExcelUtils`, `ReportUtils`                    | Custom listener-based Excel report generation                                                             |
+| **Listeners**                   | `ScreenshotListener`, `TestExecutionMethodListener`, `ResultExecutionListener` | Screenshot + page source on failure; per-test result collection; suite hooks                              |
+| **Allure Annotations**          | `CalculatorSteps`, `CalculatorSanityTest`                                      | `@Feature`, `@Step`, `@Attachment` — rich traceability in reports                                         |
+| **Retry Logic**                 | `build.gradle` (retry block)                                                   | Automatic retry of failed tests via Gradle plugin                                                         |
+| **Test Group Filtering**        | `build.gradle`, `@Test(groups = {...})`                                        | Include/exclude tests by group at runtime via `-Dgroups` / `-Dexclude`                                    |
+| **Explicit Waits**              | `WebdriverUtils`                                                               | FluentWait-based helpers (`findElement`, `elementExists`, `clickIfElementShown`) replacing implicit waits |
+| **Configuration Management**    | `Configuration`, `ConfigurationManager`, `general.properties`                  | Type-safe config via Owner library with system property overrides                                         |
+| **Fluent Assertions**           | `SoftAssertionTest`, `CalculatorSteps`                                         | AssertJ for expressive assertions and soft assertions                                                     |
+| **Lombok**                      | `TestExecutionResult`, `lombok.config`                                         | Reduces boilerplate (`@Builder`, `@Value`, `@Jacksonized`)                                                |
+
 
 [⬆ Back to Table of Contents](#-table-of-contents)
 
@@ -269,6 +277,8 @@ Override any value at runtime with a system property:
    ```
 
 [⬆ Back to Table of Contents](#-table-of-contents)
+
+---
 
 ## 🚀 Usage
 
@@ -656,11 +666,6 @@ Enable verbose logging:
 .\gradlew.bat test --debug  # full debug
 ```
 
-[⬆ Back to Table of Contents](#-table-of-contents)
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 [⬆ Back to Table of Contents](#-table-of-contents)
 
@@ -692,3 +697,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [**IntelliJ Lombok Plugin**](https://plugins.jetbrains.com/plugin/6317-lombok)
 
 [⬆ Back to Table of Contents](#-table-of-contents)
+
+---
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+[⬆ Back to Table of Contents](#-table-of-contents)
+
