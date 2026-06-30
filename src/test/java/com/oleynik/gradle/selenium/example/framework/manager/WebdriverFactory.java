@@ -5,7 +5,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import static com.oleynik.gradle.selenium.example.framework.config.ConfigurationManager.configuration;
 
@@ -27,10 +26,6 @@ public class WebdriverFactory {
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--disable-search-engine-choice-screen");
                 yield new ChromeDriver(options);
-            }
-            case "ie" -> {
-                System.setProperty("webdriver.ie.driver", ".\\drivers\\IEDriverServer.exe");
-                yield new InternetExplorerDriver();
             }
             case "edge" -> {
                 System.setProperty("webdriver.edge.driver", ".\\drivers\\msedgedriver.exe");
