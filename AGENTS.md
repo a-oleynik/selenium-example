@@ -200,6 +200,7 @@ case "chrome" -> {
 | `framework/listeners/ResultExecutionListener.java` | Suite-level reporting hook (`TestExecutionListener`)                                                                                             |
 | `framework/utils/WebdriverUtils.java`              | `createNewDriver()`, `quitDriver()`, `findElement(By)` (FluentWait), `elementExists(By)`, `elementExistsAndShown(By)`, `clickIfElementShown(By)` |
 | `src/test/resources/general.properties`            | Runtime configuration                                                                                                                            |
+| `src/test/resources/logback-test.xml`              | Logback config — console appender + `FileAppender` writing to `build/logs/test.log`; framework package at `DEBUG`, root at `INFO`                |
 | `src/test/resources/META-INF/services/`            | SPI registration for `ResultExecutionListener` + `AllureTestListener`                                                                            |
 | `lombok.config`                                    | Lombok project-level config; sets `lombok.jacksonized.jacksonVersion += 2` to resolve the Jackson2/Jackson3 ambiguity warning on `@Jacksonized`  |
 
