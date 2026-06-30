@@ -3,6 +3,7 @@ package com.oleynik.gradle.selenium.example.framework.listeners;
 import io.qameta.allure.listener.TestLifecycleListener;
 import io.qameta.allure.model.Label;
 import io.qameta.allure.model.TestResult;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,6 +11,7 @@ import java.util.Optional;
 import static com.oleynik.gradle.selenium.example.framework.utils.DateTimeUtils.getDateTimeForAllureConsoleLog;
 
 
+@Slf4j
 public class AllureTestListener implements TestLifecycleListener {
 
     private static final String REPORT_DELIMITER =
@@ -22,7 +24,7 @@ public class AllureTestListener implements TestLifecycleListener {
                 result.getFullName() + "\n" +
                 "Feature: " + getFeature(result.getLabels()) +
                 "\n" + REPORT_DELIMITER;
-        System.out.println(testInfo);
+        log.info(testInfo);
     }
 
     public void afterTestStop(TestResult result){
@@ -31,7 +33,7 @@ public class AllureTestListener implements TestLifecycleListener {
                 result.getFullName() + "\n" +
                 "Test status: " + result.getStatus() +
                 "\n" + REPORT_DELIMITER;
-        System.out.println(testInfo);
+        log.info(testInfo);
     }
 
     private String getFeature(List<Label> allureLabels) {
