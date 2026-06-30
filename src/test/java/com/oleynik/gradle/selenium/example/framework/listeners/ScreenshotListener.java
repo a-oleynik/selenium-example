@@ -4,6 +4,7 @@ import com.oleynik.gradle.selenium.example.framework.manager.WebdriverManager;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.model.Status;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -18,6 +19,7 @@ import static com.oleynik.gradle.selenium.example.framework.utils.GeneralUtils.c
 import static com.oleynik.gradle.selenium.example.framework.utils.GeneralUtils.saveBytesAsFile;
 import static java.lang.String.format;
 
+@Slf4j
 public class ScreenshotListener implements IInvokedMethodListener {
 
     @Override
@@ -65,7 +67,7 @@ public class ScreenshotListener implements IInvokedMethodListener {
         String screenshotPath = SCREENSHOTS_FOLDER + screenshotName;
         createDirectoryIfNotExist(SCREENSHOTS_FOLDER);
         saveBytesAsFile(screenshotPath, screenshotBytes);
-        System.out.println(getDateTimeForAllureConsoleLog() + ": screenshot saved in " + screenshotPath);
+        log.info("{}: screenshot saved in {}", getDateTimeForAllureConsoleLog(), screenshotPath);
     }
 
     private void savePageSource(IInvokedMethod method, String pageSource) {
@@ -79,6 +81,6 @@ public class ScreenshotListener implements IInvokedMethodListener {
         String pageSourcePath = SCREENSHOTS_FOLDER + pageSourceName;
         createDirectoryIfNotExist(SCREENSHOTS_FOLDER);
         saveBytesAsFile(pageSourcePath, pageSource.getBytes());
-        System.out.println(getDateTimeForAllureConsoleLog() + ": page source saved in " + pageSourcePath);
+        log.info("{}: page source saved in {}", getDateTimeForAllureConsoleLog(), pageSourcePath);
     }
 }

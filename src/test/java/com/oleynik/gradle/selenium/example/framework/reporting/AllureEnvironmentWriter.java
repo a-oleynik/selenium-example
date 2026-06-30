@@ -1,6 +1,7 @@
 package com.oleynik.gradle.selenium.example.framework.reporting;
 
 import com.google.common.collect.ImmutableMap;
+import lombok.extern.slf4j.Slf4j;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -16,6 +17,7 @@ import java.io.File;
 
 import static com.oleynik.gradle.selenium.example.framework.utils.GeneralUtils.createDirectoryIfNotExist;
 
+@Slf4j
 public class AllureEnvironmentWriter {
     private static final String ALLURE_RESULTS_DIRECTORY = "allure.results.directory";
     private static final String ALLURE_ENVIRONMENT_XML = "environment.xml";
@@ -29,8 +31,7 @@ public class AllureEnvironmentWriter {
             Document doc = createXmlDocument(environmentValues);
             saveXMLDocument(doc, customResultsPath, ALLURE_ENVIRONMENT_XML);
         } catch (ParserConfigurationException | TransformerException e) {
-            System.err.println("Cannot write Allure environment properties file");
-            e.printStackTrace();
+            log.error("Cannot write Allure environment properties file", e);
         }
 
     }
