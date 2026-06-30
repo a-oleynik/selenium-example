@@ -184,6 +184,7 @@ case "chrome" -> {
 | Screenshots        | `build/reports/screenshots/`                                         |
 | Allure raw results | `build/allure-results/`                                              |
 | Excel raw results  | `build/excel-results/testResult_*.json` (intermediate per-test JSON) |
+| Log file           | `build/logs/test.log` (overwritten each run; mirrors console output) |
 
 ---
 

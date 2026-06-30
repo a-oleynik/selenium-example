@@ -2,6 +2,7 @@ package com.oleynik.gradle.selenium.example.framework.utils;
 
 import com.oleynik.gradle.selenium.example.framework.manager.WebdriverManager;
 import com.oleynik.gradle.selenium.example.framework.manager.WebdriverFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.*;
 
@@ -11,6 +12,7 @@ import java.util.function.Function;
 
 import static com.oleynik.gradle.selenium.example.framework.config.ConfigurationManager.configuration;
 
+@Slf4j
 public class WebdriverUtils {
     private WebdriverUtils() {
         throw new IllegalStateException("Utility class");
@@ -27,8 +29,7 @@ public class WebdriverUtils {
             try {
                 WebdriverManager.getDriver().quit();
             } catch (Exception exception) {
-                System.out.println("Warning: driver.quit() command invoked exception " + exception.getClass().getName());
-                exception.printStackTrace();
+                log.warn("Warning: driver.quit() command invoked exception {}", exception.getClass().getName(), exception);
             } finally {
                 WebdriverManager.removeDriver();
             }

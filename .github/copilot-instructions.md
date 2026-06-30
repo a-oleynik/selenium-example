@@ -7,7 +7,7 @@ The target application is an online calculator at `http://calculator.com`.
 Tests run in parallel across Chrome/Firefox/Edge with automatic retry, screenshot capture, and dual reporting (Allure + Excel).
 
 ## Stack
-Java 21 · Gradle · Selenium WebDriver 4 · JUnit 6 (Jupiter) · Allure · AssertJ · Owner (config) · Lombok · Apache POI · Log4j/SLF4J
+Java 21 · Gradle · Selenium WebDriver 4 · JUnit 6 (Jupiter) · Allure · AssertJ · Owner (config) · Lombok · Apache POI · SLF4J · Logback
 
 ## Mandatory 3-Layer Architecture
 Every feature must follow this hierarchy — never collapse or skip layers:
@@ -136,6 +136,7 @@ taskkill /F /IM chromedriver.exe /T                          # kill stale driver
 | Screenshots        | `build/reports/screenshots/`                                          |
 | Allure raw results | `build/allure-results/`                                               |
 | Excel raw results  | `build/excel-results/testResult_*.json`                               |
+| Log file           | `build/logs/test.log` (overwritten each run; mirrors console output)  |
 
 Both Allure and Excel reports are generated automatically after every `test` run (`finalizedBy` in `build.gradle`).
 

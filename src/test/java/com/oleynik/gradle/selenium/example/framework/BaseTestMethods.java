@@ -2,10 +2,12 @@ package com.oleynik.gradle.selenium.example.framework;
 
 import com.oleynik.gradle.selenium.example.framework.manager.WebdriverManager;
 import com.oleynik.gradle.selenium.example.framework.utils.WebdriverUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 
 import java.time.Duration;
 
+@Slf4j
 public class BaseTestMethods {
     private static final int IMPLICIT_WAIT_SECONDS = 2;
 
@@ -17,7 +19,7 @@ public class BaseTestMethods {
         WebDriver driver = WebdriverManager.getDriver();
         try {
             if (driver == null) {
-                System.out.println("Webdriver is not set. Creating new driver.");
+                log.info("Webdriver is not set. Creating new driver.");
                 WebdriverUtils.createNewDriver();
                 setMaximisedBrowserWindow();
                 return;
@@ -25,7 +27,7 @@ public class BaseTestMethods {
             driver.getWindowHandles();
             driver.getTitle();
         } catch (Exception exception) {
-            System.out.println("Browser is not detected. Error message: \"" + exception.getMessage() + "\". Restarting browser");
+            log.warn("Browser is not detected. Error message: \"{}\". Restarting browser", exception.getMessage());
             WebdriverUtils.createNewDriver();
             setMaximisedBrowserWindow();
         }
