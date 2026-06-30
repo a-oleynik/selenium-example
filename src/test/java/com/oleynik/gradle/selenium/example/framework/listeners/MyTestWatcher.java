@@ -7,6 +7,7 @@ import com.oleynik.gradle.selenium.example.framework.reporting.TestExecutionResu
 import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.model.Status;
+import lombok.extern.slf4j.Slf4j;
 import org.jspecify.annotations.NonNull;
 import org.junit.jupiter.api.extension.*;
 import org.openqa.selenium.OutputType;
@@ -27,6 +28,7 @@ import static com.oleynik.gradle.selenium.example.framework.utils.GeneralUtils.c
 import static com.oleynik.gradle.selenium.example.framework.utils.GeneralUtils.saveBytesAsFile;
 import static java.lang.String.format;
 
+@Slf4j
 public class MyTestWatcher implements BeforeEachCallback, TestWatcher, InvocationInterceptor {
     private long startTime;
     List<Object> testMethodParameters;
@@ -112,7 +114,7 @@ public class MyTestWatcher implements BeforeEachCallback, TestWatcher, Invocatio
         String screenshotPath = SCREENSHOTS_FOLDER + screenshotName;
         createDirectoryIfNotExist(SCREENSHOTS_FOLDER);
         saveBytesAsFile(screenshotPath, screenshotBytes);
-        System.out.println(getDateTimeForAllureConsoleLog() + ": screenshot saved in " + screenshotPath);
+        log.info("{}: screenshot saved in {}", getDateTimeForAllureConsoleLog(), screenshotPath);
     }
 
     private void savePageSource(ExtensionContext context, String pageSource) {
@@ -123,7 +125,7 @@ public class MyTestWatcher implements BeforeEachCallback, TestWatcher, Invocatio
         String pageSourcePath = SCREENSHOTS_FOLDER + pageSourceName;
         createDirectoryIfNotExist(SCREENSHOTS_FOLDER);
         saveBytesAsFile(pageSourcePath, pageSource.getBytes());
-        System.out.println(getDateTimeForAllureConsoleLog() + ": page source saved in " + pageSourcePath);
+        log.info("{}: page source saved in {}", getDateTimeForAllureConsoleLog(), pageSourcePath);
     }
 
     private String getTestMethodName (ExtensionContext context){
