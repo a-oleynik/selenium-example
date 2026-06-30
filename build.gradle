@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        allureVersion = "2.35.2"
+        allureVersion = "2.35.3"
         allureReportVersion = "2.43.0"
         aspectjVersion = "1.9.24"
         log4jVersion = "2.26.0"

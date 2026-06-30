@@ -4,7 +4,7 @@
 [![Selenium](https://img.shields.io/badge/Selenium-4.45.0-green.svg)](https://www.selenium.dev/)
 [![JUnit](https://img.shields.io/badge/JUnit-6.1.0-green.svg)](https://junit.org/)
 [![Gradle](https://img.shields.io/badge/Gradle-9.1.0-blue.svg)](https://gradle.org/)
-[![Allure_Framework](https://img.shields.io/badge/Allure_Framework-2.43.0-purple.svg)](https://allurereport.org/docs/)
+[![Allure_Framework](https://img.shields.io/badge/Allure_Framework-2.35.3-purple.svg)](https://allurereport.org/docs/)
 [![Allure_CLI](https://img.shields.io/badge/Allure_CLI-2.43.0-yellow.svg)](https://allurereport.org/docs/)
 [![Owner](https://img.shields.io/badge/Owner-1.0.12-blue.svg)](http://owner.aeonbits.org/)
 [![AssertJ](https://img.shields.io/badge/AssertJ-3.27.7-orange.svg)](https://assertj.github.io/doc/)
