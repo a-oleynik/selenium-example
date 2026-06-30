@@ -61,7 +61,7 @@ java -jar drivers/selenium-server-4.24.0.jar standalone --config drivers/two-bro
 Config is managed via the **Owner** library reading `src/test/resources/general.properties`:
 
 ```properties
-env.browser = Chrome       # Chrome | Firefox | Edge | IE
+env.browser = Chrome       # Chrome | Firefox | Edge
 env.url = http://calculator.com
 default.webdriver.timeout = 180
 env.time.zone = Europe/Warsaw
