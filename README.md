@@ -2,7 +2,7 @@
 
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
 [![Selenium](https://img.shields.io/badge/Selenium-4.45.0-green.svg)](https://www.selenium.dev/)
-[![JUnit](https://img.shields.io/badge/JUnit-6.1.0-green.svg)](https://junit.org/)
+[![JUnit](https://img.shields.io/badge/JUnit-6.1.1-green.svg)](https://junit.org/)
 [![Gradle](https://img.shields.io/badge/Gradle-9.1.0-blue.svg)](https://gradle.org/)
 [![Allure_Framework](https://img.shields.io/badge/Allure_Framework-2.35.3-purple.svg)](https://allurereport.org/docs/)
 [![Allure_CLI](https://img.shields.io/badge/Allure_CLI-2.43.0-yellow.svg)](https://allurereport.org/docs/)
@@ -138,23 +138,23 @@ Use this repository if you want to:
 
 ## 🛠️ Tech Stack
 
-| Technology                         | Version       | Purpose                                                           |
-|------------------------------------|---------------|-------------------------------------------------------------------|
-| **Java**                           | 21            | Programming language                                              |
-| **Gradle**                         | 9.1.0         | Build automation                                                  |
-| **Selenium WebDriver**             | 4.45.0        | Browser automation                                                |
-| **JUnit 6**                        | 6.1.0         | Testing framework                                                 |
-| **Allure Framework (Allure Java)** | 2.35.2        | Used inside tests (annotations, listeners). Produces raw results. |
-| **Allure Report CLI**              | 2.43.0        | Generates interactive HTML report from test results.              |
-| **AssertJ**                        | 3.27.7        | Fluent assertions                                                 |
-| **Apache POI**                     | 5.5.1         | Excel report generation                                           |
-| **OpenCSV**                        | 5.12.0        | CSV data handling                                                 |
-| **Owner**                          | 1.0.12        | Configuration management                                          |
-| **Lombok**                         | 1.18.46       | Code generation                                                   |
-| **Jackson**                        | 2.22.0        | JSON processing                                                   |
-| **SLF4J**                          | 2.0.18        | Logging API (`@Slf4j` via Lombok in all framework classes)        |
-| **Logback**                        | 1.5.18        | Logging implementation — console + `build/logs/test.log`          |
-| **Log4j → SLF4J bridge**           | 2.26.0        | Routes Log4j 2 API calls into SLF4J                               |
+| Technology                         | Version | Purpose                                                           |
+|------------------------------------|---------|-------------------------------------------------------------------|
+| **Java**                           | 21      | Programming language                                              |
+| **Gradle**                         | 9.1.0   | Build automation                                                  |
+| **Selenium WebDriver**             | 4.45.0  | Browser automation                                                |
+| **JUnit 6**                        | 6.1.1   | Testing framework                                                 |
+| **Allure Framework (Allure Java)** | 2.35.2  | Used inside tests (annotations, listeners). Produces raw results. |
+| **Allure Report CLI**              | 2.43.0  | Generates interactive HTML report from test results.              |
+| **AssertJ**                        | 3.27.7  | Fluent assertions                                                 |
+| **Apache POI**                     | 5.5.1   | Excel report generation                                           |
+| **OpenCSV**                        | 5.12.0  | CSV data handling                                                 |
+| **Owner**                          | 1.0.12  | Configuration management                                          |
+| **Lombok**                         | 1.18.46 | Code generation                                                   |
+| **Jackson**                        | 2.22.0  | JSON processing                                                   |
+| **SLF4J**                          | 2.0.18  | Logging API (`@Slf4j` via Lombok in all framework classes)        |
+| **Logback**                        | 1.5.18  | Logging implementation — console + `build/logs/test.log`          |
+| **Log4j → SLF4J bridge**           | 2.26.0  | Routes Log4j 2 API calls into SLF4J                               |
 
 ### 🔌 Gradle Plugins
 
