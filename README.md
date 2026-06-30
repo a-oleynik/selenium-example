@@ -153,7 +153,9 @@ Use this repository if you want to:
 | **Owner**                          | 1.0.12        | Configuration management                                          |
 | **Lombok**                         | 1.18.46       | Code generation                                                   |
 | **Jackson**                        | 2.22.0        | JSON processing                                                   |
-| **Log4j/SLF4J**                    | 2.26.0/2.0.18 | Logging                                                           |
+| **SLF4J**                          | 2.0.18        | Logging API (`@Slf4j` via Lombok in all framework classes)        |
+| **Logback**                        | 1.5.18        | Logging implementation — console + `build/logs/test.log`          |
+| **Log4j → SLF4J bridge**           | 2.26.0        | Routes Log4j 2 API calls into SLF4J                               |
 
 ### 🔌 Gradle Plugins
 
@@ -453,11 +455,13 @@ selenium-example/
 │       │           ├── BasicOperationsTest.java
 │       │           ├── CalculatorSanityTest.java
 │       │           └── SoftAssertionTest.java
-│       └── resources/
-│           ├── general.properties      # Main configuration
-│           ├── allure.properties       # Allure configuration
-│           └── Division.csv            # Test data files
+        └── resources/
+            ├── general.properties      # Main configuration
+            ├── allure.properties       # Allure configuration
+            ├── logback-test.xml        # Logback config — console + build/logs/test.log
+            └── Division.csv            # Test data files
 ├── build/
+│   ├── logs/                           # SLF4J/Logback log file (test.log)
 │   ├── reports/                        # Generated reports
 │   │   ├── allure-report/              # Allure HTML report
 │   │   ├── testng/                     # TestNG HTML report
@@ -646,6 +650,19 @@ Both are attached to the Allure report automatically.
 - Location: `build/reports/screenshots/`
 - Format: `timestamp-ClassName-testMethod.png`
 
+### Log File
+
+Every test run writes a structured log to `build/logs/test.log`.  
+The file is **overwritten on each run** (`append=false`) so it always reflects the latest execution.
+
+- **Location:** `build/logs/test.log`
+- **Console:** same output is mirrored to stdout as before
+- **Log level:** `INFO` globally; `DEBUG` for all `com.oleynik…framework` classes (driver lifecycle, step details)
+- **Config:** `src/test/resources/logback-test.xml`
+
+> **Note:** `build/logs/` is inside the `build/` directory, so `.\gradlew.bat clean` removes it together
+> with all other build artefacts, giving a clean log on the next run.
+
 [⬆ Back to Table of Contents](#-table-of-contents)
 
 ---
@@ -738,7 +755,13 @@ If you encounter WebDriver compatibility issues:
 
 ### View Detailed Logs
 
-Enable verbose logging:
+A structured log file is written automatically after every run:
+
+```
+build/logs/test.log
+```
+
+For even more verbose Gradle output:
 
 ```bash
 .\gradlew.bat test --info   # verbose

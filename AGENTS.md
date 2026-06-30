@@ -178,6 +178,7 @@ case "chrome" -> {
 | Screenshots        | `build/reports/screenshots/`                                          |
 | Allure raw results | `build/allure-results/`                                               |
 | Excel raw results  | `build/excel-results/testResult_*.json` (intermediate per-test JSON)  |
+| Log file           | `build/logs/test.log` (overwritten each run; mirrors console output)  |
 
 ---
 
@@ -195,6 +196,7 @@ case "chrome" -> {
 | `framework/utils/WebdriverUtils.java`                  | Driver lifecycle + explicit wait helpers: `createNewDriver()`, `quitDriver()`, `findElement(By)` (FluentWait, `presenceOfElementLocated`), `findElement(By, Function, Integer)` (custom condition + timeout), `elementExists(By)`, `elementExistsAndShown(By)`, `clickIfElementShown(By)` |
 | `framework/config/Constants.java`                      | Path constants: `BUILD_FOLDER`, `REPORTS_FOLDER`, `SCREENSHOTS_FOLDER`, `EXCEL_RESULTS_FOLDER`, `TEST_RESOURCES` — use these whenever referencing file system paths                                                                                                                       |
 | `src/test/resources/general.properties`                | Runtime configuration                                                                                                                                                                                                                                                                     |
+| `src/test/resources/logback-test.xml`                  | Logback config — console appender + `FileAppender` writing to `build/logs/test.log`; framework package at `DEBUG`, root at `INFO`                                                                                                                                                         |
 | `src/test/resources/META-INF/services/`                | SPI registration for `AllureTestListener` only                                                                                                                                                                                                                                            |
 | `lombok.config`                                        | Lombok project-level config; sets `lombok.jacksonized.jacksonVersion += 2` to resolve the Jackson2/Jackson3 ambiguity warning on `@Jacksonized` (e.g. `TestExecutionResult`)                                                                                                              |
 

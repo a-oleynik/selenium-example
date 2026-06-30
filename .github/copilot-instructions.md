@@ -7,7 +7,7 @@ The target application is an online calculator at `http://calculator.com`.
 Tests run in parallel across Chrome/Firefox/Edge with automatic retry, screenshot capture, and dual reporting (Allure + Excel).
 
 ## Stack
-Java 21 · Gradle · Selenium WebDriver 4 · TestNG 7 · Allure · AssertJ · Owner (config) · Lombok · Apache POI · Log4j/SLF4J
+Java 21 · Gradle · Selenium WebDriver 4 · TestNG 7 · Allure · AssertJ · Owner (config) · Lombok · Apache POI · SLF4J · Logback
 
 ## Mandatory 3-Layer Architecture
 Every feature must follow this hierarchy — never collapse or skip layers:
@@ -136,6 +136,7 @@ taskkill /F /IM chromedriver.exe /T                        # kill stale drivers
 | Screenshots        | `build/reports/screenshots/`                                          |
 | Allure raw results | `build/allure-results/`                                               |
 | Excel raw results  | `build/excel-results/testResult_*.json`                               |
+| Log file           | `build/logs/test.log` (overwritten each run; mirrors console output)  |
 
 Both Allure and Excel reports are generated automatically after every `test` run (`finalizedBy` in `build.gradle`).
 
@@ -151,8 +152,9 @@ Both Allure and Excel reports are generated automatically after every `test` run
 | `framework/listeners/ResultExecutionListener.java`     | Suite-level reporting hook (`IExecutionListener`)                                                                                                                                                                                                                                         |
 | `framework/listeners/TestExecutionMethodListener.java` | Per-test result collector (`IInvokedMethodListener`)                                                                                                                                                                                                                                      |
 | `framework/utils/WebdriverUtils.java`                  | Driver lifecycle + explicit wait helpers: `createNewDriver()`, `quitDriver()`, `findElement(By)` (FluentWait, `presenceOfElementLocated`), `findElement(By, Function, Integer)` (custom condition + timeout), `elementExists(By)`, `elementExistsAndShown(By)`, `clickIfElementShown(By)` |
-| `framework/config/Constants.java`                      | Path constants: `BUILD_FOLDER`, `REPORTS_FOLDER`, `SCREENSHOTS_FOLDER`, `EXCEL_RESULTS_FOLDER`, `TEST_RESOURCES` — use these whenever referencing file system paths                                                                                                                       |
+| `framework/config/Constants.java`                      | Path constants: `BUILD_FOLDER`, `LOGS_FOLDER`, `REPORTS_FOLDER`, `SCREENSHOTS_FOLDER`, `EXCEL_RESULTS_FOLDER`, `TEST_RESOURCES` — use these whenever referencing file system paths                                                                                                        |
 | `src/test/resources/general.properties`                | Runtime configuration                                                                                                                                                                                                                                                                     |
+| `src/test/resources/logback-test.xml`                  | Logback config — console appender + `FileAppender` writing to `build/logs/test.log`; framework package at `DEBUG`, root at `INFO`                                                                                                                                                         |
 | `src/test/resources/META-INF/services/`                | SPI registration for `AllureTestListener` only                                                                                                                                                                                                                                            |
 | `lombok.config`                                        | Lombok project-level config; sets `lombok.jacksonized.jacksonVersion += 2` to resolve the Jackson2/Jackson3 ambiguity warning on `@Jacksonized`                                                                                                                                           |
 | `AGENTS.md`                                            | Full agent/AI guide — architecture, workflow, key files, commands                                                                                                                                                                                                                         |

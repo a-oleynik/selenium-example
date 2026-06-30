@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.oleynik.gradle.selenium.example.framework.reporting.TestExecutionResult;
 import com.oleynik.gradle.selenium.example.framework.reporting.ThrowableJacksonModule;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -26,6 +27,7 @@ import static com.oleynik.gradle.selenium.example.framework.utils.ExcelUtils.cre
 import static com.oleynik.gradle.selenium.example.framework.utils.GeneralUtils.createDirectoryIfNotExist;
 import static com.oleynik.gradle.selenium.example.framework.utils.JsonUtils.getObjectMapper;
 
+@Slf4j
 public class ReportUtils {
     private ReportUtils() {
         throw new IllegalStateException("Utility class");
@@ -39,7 +41,7 @@ public class ReportUtils {
             createDirectoryIfNotExist(EXCEL_RESULTS_FOLDER);
             objectMapper.writeValue(new File(EXCEL_RESULTS_FOLDER + "testResult_" + getDateTimeForTestResultFile() + ".json"), result);
         } catch (IOException ioException) {
-            ioException.printStackTrace();
+            log.error("Failed to save test execution result", ioException);
         }
     }
 
@@ -50,7 +52,7 @@ public class ReportUtils {
                     .map(i -> readTestExecutionResult(i.toString()))
                     .toList();
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("Failed to read test execution results from {}", EXCEL_RESULTS_FOLDER, e);
             return new ArrayList<>();
         }
     }
