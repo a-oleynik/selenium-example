@@ -5,7 +5,7 @@
 [![JUnit](https://img.shields.io/badge/JUnit-6.1.1-green.svg)](https://junit.org/)
 [![Gradle](https://img.shields.io/badge/Gradle-9.1.0-blue.svg)](https://gradle.org/)
 [![Allure_Framework](https://img.shields.io/badge/Allure_Framework-2.35.3-purple.svg)](https://allurereport.org/docs/)
-[![Allure_CLI](https://img.shields.io/badge/Allure_CLI-2.43.0-yellow.svg)](https://allurereport.org/docs/)
+[![Allure_CLI](https://img.shields.io/badge/Allure_CLI-2.44.0-yellow.svg)](https://allurereport.org/docs/)
 [![Owner](https://img.shields.io/badge/Owner-1.0.12-blue.svg)](http://owner.aeonbits.org/)
 [![AssertJ](https://img.shields.io/badge/AssertJ-3.27.7-orange.svg)](https://assertj.github.io/doc/)
 [![License](https://img.shields.io/badge/License-MIT-lightgrey.svg)](LICENSE)
@@ -145,15 +145,15 @@ Use this repository if you want to:
 | **Selenium WebDriver**             | 4.45.0  | Browser automation                                                |
 | **JUnit 6**                        | 6.1.1   | Testing framework                                                 |
 | **Allure Framework (Allure Java)** | 2.35.2  | Used inside tests (annotations, listeners). Produces raw results. |
-| **Allure Report CLI**              | 2.43.0  | Generates interactive HTML report from test results.              |
+| **Allure Report CLI**              | 2.44.0  | Generates interactive HTML report from test results.              |
 | **AssertJ**                        | 3.27.7  | Fluent assertions                                                 |
 | **Apache POI**                     | 5.5.1   | Excel report generation                                           |
 | **OpenCSV**                        | 5.12.0  | CSV data handling                                                 |
 | **Owner**                          | 1.0.12  | Configuration management                                          |
 | **Lombok**                         | 1.18.46 | Code generation                                                   |
-| **Jackson**                        | 2.22.0  | JSON processing                                                   |
+| **Jackson**                        | 2.22.1  | JSON processing                                                   |
 | **SLF4J**                          | 2.0.18  | Logging API (`@Slf4j` via Lombok in all framework classes)        |
-| **Logback**                        | 1.5.18  | Logging implementation — console + `build/logs/test.log`          |
+| **Logback**                        | 1.5.37  | Logging implementation — console + `build/logs/test.log`          |
 | **Log4j → SLF4J bridge**           | 2.26.0  | Routes Log4j 2 API calls into SLF4J                               |
 
 ### 🔌 Gradle Plugins
