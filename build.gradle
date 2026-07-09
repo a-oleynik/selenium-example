@@ -1,11 +1,11 @@
 buildscript {
     ext {
         allureVersion = "2.35.3"
-        allureReportVersion = "2.43.0"
+        allureReportVersion = "2.44.0"
         aspectjVersion = "1.9.24"
         log4jVersion = "2.26.0"
-        jacksonVersion = "2.22.0"
-        logbackVersion = "1.5.18"
+        jacksonVersion = "2.22.1"
+        logbackVersion = "1.5.37"
         seleniumVersion = "4.45.0"
         slf4jVersion = "2.0.18"
         testNGVersion = "7.12.0"
