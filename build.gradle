@@ -8,8 +8,8 @@ buildscript {
         logbackVersion = "1.5.37"
         seleniumVersion = "4.45.0"
         slf4jVersion = "2.0.18"
-        junit5Version = "6.1.1"
-        junitPlatformVersion = "6.1.1"
+        junit5Version = "6.1.2"
+        junitPlatformVersion = "6.1.2"
         lombokVersion = "1.18.46"
     }
 }
