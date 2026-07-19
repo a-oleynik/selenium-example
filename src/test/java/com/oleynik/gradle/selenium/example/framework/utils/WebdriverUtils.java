@@ -59,9 +59,30 @@ public class WebdriverUtils {
         return elementExists(by) && WebdriverUtils.findElement(by).isDisplayed();
     }
 
+    public static WebElement waitForElementVisible(By locator) {
+        WebElement element = findElement(locator, ExpectedConditions::visibilityOfElementLocated, configuration().defaultWebdriverTimeout());
+        if (element == null || !element.isDisplayed()) {
+            throw new RuntimeException("Element not visible: " + locator);
+        }
+        return element;
+    }
+
+    public static WebElement elementExistsScrollAndVisible(By locator) {
+        if (!elementExists(locator)) {
+            throw new RuntimeException("Element not found: " + locator);
+        }
+        scrollToElementCenter(findElement(locator));
+        return waitForElementVisible(locator);
+    }
+
     public static void clickIfElementShown(By by) {
         if (elementExistsAndShown(by)) {
             WebdriverUtils.findElement(by).click();
         }
+    }
+
+    public static void scrollToElementCenter(WebElement element) {
+        ((JavascriptExecutor) WebdriverManager.getDriver())
+                .executeScript("arguments[0].scrollIntoView({behavior: 'instant', block: 'center'});", element);
     }
 }
