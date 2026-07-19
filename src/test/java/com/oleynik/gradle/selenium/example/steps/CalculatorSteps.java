@@ -16,6 +16,7 @@ public class CalculatorSteps {
         calculatorPage = new CalculatorPage(url);
         calculatorPage.pressConsent();
         calculatorPage.acceptCookie();
+        calculatorPage.removeAds();
     }
 
     @Step("Getting page title")
