@@ -1,9 +1,9 @@
 buildscript {
     ext {
         allureVersion = "2.35.4"
-        allureReportVersion = "2.44.0"
+        allureReportVersion = "2.45.0"
         aspectjVersion = "1.9.24"
-        log4jVersion = "2.26.0"
+        log4jVersion = "2.26.1"
         jacksonVersion = "2.22.1"
         logbackVersion = "1.6.1"
         seleniumVersion = "4.46.0"
@@ -18,7 +18,7 @@ plugins {
     id('io.qameta.allure') version '4.1.0'
     id 'idea'
     id 'org.gradle.test-retry' version '1.6.5'
-    id 'com.github.ben-manes.versions' version '0.56.0'
+    id 'com.github.ben-manes.versions' version '0.59.0'
 }
 
 repositories {
