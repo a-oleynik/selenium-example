@@ -5,7 +5,7 @@
 [![TestNG](https://img.shields.io/badge/TestNG-7.12.0-red.svg)](https://testng.org/)
 [![Gradle](https://img.shields.io/badge/Gradle-9.1.0-blue.svg)](https://gradle.org/)
 [![Allure_Framework](https://img.shields.io/badge/Allure_Framework-2.35.4-purple.svg)](https://allurereport.org/docs/)
-[![Allure_CLI](https://img.shields.io/badge/Allure_CLI-2.44.0-yellow.svg)](https://allurereport.org/docs/)
+[![Allure_CLI](https://img.shields.io/badge/Allure_CLI-2.45.0-yellow.svg)](https://allurereport.org/docs/)
 [![Owner](https://img.shields.io/badge/Owner-1.0.12-blue.svg)](http://owner.aeonbits.org/)
 [![AssertJ](https://img.shields.io/badge/AssertJ-3.27.7-orange.svg)](https://assertj.github.io/doc/)
 [![License](https://img.shields.io/badge/License-MIT-lightgrey.svg)](LICENSE)
@@ -145,7 +145,7 @@ Use this repository if you want to:
 | **Selenium WebDriver**             | 4.46.0  | Browser automation                                                |
 | **TestNG**                         | 7.12.0  | Testing framework                                                 |
 | **Allure Framework (Allure Java)** | 2.35.4  | Used inside tests (annotations, listeners). Produces raw results. |
-| **Allure Report CLI**              | 2.44.0  | Generates interactive HTML report from test results.              |
+| **Allure Report CLI**              | 2.45.0  | Generates interactive HTML report from test results.              |
 | **AssertJ**                        | 3.27.7  | Fluent assertions                                                 |
 | **Apache POI**                     | 5.5.1   | Excel report generation                                           |
 | **OpenCSV**                        | 5.12.0  | CSV data handling                                                 |
@@ -154,7 +154,7 @@ Use this repository if you want to:
 | **Jackson**                        | 2.22.1  | JSON processing                                                   |
 | **SLF4J**                          | 2.0.18  | Logging API (`@Slf4j` via Lombok in all framework classes)        |
 | **Logback**                        | 1.6.1   | Logging implementation — console + `build/logs/test.log`          |
-| **Log4j → SLF4J bridge**           | 2.26.0  | Routes Log4j 2 API calls into SLF4J                               |
+| **Log4j → SLF4J bridge**           | 2.26.1  | Routes Log4j 2 API calls into SLF4J                               |
 
 ### 🔌 Gradle Plugins
 
@@ -162,7 +162,7 @@ Use this repository if you want to:
 |---------------------------------|----------|---------------------------------------------------------------------|
 | `io.qameta.allure`              | 4.1.0    | Allure reporting integration for Gradle                             |
 | `org.gradle.test-retry`         | 1.6.5    | Automatically retries failed tests to handle flakiness              |
-| `com.github.ben-manes.versions` | 0.56.0   | Checks for dependency updates via `.\gradlew.bat dependencyUpdates` |
+| `com.github.ben-manes.versions` | 0.59.0   | Checks for dependency updates via `.\gradlew.bat dependencyUpdates` |
 | `java-library`                  | Built-in | Core Java project support                                           |
 | `idea`                          | Built-in | IntelliJ IDEA project file generation and integration               |
 
