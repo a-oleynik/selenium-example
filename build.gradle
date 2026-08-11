@@ -5,8 +5,8 @@ buildscript {
         aspectjVersion = "1.9.24"
         log4jVersion = "2.26.1"
         jacksonVersion = "2.22.1"
-        logbackVersion = "1.6.1"
-        seleniumVersion = "4.46.0"
+        logbackVersion = "1.6.2"
+        seleniumVersion = "4.47.0"
         slf4jVersion = "2.0.18"
         testNGVersion = "7.12.0"
         lombokVersion = "1.18.46"
@@ -18,7 +18,7 @@ plugins {
     id('io.qameta.allure') version '4.1.0'
     id 'idea'
     id 'org.gradle.test-retry' version '1.6.5'
-    id 'com.github.ben-manes.versions' version '0.59.0'
+    id 'com.github.ben-manes.versions' version '0.61.0'
 }
 
 repositories {
