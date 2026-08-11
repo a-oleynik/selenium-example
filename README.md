@@ -1,7 +1,7 @@
 # 🚀 Gradle Selenium WebDriver JUnit 6 Example (Manual Driver Management)
 
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
-[![Selenium](https://img.shields.io/badge/Selenium-4.46.0-green.svg)](https://www.selenium.dev/)
+[![Selenium](https://img.shields.io/badge/Selenium-4.47.0-green.svg)](https://www.selenium.dev/)
 [![JUnit](https://img.shields.io/badge/JUnit-6.1.2-green.svg)](https://junit.org/)
 [![Gradle](https://img.shields.io/badge/Gradle-9.1.0-blue.svg)](https://gradle.org/)
 [![Allure_Framework](https://img.shields.io/badge/Allure_Framework-2.35.4-purple.svg)](https://allurereport.org/docs/)
@@ -142,7 +142,7 @@ Use this repository if you want to:
 |------------------------------------|---------|-------------------------------------------------------------------|
 | **Java**                           | 21      | Programming language                                              |
 | **Gradle**                         | 9.1.0   | Build automation                                                  |
-| **Selenium WebDriver**             | 4.46.0  | Browser automation                                                |
+| **Selenium WebDriver**             | 4.47.0  | Browser automation                                                |
 | **JUnit 6**                        | 6.1.2   | Testing framework                                                 |
 | **Allure Framework (Allure Java)** | 2.35.4  | Used inside tests (annotations, listeners). Produces raw results. |
 | **Allure Report CLI**              | 2.45.0  | Generates interactive HTML report from test results.              |
@@ -153,7 +153,7 @@ Use this repository if you want to:
 | **Lombok**                         | 1.18.46 | Code generation                                                   |
 | **Jackson**                        | 2.22.1  | JSON processing                                                   |
 | **SLF4J**                          | 2.0.18  | Logging API (`@Slf4j` via Lombok in all framework classes)        |
-| **Logback**                        | 1.6.1   | Logging implementation — console + `build/logs/test.log`          |
+| **Logback**                        | 1.6.2   | Logging implementation — console + `build/logs/test.log`          |
 | **Log4j → SLF4J bridge**           | 2.26.1  | Routes Log4j 2 API calls into SLF4J                               |
 
 ### 🔌 Gradle Plugins
@@ -162,7 +162,7 @@ Use this repository if you want to:
 |---------------------------------|----------|---------------------------------------------------------------------|
 | `io.qameta.allure`              | 4.1.0    | Allure reporting integration for Gradle                             |
 | `org.gradle.test-retry`         | 1.6.5    | Automatically retries failed tests to handle flakiness              |
-| `com.github.ben-manes.versions` | 0.59.0   | Checks for dependency updates via `.\gradlew.bat dependencyUpdates` |
+| `com.github.ben-manes.versions` | 0.61.0   | Checks for dependency updates via `.\gradlew.bat dependencyUpdates` |
 | `java-library`                  | Built-in | Core Java project support                                           |
 | `idea`                          | Built-in | IntelliJ IDEA project file generation and integration               |
 
