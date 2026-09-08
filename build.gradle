@@ -6,7 +6,7 @@ buildscript {
         log4jVersion = "2.26.1"
         jacksonVersion = "2.22.1"
         logbackVersion = "1.6.2"
-        seleniumVersion = "4.47.0"
+        seleniumVersion = "4.48.0"
         slf4jVersion = "2.0.18"
         junit5Version = "6.1.2"
         junitPlatformVersion = "6.1.2"
