@@ -1,7 +1,7 @@
 # 🚀 Gradle Selenium WebDriver JUnit 6 Example (Manual Driver Management)
 
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
-[![Selenium](https://img.shields.io/badge/Selenium-4.47.0-green.svg)](https://www.selenium.dev/)
+[![Selenium](https://img.shields.io/badge/Selenium-4.48.0-green.svg)](https://www.selenium.dev/)
 [![JUnit](https://img.shields.io/badge/JUnit-6.1.2-green.svg)](https://junit.org/)
 [![Gradle](https://img.shields.io/badge/Gradle-9.1.0-blue.svg)](https://gradle.org/)
 [![Allure_Framework](https://img.shields.io/badge/Allure_Framework-2.35.4-purple.svg)](https://allurereport.org/docs/)
@@ -150,7 +150,7 @@ Use this repository if you want to:
 | **Apache POI**                     | 5.5.1   | Excel report generation                                           |
 | **OpenCSV**                        | 5.12.0  | CSV data handling                                                 |
 | **Owner**                          | 1.0.12  | Configuration management                                          |
-| **Lombok**                         | 1.18.46 | Code generation                                                   |
+| **Lombok**                         | 1.18.48 | Code generation                                                   |
 | **Jackson**                        | 2.22.1  | JSON processing                                                   |
 | **SLF4J**                          | 2.0.18  | Logging API (`@Slf4j` via Lombok in all framework classes)        |
 | **Logback**                        | 1.6.2   | Logging implementation — console + `build/logs/test.log`          |
