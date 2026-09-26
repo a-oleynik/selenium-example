@@ -1,7 +1,7 @@
 # 🚀 Gradle Selenium WebDriver JUnit 6 Example (Manual Driver Management)
 
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
-[![Selenium](https://img.shields.io/badge/Selenium-4.48.0-green.svg)](https://www.selenium.dev/)
+[![Selenium](https://img.shields.io/badge/Selenium-4.49.0-green.svg)](https://www.selenium.dev/)
 [![JUnit](https://img.shields.io/badge/JUnit-6.1.2-green.svg)](https://junit.org/)
 [![Gradle](https://img.shields.io/badge/Gradle-9.1.0-blue.svg)](https://gradle.org/)
 [![Allure_Framework](https://img.shields.io/badge/Allure_Framework-2.35.4-purple.svg)](https://allurereport.org/docs/)
@@ -142,7 +142,7 @@ Use this repository if you want to:
 |------------------------------------|---------|-------------------------------------------------------------------|
 | **Java**                           | 21      | Programming language                                              |
 | **Gradle**                         | 9.1.0   | Build automation                                                  |
-| **Selenium WebDriver**             | 4.47.0  | Browser automation                                                |
+| **Selenium WebDriver**             | 4.49.0  | Browser automation                                                |
 | **JUnit 6**                        | 6.1.2   | Testing framework                                                 |
 | **Allure Framework (Allure Java)** | 2.35.4  | Used inside tests (annotations, listeners). Produces raw results. |
 | **Allure Report CLI**              | 2.45.0  | Generates interactive HTML report from test results.              |
@@ -151,9 +151,9 @@ Use this repository if you want to:
 | **OpenCSV**                        | 5.12.0  | CSV data handling                                                 |
 | **Owner**                          | 1.0.12  | Configuration management                                          |
 | **Lombok**                         | 1.18.48 | Code generation                                                   |
-| **Jackson**                        | 2.22.1  | JSON processing                                                   |
+| **Jackson**                        | 2.22.3  | JSON processing                                                   |
 | **SLF4J**                          | 2.0.18  | Logging API (`@Slf4j` via Lombok in all framework classes)        |
-| **Logback**                        | 1.6.2   | Logging implementation — console + `build/logs/test.log`          |
+| **Logback**                        | 1.6.4   | Logging implementation — console + `build/logs/test.log`          |
 | **Log4j → SLF4J bridge**           | 2.26.1  | Routes Log4j 2 API calls into SLF4J                               |
 
 ### 🔌 Gradle Plugins
@@ -161,8 +161,8 @@ Use this repository if you want to:
 | Plugin                          | Version  | Purpose                                                             |
 |---------------------------------|----------|---------------------------------------------------------------------|
 | `io.qameta.allure`              | 4.1.0    | Allure reporting integration for Gradle                             |
-| `org.gradle.test-retry`         | 1.6.5    | Automatically retries failed tests to handle flakiness              |
-| `com.github.ben-manes.versions` | 0.61.0   | Checks for dependency updates via `.\gradlew.bat dependencyUpdates` |
+| `org.gradle.test-retry`         | 1.6.6    | Automatically retries failed tests to handle flakiness              |
+| `com.github.ben-manes.versions` | 0.64.0   | Checks for dependency updates via `.\gradlew.bat dependencyUpdates` |
 | `java-library`                  | Built-in | Core Java project support                                           |
 | `idea`                          | Built-in | IntelliJ IDEA project file generation and integration               |
 
@@ -785,7 +785,7 @@ For even more verbose Gradle output:
 - [Selenium Grid Setup](https://www.selenium.dev/documentation/grid/)
 - [WebDriver Downloads](https://www.selenium.dev/downloads/)
 - [Forget WebDriverManager: Use Selenium Manager Instead](https://medium.com/@andrei.oleynik/forget-webdrivermanager-use-selenium-manager-instead-1acf7e1076f3)
-- [TestNG XML Is a Legacy Concept: Here's What Modern Test Suites Should Look Like](https://medium.com/@andrei.oleynik/testng-xml-is-a-legacy-concept-heres-what-modern-test-suites-should-look-like-bd5cb380db71)
+- [testng.xml Is Legacy. Here’s What Modern TestNG Suites Should Look Like](https://medium.com/@andrei.oleynik/testng-xml-is-a-legacy-concept-heres-what-modern-test-suites-should-look-like-bd5cb380db71)
 - [WebDriver getAttribute() is Back: When to Use It vs getDomAttribute() and getDomProperty()](https://medium.com/@andrei.oleynik/adventures-of-getattribute-back-from-the-dead-846c31f5bcab)
 - [JUnit 6 Released — Clean-Up, Modernization & Minimal Disruption](https://medium.com/@andrei.oleynik/junit-6-released-clean-up-modernization-minimal-disruption-d3ecf11b64ad)
 
