@@ -176,6 +176,7 @@ Before you begin, ensure you have the following installed:
 
 - **Java Development Kit (JDK) 21** or higher
     - [Download JDK](https://www.oracle.com/java/technologies/downloads/)
+    - [Installation Guide (Windows, macOS, Ubuntu)](https://medium.com/@andrei.oleynik/how-to-install-and-set-up-java-on-windows-macos-and-ubuntu-jdk-maven-and-gradle-728a732dd123)
     - Verify: `java -version`
 
 - **Gradle** (optional — Gradle Wrapper is included)
@@ -736,6 +737,7 @@ For even more verbose Gradle output:
 - [Gradle User Guide](https://docs.gradle.org/current/userguide/userguide.html)
 - [Selenium Manager](https://www.selenium.dev/documentation/selenium_manager/)
 - [Selenium Grid Setup](https://www.selenium.dev/documentation/grid/)
+- [How to Install and Set Up Java on Windows, macOS, and Ubuntu: JDK, Maven, and Gradle](https://medium.com/@andrei.oleynik/how-to-install-and-set-up-java-on-windows-macos-and-ubuntu-jdk-maven-and-gradle-728a732dd123)
 - [Forget WebDriverManager: Use Selenium Manager Instead](https://medium.com/@andrei.oleynik/forget-webdrivermanager-use-selenium-manager-instead-1acf7e1076f3)
 - [testng.xml Is Legacy. Here’s What Modern TestNG Suites Should Look Like](https://medium.com/@andrei.oleynik/testng-xml-is-a-legacy-concept-heres-what-modern-test-suites-should-look-like-bd5cb380db71)
 - [WebDriver getAttribute() is Back: When to Use It vs getDomAttribute() and getDomProperty()](https://medium.com/@andrei.oleynik/adventures-of-getattribute-back-from-the-dead-846c31f5bcab)
