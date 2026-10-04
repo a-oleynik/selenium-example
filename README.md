@@ -173,21 +173,25 @@ Use this repository if you want to:
 
 ## 📦 Prerequisites
 
+> 💡 **Need help setting up your environment?**  
+> Check the comprehensive [Java, Gradle & Environment Setup Guide (Windows, macOS, Ubuntu)](https://medium.com/@andrei.oleynik/how-to-install-and-set-up-java-on-windows-macos-and-ubuntu-jdk-maven-and-gradle-728a732dd123) covering JDK installation, Gradle setup, `JAVA_HOME` configuration, and troubleshooting.
+
 Before you begin, ensure you have the following installed:
 
 - **Java Development Kit (JDK) 21** or higher
     - [Download JDK](https://www.oracle.com/java/technologies/downloads/)
-    - [Installation Guide (Windows, macOS, Ubuntu)](https://medium.com/@andrei.oleynik/how-to-install-and-set-up-java-on-windows-macos-and-ubuntu-jdk-maven-and-gradle-728a732dd123)
+    - Ensure `JAVA_HOME` and `PATH` are properly configured
     - Verify: `java -version`
 
-- **Gradle** (optional — Gradle Wrapper is included)
-    - Verify: `gradle -version`
+- **Gradle** (optional — Gradle Wrapper is included: `gradlew` / `gradlew.bat`)
+    - [Download Gradle](https://gradle.org/install/) (if using standalone installation)
+    - Verify: `gradle -version` or `.\gradlew.bat --version`
 
 - **Git** (for cloning the repository)
     - [Download Git](https://git-scm.com/downloads)
     - Verify: `git --version`
 
-- **Web Browser** (Chrome, Firefox, Edge, Opera, or IE)
+- **Web Browser** (Google Chrome, Mozilla Firefox, Microsoft Edge, Opera)
   - See [WebDriver Setup](#-webdriver-setup) section for driver downloads
 
     [⬆ Back to Table of Contents](#-table-of-contents)
