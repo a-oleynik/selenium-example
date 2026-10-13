@@ -2,7 +2,7 @@
 
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
 [![Selenium](https://img.shields.io/badge/Selenium-4.51.0-green.svg)](https://www.selenium.dev/)
-[![JUnit](https://img.shields.io/badge/JUnit-6.1.2-green.svg)](https://junit.org/)
+[![JUnit](https://img.shields.io/badge/JUnit-6.1.3-green.svg)](https://junit.org/)
 [![Gradle](https://img.shields.io/badge/Gradle-9.1.0-blue.svg)](https://gradle.org/)
 [![Allure_Framework](https://img.shields.io/badge/Allure_Framework-2.35.4-purple.svg)](https://allurereport.org/docs/)
 [![Allure_CLI](https://img.shields.io/badge/Allure_CLI-2.45.0-yellow.svg)](https://allurereport.org/docs/)
@@ -143,7 +143,7 @@ Use this repository if you want to:
 | **Java**                           | 21      | Programming language                                              |
 | **Gradle**                         | 9.1.0   | Build automation                                                  |
 | **Selenium WebDriver**             | 4.51.0  | Browser automation                                                |
-| **JUnit 6**                        | 6.1.2   | Testing framework                                                 |
+| **JUnit 6**                        | 6.1.3   | Testing framework                                                 |
 | **Allure Framework (Allure Java)** | 2.35.4  | Used inside tests (annotations, listeners). Produces raw results. |
 | **Allure Report CLI**              | 2.45.0  | Generates interactive HTML report from test results.              |
 | **AssertJ**                        | 3.27.7  | Fluent assertions                                                 |
