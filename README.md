@@ -746,6 +746,7 @@ For even more verbose Gradle output:
 - [testng.xml Is Legacy. Here’s What Modern TestNG Suites Should Look Like](https://medium.com/@andrei.oleynik/testng-xml-is-a-legacy-concept-heres-what-modern-test-suites-should-look-like-bd5cb380db71)
 - [WebDriver getAttribute() is Back: When to Use It vs getDomAttribute() and getDomProperty()](https://medium.com/@andrei.oleynik/adventures-of-getattribute-back-from-the-dead-846c31f5bcab)
 - [JUnit 6 Released — Clean-Up, Modernization & Minimal Disruption](https://medium.com/@andrei.oleynik/junit-6-released-clean-up-modernization-minimal-disruption-d3ecf11b64ad)
+- [JUnit 6 from Scratch: What a Test Framework Actually Does](https://medium.com/@andrei.oleynik/junit-6-from-scratch-6d4be3f04974)
 
 [⬆ Back to Table of Contents](#-table-of-contents)
 
